@@ -2,12 +2,26 @@
 
 void Gambler::GetOneCard(Card card, int hand)
 {
-	vHand[hand].GetOneCard(card);
+	if (vHand.size() < 1)
+	{
+		Hand firsthand;
+		vHand.push_back(firsthand);
+	}
+
+	if (vHand.size() > hand)
+	{
+		vHand[hand].GetOneCard(card);
+	}
 }
 
-void Gambler::CleanHands(int hand)
+void Gambler::CleanHands(void)
 {
-	vHand[hand].CleanHands();
+	for (int i=0; i<vHand.size(); i++)
+	{
+		vHand[i].CleanHands();
+	}
+
+	vHand.clear();
 }
 
 Gambler::Gambler(void)

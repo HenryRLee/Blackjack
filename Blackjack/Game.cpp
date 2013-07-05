@@ -29,7 +29,7 @@ void inline Game::DealOneCard(Gambler * gambler)
 	gambler->GetOneCard(pop);
 }
 
-void Game::PlayerAction(Player * player, int hand)
+void Game::PlayerAction(Player * player, bitset<5> allowset, int hand)
 {
 	int action;
 
@@ -46,6 +46,8 @@ void Game::OneHandRoutine(Dealer * dealer, vector < class Player * > vPlayer)
 
 	for (int i=0; i<vPlayer.size(); i++)
 	{
+		bitset <5> allowset;
+
 		if (vPlayer[i]->vHand[0].iScore == MaxScore)
 		{
 			/* Blackjack */
@@ -55,7 +57,7 @@ void Game::OneHandRoutine(Dealer * dealer, vector < class Player * > vPlayer)
 			break;
 		}
 
-		PlayerAction(vPlayer[i]);
+		PlayerAction(vPlayer[i], allowset);
 	}
 }
 

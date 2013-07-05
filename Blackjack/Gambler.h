@@ -19,7 +19,7 @@ public:
 	virtual int MakeDecision(int hand=0) = 0;
 
 	void GetOneCard(class Card, int hand=0);
-	void CleanHands(int hand=0);
+	void CleanHands(void);
 
 	Gambler(void);
 	virtual ~Gambler(void);
