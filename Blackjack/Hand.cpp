@@ -1,5 +1,10 @@
 #include "Hand.h"
 
+int Hand::GetScore(void)
+{
+	return iScore;
+}
+
 void Hand::GetOneCard(Card card)
 {
 	vCard.push_back(card);

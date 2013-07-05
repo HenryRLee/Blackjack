@@ -8,15 +8,18 @@ using namespace GameTerm;
 class Hand
 {
 protected:
-	int iSoftScore;
 
 public:
 	vector <Card> vCard;
 
 	int iScore;
+	int iSoftScore;
+
 	int iStatus;
 
 	double iBid;
+
+	int GetScore(void);
 
 	void GetOneCard(class Card);
 	void CleanHands(void);
