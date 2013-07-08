@@ -1,6 +1,11 @@
 #include "Player.h"
 #include "Table.h"
 
+void Player::SetBudget(double budget)
+{
+	this->iBudget = budget;
+}
+
 void Player::PlaceBid(double bid, int hand)
 {
 	if (vHand.size() > hand)
@@ -69,6 +74,10 @@ int Player::MakeDecision(bitset<5> actionset, int hand)
 	if (vHand.size() > hand)
 	{
 		return STAND;
+	}
+	else
+	{
+		return -1;
 	}
 }
 

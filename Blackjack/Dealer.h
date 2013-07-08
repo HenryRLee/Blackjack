@@ -7,6 +7,8 @@ class Dealer :
 public:
 	void JoinTable(Table *);
 
+	int MakeDecision(bool bHitOnSoft17, int hand=0);
+
 	Dealer(void);
 	~Dealer(void);
 };

@@ -16,7 +16,7 @@ public:
 	vector <Hand> vHand;
 
 	virtual void JoinTable(Table *) = 0;
-	virtual int MakeDecision(int hand=0) = 0;
+	virtual int MakeDecision(void) = 0;
 
 	void GetOneCard(class Card, int hand=0);
 	void CleanHands(void);

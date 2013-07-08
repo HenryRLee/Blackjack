@@ -4,11 +4,12 @@
 class ShuffleMachine;
 class Dealer;
 class Player;
+class Game;
 
 class Table
 {
 private:
-
+	Game * gametype;
 
 public:
 	Dealer * dealer;
@@ -18,6 +19,9 @@ public:
 	void AddPlayer(Player *);
 	void DelDealer(Dealer *);
 	void DelPlayer(Player *);
+
+	void UseGameType(Game *);
+	void StartOneGame(void);
 
 	Table(void);
 	~Table(void);

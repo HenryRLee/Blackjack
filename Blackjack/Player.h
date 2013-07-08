@@ -8,6 +8,8 @@ protected:
 	double iBudget;
 
 public:
+	void SetBudget(double);
+
 	void PlaceBid(double, int hand=0);
 	void RaiseBid(double, int hand=0);
 	void DoubleBid(int hand=0);
