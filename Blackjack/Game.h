@@ -1,6 +1,7 @@
 #pragma once
 #include "Blackjack.h"
 
+class Table;
 class Gambler;
 class Player;
 class Dealer;
@@ -24,7 +25,6 @@ namespace GameTerm
 		MaxHands= 8,
 		MaxScore = 21
 	};
-
 };
 
 class Game
@@ -52,7 +52,7 @@ protected:
 	void DealerAction(Dealer *);
 
 public:
-	void OneHandRoutine(Dealer * , vector < class Player * >);
+	void OneHandRoutine(Dealer * , vector < class Player * >, Table *);
 
 	Game(void);
 	virtual ~Game(void);

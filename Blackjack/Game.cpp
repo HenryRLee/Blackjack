@@ -168,7 +168,8 @@ void Game::DealerAction(Dealer * dealer)
 	}
 }
 
-void Game::OneHandRoutine(Dealer * dealer, vector < class Player * > vPlayer)
+void Game::OneHandRoutine(Dealer * dealer, vector < class Player * > vPlayer,
+		Table * table)
 {
 	Card cardPop;
 

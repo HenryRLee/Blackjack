@@ -47,7 +47,7 @@ void Table::UseGameType(Game * game)
 void Table::StartOneGame(void)
 {
 	if ((dealer != NULL) && (vPlayer.size()>0))
-		gametype->OneHandRoutine(dealer, vPlayer);
+		gametype->OneHandRoutine(dealer, vPlayer, this);
 }
 
 Table::Table(void)
