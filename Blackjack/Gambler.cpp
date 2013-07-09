@@ -24,6 +24,11 @@ void Gambler::CleanHands(void)
 	vHand.clear();
 }
 
+vector <Hand> Gambler::ShowHand(int iHand)
+{
+	return vHand;
+}
+
 Gambler::Gambler(void)
 {
 }

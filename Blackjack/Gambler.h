@@ -13,12 +13,13 @@ protected:
 	string name;
 
 	Table *table;
+	vector <Hand> vHand;
 
 	void GetOneCard(class Card, int hand=0);
 	void CleanHands(void);
 
 public:
-	vector <Hand> vHand;
+	vector <Hand> ShowHand(int hand=0);
 
 	virtual void JoinTable(Table *) = 0;
 
