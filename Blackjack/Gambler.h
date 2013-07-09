@@ -1,7 +1,7 @@
 #pragma once
 #include "Blackjack.h"
 #include "Hand.h"
-#include "Game.h"
+#include "GameTerm.h"
 
 class Table;
 

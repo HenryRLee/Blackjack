@@ -1,7 +1,7 @@
 #pragma once
 #include "Blackjack.h"
 #include "Card.h"
-#include "Game.h"
+#include "GameTerm.h"
 
 using namespace GameTerm;
 
