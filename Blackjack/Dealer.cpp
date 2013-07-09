@@ -48,6 +48,11 @@ Dealer::Dealer(void)
 {
 }
 
+Dealer::Dealer(string name)
+{
+	this->name = name;
+}
+
 Dealer::~Dealer(void)
 {
 }

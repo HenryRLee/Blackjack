@@ -20,6 +20,8 @@ public:
 	void DelDealer(Dealer *);
 	void DelPlayer(Player *);
 
+	void CleanTable(void);
+
 	void UseGameType(Game *);
 	void StartOneGame(void);
 

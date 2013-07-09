@@ -28,6 +28,11 @@ Gambler::Gambler(void)
 {
 }
 
+Gambler::Gambler(string name)
+{
+	this->name = name;
+}
+
 Gambler::~Gambler(void)
 {
 }

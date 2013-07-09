@@ -6,9 +6,10 @@ class Card
 private:
 	int id;
 	unsigned int value;
-	char name[8];
+	string name;
 public:
 	unsigned int GetValue(void);
+	string GetName(void);
 
 	Card(void);
 	Card(int id, int value, char name[]);

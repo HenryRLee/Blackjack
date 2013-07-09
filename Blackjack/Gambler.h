@@ -10,17 +10,22 @@ using namespace GameTerm;
 class Gambler
 {
 protected:
+	string name;
+
 	Table *table;
+
+	void GetOneCard(class Card, int hand=0);
+	void CleanHands(void);
 
 public:
 	vector <Hand> vHand;
 
 	virtual void JoinTable(Table *) = 0;
-	virtual int MakeDecision(void) = 0;
-
-	void GetOneCard(class Card, int hand=0);
-	void CleanHands(void);
 
 	Gambler(void);
+	Gambler(string);
 	virtual ~Gambler(void);
+
+	friend class Game;
+	friend class Table;
 };

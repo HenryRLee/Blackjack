@@ -57,11 +57,6 @@ int Player::SplitCards(int iSrcHand)
 	return iNewHand;
 }
 
-void Player::CleanHands(void)
-{
-	Gambler::CleanHands();
-}
-
 void Player::JoinTable(Table * table)
 {
 	table->AddPlayer(this);
@@ -83,6 +78,12 @@ int Player::MakeDecision(bitset<5> actionset, int hand)
 
 Player::Player(void)
 {
+	iBudget = 1000*1000;
+}
+
+Player::Player(string name)
+{
+	this->name = name;
 	iBudget = 1000*1000;
 }
 

@@ -1,9 +1,11 @@
 #include "Table.h"
 #include "Game.h"
+#include "Player.h"
+#include "Dealer.h"
 
 void Table::AddDealer(Dealer * dealer)
 {
-	if (this->dealer != NULL)
+	if (this->dealer == NULL)
 		this->dealer = dealer;
 }
 
@@ -27,6 +29,16 @@ void Table::DelPlayer(Player * player)
 	}
 }
 
+void Table::CleanTable(void)
+{
+	for (int i=0; i<vPlayer.size(); i++)
+	{
+		vPlayer[i]->CleanHands();
+	}
+
+	dealer->CleanHands();
+}
+
 void Table::UseGameType(Game * game)
 {
 	this->gametype = game;
@@ -34,7 +46,8 @@ void Table::UseGameType(Game * game)
 
 void Table::StartOneGame(void)
 {
-	gametype->OneHandRoutine(dealer, vPlayer);
+	if ((dealer != NULL) && (vPlayer.size()>0))
+		gametype->OneHandRoutine(dealer, vPlayer);
 }
 
 Table::Table(void)
