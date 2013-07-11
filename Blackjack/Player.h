@@ -13,6 +13,8 @@ protected:
 	void GetPays(double multiplier, int hand=0);
 
 public:
+	string ShowName(void);
+
 	void SetBudget(double);
 
 	void PlaceBid(double, int hand=0);

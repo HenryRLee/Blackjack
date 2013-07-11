@@ -29,6 +29,11 @@ vector <Hand> Gambler::ShowHand(int iHand)
 	return vHand;
 }
 
+string Gambler::ShowName(void)
+{
+	return name;
+}
+
 Gambler::Gambler(void)
 {
 }

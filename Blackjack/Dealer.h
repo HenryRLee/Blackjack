@@ -8,6 +8,8 @@ protected:
 	int MakeDecision(bool bHitOnSoft17, int hand=0);
 
 public:
+	string ShowName(void);
+
 	void JoinTable(Table *);
 
 	Dealer(void);

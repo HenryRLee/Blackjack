@@ -1,6 +1,11 @@
 #include "Dealer.h"
 #include "Table.h"
 
+string Dealer::ShowName(void)
+{
+	return "[Dealer]" + name;
+}
+
 void Dealer::JoinTable(Table * table)
 {
 	table->AddDealer(this);

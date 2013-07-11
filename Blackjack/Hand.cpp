@@ -35,6 +35,11 @@ void Hand::CleanHands(void)
 
 Hand::Hand(void)
 {
+	vCard.clear();
+	iScore = 0;
+	iBid = 0;
+	iStatus = WAITING;
+	iSoftScore = 0;
 }
 
 Hand::~Hand(void)

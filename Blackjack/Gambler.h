@@ -20,6 +20,7 @@ protected:
 
 public:
 	vector <Hand> ShowHand(int hand=0);
+	string ShowName(void);
 
 	virtual void JoinTable(Table *) = 0;
 

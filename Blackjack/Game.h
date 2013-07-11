@@ -9,11 +9,13 @@ class Gambler;
 class Player;
 class Dealer;
 class ShuffleMachine;
+class Statistics;
 
 class Game
 {
 protected:
-	ShuffleMachine *shuffler;
+	ShuffleMachine * shuffler;
+	Statistics * statistics;
 
 	bool bHitOnSoft17;
 	bool bDouble;
@@ -36,6 +38,8 @@ protected:
 
 public:
 	void OneHandRoutine(Dealer * , vector < class Player * >, Table *);
+
+	void UseStatistics(Statistics *);
 
 	Game(void);
 	virtual ~Game(void);

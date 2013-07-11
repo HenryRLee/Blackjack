@@ -2,6 +2,7 @@
 #include "Player.h"
 #include "Dealer.h"
 #include "ShuffleMachine.h"
+#include "Statistics.h"
 
 void inline Game::DealInitialCards(Dealer * dealer, 
 		vector < class Player * > vPlayer)
@@ -177,6 +178,8 @@ void Game::OneHandRoutine(Dealer * dealer, vector < class Player * > vPlayer,
 
 	DealInitialCards(dealer, vPlayer);
 
+	statistics->Update(table, "Dealt initial cards");
+
 	for (int i=0; i<vPlayer.size(); i++)
 	{
 		bitset <5> allowset;
@@ -207,47 +210,73 @@ void Game::OneHandRoutine(Dealer * dealer, vector < class Player * > vPlayer,
 	DealOneCard(dealer);
 	DealerAction(dealer);
 
+	statistics->Update(" ");
+	statistics->Update(dealer, "Final hands");
+	statistics->Update(" ");
+
 	if (dealer->vHand.size() > 0)
 	{
 		for (int i=0; i<vPlayer.size(); i++)
 		{
+			statistics->Update(vPlayer[i], "Final hands");
 			for (int j=0; j<vPlayer[i]->vHand.size(); j++)
 			{
 				if (vPlayer[i]->vHand[j].iStatus == BJ)
 				{
 					vPlayer[i]->GetPays(dBlackJackPays);
+
+					statistics->Update(&vPlayer[i]->vHand[j], "BlackJack");
 				}
 				else if (vPlayer[i]->vHand[j].iStatus == BUSTED)
 				{
 					vPlayer[i]->vHand[j].iStatus = LOST;
+
+					statistics->Update(&vPlayer[i]->vHand[j], "Lose");
 				}
 				else if (vPlayer[i]->vHand[j].iStatus == SURRENDERED)
 				{
 					vPlayer[i]->GetPays(0.5);
+
+					statistics->Update(&vPlayer[i]->vHand[j], "Surrender");
 				}
 				else if (dealer->vHand[0].iStatus == BUSTED)
 				{
 					vPlayer[i]->vHand[j].iStatus = WON;
 					vPlayer[i]->GetPays(2);
+
+					statistics->Update(&vPlayer[i]->vHand[j], "Dealer bust");
 				}
 				else if (vPlayer[i]->vHand[j].iScore > dealer->vHand[0].iScore)
 				{
 					vPlayer[i]->vHand[j].iStatus = WON;
 					vPlayer[i]->GetPays(2);
+
+					statistics->Update(&vPlayer[i]->vHand[j], "Player win");
 				}
 				else if (vPlayer[i]->vHand[j].iScore == dealer->vHand[0].iScore)
 				{
 					vPlayer[i]->vHand[j].iStatus = PUSH;
 					vPlayer[i]->GetPays(1);
+
+					statistics->Update(&vPlayer[i]->vHand[j], "Push");
 				}
-				else if (vPlayer[i]->vHand[j].iScore == dealer->vHand[0].iScore)
+				else if (vPlayer[i]->vHand[j].iScore < dealer->vHand[0].iScore)
 				{
 					vPlayer[i]->vHand[j].iStatus = LOST;
+
+					statistics->Update(&vPlayer[i]->vHand[j], "Player lose");
 				}
 			}
 		}
 	}
 					
+	statistics->Update(" ");
+	statistics->Update(table, "Game complete");
+}
+
+void Game::UseStatistics(Statistics * statistics)
+{
+	this->statistics = statistics;
 }
 
 Game::Game(void)

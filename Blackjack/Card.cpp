@@ -5,7 +5,7 @@ unsigned int Card::GetValue(void)
 	return value;
 }
 
-string Card::GetName(void)
+string Card::ShowName(void)
 {
 	return name;
 }

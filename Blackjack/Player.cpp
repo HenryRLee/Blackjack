@@ -1,6 +1,11 @@
 #include "Player.h"
 #include "Table.h"
 
+string Player::ShowName(void)
+{
+	return "[Player]" + name;
+}
+
 void Player::SetBudget(double budget)
 {
 	this->iBudget = budget;

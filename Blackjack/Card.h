@@ -9,7 +9,7 @@ private:
 	string name;
 public:
 	unsigned int GetValue(void);
-	string GetName(void);
+	string ShowName(void);
 
 	Card(void);
 	Card(int id, int value, char name[]);
