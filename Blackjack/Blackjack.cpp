@@ -18,6 +18,7 @@ int main(int argc, char *argv[])
 	MacauGame->UseStatistics(Logger);
 	Venetian->UseGameType(MacauGame);
 
+	Venetian->CleanTable();
 	Venetian->StartOneGame();
 
 	return 0;

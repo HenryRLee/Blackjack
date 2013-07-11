@@ -30,16 +30,16 @@ int Dealer::MakeDecision(bool bHitOnSoft17, int iHand)
 		}
 		else if (score == 17)
 		{
-			if (bHitOnSoft17)
+			if (vHand[iHand].iSoftScore <= 0)
 			{
-				return HIT;
+				return STAND;
 			}
 			else
 			{
-				if (vHand[iHand].iSoftScore > 0)
-					return STAND;
-				else
+				if (bHitOnSoft17)
 					return HIT;
+				else
+					return STAND;
 			}
 		}
 	}
