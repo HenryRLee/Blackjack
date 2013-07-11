@@ -11,14 +11,14 @@ class Table
 private:
 	Game * gametype;
 
-public:
-	Dealer * dealer;
-	vector < class Player * > vPlayer;
-
 	void AddDealer(Dealer *);
 	void AddPlayer(Player *);
 	void DelDealer(Dealer *);
 	void DelPlayer(Player *);
+
+public:
+	Dealer * dealer;
+	vector < class Player * > vPlayer;
 
 	void CleanTable(void);
 
@@ -27,4 +27,7 @@ public:
 
 	Table(void);
 	~Table(void);
+
+	friend class Player;
+	friend class Dealer;
 };

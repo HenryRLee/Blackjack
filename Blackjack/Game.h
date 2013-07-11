@@ -36,11 +36,14 @@ protected:
 	void PlayerAction(Player *, bitset<5> allowset, int hand=0);
 	void DealerAction(Dealer *);
 
-public:
 	void OneHandRoutine(Dealer * , vector < class Player * >, Table *);
+
+public:
 
 	void UseStatistics(Statistics *);
 
 	Game(void);
 	virtual ~Game(void);
+
+	friend class Table;
 };
