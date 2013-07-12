@@ -171,6 +171,10 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
+				RelativePath=".\BasicStrategy.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\Blackjack.cpp"
 				>
 			</File>
@@ -199,7 +203,15 @@
 				>
 			</File>
 			<File
+				RelativePath=".\Hand.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\MacauSimulation.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\NoStrategy.cpp"
 				>
 			</File>
 			<File
@@ -207,11 +219,27 @@
 				>
 			</File>
 			<File
+				RelativePath=".\ProbabilityCalculator.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\ShuffleMachine.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\Hand.cpp"
+				RelativePath=".\SimpleCalculator.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Statistics.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Strategy.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\StreamLog.cpp"
 				>
 			</File>
 			<File
@@ -224,6 +252,10 @@
 			Filter="h;hpp;hxx;hm;inl;inc;xsd"
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
+			<File
+				RelativePath=".\BasicStrategy.h"
+				>
+			</File>
 			<File
 				RelativePath=".\Blackjack.h"
 				>
@@ -253,7 +285,19 @@
 				>
 			</File>
 			<File
+				RelativePath=".\GameTerm.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Hand.h"
+				>
+			</File>
+			<File
 				RelativePath=".\MacauSimulation.h"
+				>
+			</File>
+			<File
+				RelativePath=".\NoStrategy.h"
 				>
 			</File>
 			<File
@@ -261,11 +305,27 @@
 				>
 			</File>
 			<File
+				RelativePath=".\ProbabilityCalculator.h"
+				>
+			</File>
+			<File
 				RelativePath=".\ShuffleMachine.h"
 				>
 			</File>
 			<File
-				RelativePath=".\Hand.h"
+				RelativePath=".\SimpleCalculator.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Statistics.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Strategy.h"
+				>
+			</File>
+			<File
+				RelativePath=".\StreamLog.h"
 				>
 			</File>
 			<File
