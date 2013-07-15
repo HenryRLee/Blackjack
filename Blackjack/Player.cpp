@@ -1,5 +1,6 @@
 #include "Player.h"
 #include "Table.h"
+#include "Strategy.h"
 
 string Player::ShowName(void)
 {
@@ -73,12 +74,20 @@ int Player::MakeDecision(bitset<5> actionset, int hand)
 {
 	if (vHand.size() > hand)
 	{
-		return STAND;
+		int action;
+
+		action = strategy->MakeDecision(vHand[hand], actionset, *table);
+		return action;
 	}
 	else
 	{
 		return -1;
 	}
+}
+
+void Player::UseStrategy(Strategy * strategy)
+{
+	this->strategy = strategy;
 }
 
 Player::Player(void)

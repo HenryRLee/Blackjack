@@ -1,11 +1,15 @@
 #pragma once
 #include "Gambler.h"
 
+class Strategy;
+
 class Player :
 	public Gambler
 {
 protected:
 	double iBudget;
+
+	Strategy * strategy;
 
 	int SplitCards(int srchand);
 	int MakeDecision(bitset<5> actionset, int hand=0);
@@ -22,6 +26,8 @@ public:
 	void DoubleBid(int hand=0);
 
 	void JoinTable(Table *);
+
+	void UseStrategy(Strategy *);
 
 	Player(void);
 	Player(string);

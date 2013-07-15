@@ -2,7 +2,9 @@ all: Blackjack
 
 Blackjack: Blackjack.o Card.o Dealer.o Deck.o Gambler.o Game.o \
 		MacauSimulation.o Player.o ShuffleMachine.o Table.o \
-		ContinuousShufflingMachine.o Hand.o Statistics.o StreamLog.o
+		ContinuousShufflingMachine.o Hand.o Statistics.o StreamLog.o \
+		Strategy.o BasicStrategy.o ProbabilityCalculator.o SimpleCalculator.o \
+		NoStrategy.o
 	g++ $^ ${CFLAGS} -o $@
 
 %.o: %.cpp
