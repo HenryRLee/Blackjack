@@ -10,6 +10,5 @@ public:
 	Card *card[CardNumInDeck];
 
 	Deck(void);
-	Deck(int idx);
 	~Deck(void);
 };
