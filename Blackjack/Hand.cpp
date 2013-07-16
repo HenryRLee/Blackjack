@@ -24,6 +24,35 @@ void Hand::GetOneCard(Card card)
 
 }
 
+Card Hand::RemoveLastCard(void)
+{
+	int value;
+	Card pop = vCard.back();
+
+	vCard.pop_back();
+
+	/* Because the Ace value varies, we have to recount the value from start. */
+	iScore = 0;
+	iSoftScore = 0;
+
+	for (int i=0; i<vCard.size(); i++)
+	{
+		value = vCard[i].GetValue();
+		iScore += value;
+
+		if (value == 11)
+			iSoftScore++;
+
+		while ((iScore>MaxScore) && (iSoftScore>0))
+		{
+			iSoftScore--;
+			iScore -= 10;
+		}
+	}
+
+	return pop;
+}
+
 void Hand::CleanHands(void)
 {
 	vCard.clear();

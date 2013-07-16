@@ -22,6 +22,8 @@ public:
 	int GetScore(void);
 
 	void GetOneCard(class Card);
+	Card RemoveLastCard(void);
+
 	void CleanHands(void);
 
 	Hand(void);

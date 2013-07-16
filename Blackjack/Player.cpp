@@ -53,12 +53,11 @@ int Player::SplitCards(int iSrcHand)
 	int iNewHand;
 
 	iNewHand = vHand.size();
-	cardPop = vHand[iSrcHand].vCard.back();
-
-	handNew.vCard.push_back(cardPop);
-	vHand[iSrcHand].vCard.pop_back();
 
 	vHand.push_back(handNew);
+
+	cardPop = vHand[iSrcHand].RemoveLastCard();
+	GetOneCard(cardPop, iNewHand);
 
 	return iNewHand;
 }
