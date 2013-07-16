@@ -56,7 +56,7 @@ int NoStrategy::InputSelection(bitset <5> allowset)
 
 	if (allowset[action] == 0)
 	{
-		cout << "Action not supported" << endl;
+		cout << "Action not available" << endl;
 		return InputSelection(allowset);
 	}
 	else

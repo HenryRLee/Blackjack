@@ -49,6 +49,12 @@ void Game::PlayerAction(Player * player, bitset<5> allowset, int iHand)
 
 	action = player->MakeDecision(allowset, iHand);
 
+	if (allowset[action] == 0)
+	{
+		statistics->Update("Action not available");
+		PlayerAction(player, allowset, iHand);
+	}
+
 	switch (action)
 	{
 	case HIT:
