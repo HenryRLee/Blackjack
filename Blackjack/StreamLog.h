@@ -7,7 +7,7 @@ class StreamLog :
 public:
 	void Update(Table *, string text="");
 	void Update(Gambler *, string text="");
-	void Update(Hand *, string text="");
+	void Update(Hand, string text="");
 	void Update(string text="");
 
 	StreamLog(void);

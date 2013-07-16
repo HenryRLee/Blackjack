@@ -36,7 +36,7 @@ void StreamLog::Update(Gambler * gambler, string text)
 		cout << gambler->ShowName() << " " << text << endl;
 
 		for (int i=0; i<(vHand.size()); i++)
-			Update(&vHand[i]);
+			Update(vHand[i]);
 	}
 	else
 	{
@@ -44,21 +44,14 @@ void StreamLog::Update(Gambler * gambler, string text)
 	}
 }
 
-void StreamLog::Update(Hand * hand, string text)
+void StreamLog::Update(Hand hand, string text)
 {
 	if (text.compare("") != 0)
 		cout << text << endl;
 
-	if (hand != NULL)
-	{
-		for (int i=0; i<(hand->vCard.size()); i++)
-			cout << hand->vCard[i].ShowName() << " ";
-		cout << "Score:" << hand->GetScore() << endl;
-	}
-	else
-	{
-		cout << "Hand does not exist" << endl;
-	}
+	for (int i=0; i<(hand.vCard.size()); i++)
+		cout << hand.vCard[i].ShowName() << " ";
+	cout << "Score:" << hand.GetScore() << endl;
 }
 
 void StreamLog::Update(string text)

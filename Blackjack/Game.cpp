@@ -61,6 +61,7 @@ void Game::PlayerAction(Player * player, bitset<5> allowset, int iHand)
 		allowset.set(SPLIT, 0);
 
 		DealOneCard(player, iHand);
+		statistics->Update(*handCurrent);
 
 		if (handCurrent->GetScore() > MaxScore)
 			handCurrent->iStatus = BUSTED;
@@ -70,6 +71,7 @@ void Game::PlayerAction(Player * player, bitset<5> allowset, int iHand)
 
 	case STAND:
 		handCurrent->iStatus = WAITING;
+		statistics->Update(*handCurrent);
 		break;
 
 	case DOUBLE:
@@ -90,6 +92,7 @@ void Game::PlayerAction(Player * player, bitset<5> allowset, int iHand)
 
 		player->DoubleBid(iHand);
 		DealOneCard(player, iHand);
+		statistics->Update(*handCurrent);
 
 		if (handCurrent->GetScore() > MaxScore)
 			handCurrent->iStatus = BUSTED;
@@ -100,6 +103,7 @@ void Game::PlayerAction(Player * player, bitset<5> allowset, int iHand)
 
 	case SURRENDER:
 		handCurrent->iStatus = SURRENDERED;
+		statistics->Update(*handCurrent);
 
 		break;
 
@@ -128,9 +132,11 @@ void Game::PlayerAction(Player * player, bitset<5> allowset, int iHand)
 			allowset.set(SURRENDER, 0);
 
 		DealOneCard(player, iHand);
+		statistics->Update(player->vHand[iHand]);
 		PlayerAction(player, allowset, iHand);
 
 		DealOneCard(player, iSplittedHand);
+		statistics->Update(player->vHand[iSplittedHand]);
 		PlayerAction(player, allowset, iSplittedHand);
 
 		break;
