@@ -51,7 +51,13 @@ void StreamLog::Update(Hand hand, string text)
 
 	for (int i=0; i<(hand.vCard.size()); i++)
 		cout << hand.vCard[i].ShowName() << " ";
-	cout << "Score:" << hand.GetScore() << endl;
+
+	cout << "Score:" << hand.GetScore();
+
+	if (hand.iSoftScore > 0)
+		cout << "|" << hand.GetScore()-10;
+	
+	cout << endl;
 }
 
 void StreamLog::Update(string text)

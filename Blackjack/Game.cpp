@@ -233,46 +233,46 @@ void Game::OneHandRoutine(Dealer * dealer, vector < class Player * > vPlayer,
 				{
 					vPlayer[i]->GetPays(dBlackJackPays);
 
-					statistics->Update("  Player has a BlackJack");
+					statistics->Update("  PLAYER HAS A BLACKJACK");
 				}
 				else if (vPlayer[i]->vHand[j].iStatus == BUSTED)
 				{
 					vPlayer[i]->vHand[j].iStatus = LOST;
 
-					statistics->Update("  Player busts");
+					statistics->Update("  PLAYER BUSTS");
 				}
 				else if (vPlayer[i]->vHand[j].iStatus == SURRENDERED)
 				{
 					vPlayer[i]->GetPays(0.5);
 
-					statistics->Update("  Player surrenders");
+					statistics->Update("  PLAYER SURRENDERS");
 				}
 				else if (dealer->vHand[0].iStatus == BUSTED)
 				{
 					vPlayer[i]->vHand[j].iStatus = WON;
 					vPlayer[i]->GetPays(2);
 
-					statistics->Update("  Dealer busts");
+					statistics->Update("  DEALER BUSTS");
 				}
 				else if (vPlayer[i]->vHand[j].iScore > dealer->vHand[0].iScore)
 				{
 					vPlayer[i]->vHand[j].iStatus = WON;
 					vPlayer[i]->GetPays(2);
 
-					statistics->Update("  Player wins");
+					statistics->Update("  PLAYER WINS");
 				}
 				else if (vPlayer[i]->vHand[j].iScore == dealer->vHand[0].iScore)
 				{
 					vPlayer[i]->vHand[j].iStatus = PUSH;
 					vPlayer[i]->GetPays(1);
 
-					statistics->Update("  Push");
+					statistics->Update("  PUSH");
 				}
 				else if (vPlayer[i]->vHand[j].iScore < dealer->vHand[0].iScore)
 				{
 					vPlayer[i]->vHand[j].iStatus = LOST;
 
-					statistics->Update("  Player loses");
+					statistics->Update("  PLAYER LOSES");
 				}
 			}
 		}

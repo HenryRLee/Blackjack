@@ -5,6 +5,19 @@
 void NoStrategy::OutputDialogue(bitset <5> allowset)
 {
 	cout << "Input your Selection" << endl;
+	cout << "Available options: ";
+
+	if (allowset[HIT] == 1)
+		cout << "HIT ";
+	if (allowset[STAND] == 1)
+		cout << "STAND ";
+	if (allowset[DOUBLE] == 1)
+		cout << "DOUBLE ";
+	if (allowset[SPLIT] == 1)
+		cout << "SPLIT ";
+	if (allowset[SURRENDER] == 1)
+		cout << "SURRENDER ";
+	cout << endl;
 }
 
 int NoStrategy::InputSelection(bitset <5> allowset)
