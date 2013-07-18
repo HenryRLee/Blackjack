@@ -5,6 +5,14 @@ int Hand::GetScore(void)
 	return iScore;
 }
 
+bool Hand::IsScoreSoft(void)
+{
+	if (iSoftScore > 0)
+		return true;
+	else
+		return false;
+}
+
 void Hand::GetOneCard(Card card)
 {
 	int value;

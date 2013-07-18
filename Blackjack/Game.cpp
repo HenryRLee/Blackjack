@@ -161,7 +161,7 @@ void Game::DealerAction(Dealer * dealer)
 	case HIT:
 		DealOneCard(dealer);
 
-		if (dealer->vHand[0].iScore > MaxScore)
+		if (dealer->vHand[0].GetScore() > MaxScore)
 			dealer->vHand[0].iStatus = BUSTED;
 		else
 			DealerAction(dealer);
@@ -192,7 +192,7 @@ void Game::OneHandRoutine(Dealer * dealer, vector < class Player * > vPlayer,
 	{
 		bitset <5> allowset;
 
-		if (vPlayer[i]->vHand[0].iScore == MaxScore)
+		if (vPlayer[i]->vHand[0].GetScore() == MaxScore)
 		{
 			/* Blackjack */
 			vPlayer[i]->vHand[0].iStatus = BJ;
@@ -254,21 +254,21 @@ void Game::OneHandRoutine(Dealer * dealer, vector < class Player * > vPlayer,
 
 					statistics->Update("  DEALER BUSTS");
 				}
-				else if (vPlayer[i]->vHand[j].iScore > dealer->vHand[0].iScore)
+				else if (vPlayer[i]->vHand[j].GetScore() > dealer->vHand[0].GetScore())
 				{
 					vPlayer[i]->vHand[j].iStatus = WON;
 					vPlayer[i]->GetPays(2);
 
 					statistics->Update("  PLAYER WINS");
 				}
-				else if (vPlayer[i]->vHand[j].iScore == dealer->vHand[0].iScore)
+				else if (vPlayer[i]->vHand[j].GetScore() == dealer->vHand[0].GetScore())
 				{
 					vPlayer[i]->vHand[j].iStatus = PUSH;
 					vPlayer[i]->GetPays(1);
 
 					statistics->Update("  PUSH");
 				}
-				else if (vPlayer[i]->vHand[j].iScore < dealer->vHand[0].iScore)
+				else if (vPlayer[i]->vHand[j].GetScore() < dealer->vHand[0].GetScore())
 				{
 					vPlayer[i]->vHand[j].iStatus = LOST;
 

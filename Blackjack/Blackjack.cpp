@@ -5,6 +5,7 @@
 #include "MacauSimulation.h"
 #include "StreamLog.h"
 #include "NoStrategy.h"
+#include "BasicStrategy.h"
 
 int main(int argc, char *argv[])
 {
@@ -14,9 +15,10 @@ int main(int argc, char *argv[])
 	Game * MacauGame = new MacauSimulation;
 	Statistics * Logger = new StreamLog;
 	Strategy * UserInput = new NoStrategy;
+	Strategy * BStrategy = new BasicStrategy;
 
 	Hank->JoinTable(Venetian);
-	Hank->UseStrategy(UserInput);
+	Hank->UseStrategy(BStrategy);
 	BJDealer->JoinTable(Venetian);
 	MacauGame->UseStatistics(Logger);
 	Venetian->UseGameType(MacauGame);

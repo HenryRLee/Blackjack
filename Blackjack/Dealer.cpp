@@ -30,7 +30,7 @@ int Dealer::MakeDecision(bool bHitOnSoft17, int iHand)
 		}
 		else if (score == 17)
 		{
-			if (vHand[iHand].iSoftScore <= 0)
+			if (!vHand[iHand].IsScoreSoft())
 			{
 				return STAND;
 			}

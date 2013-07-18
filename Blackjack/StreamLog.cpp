@@ -54,7 +54,7 @@ void StreamLog::Update(Hand hand, string text)
 
 	cout << "Score:" << hand.GetScore();
 
-	if (hand.iSoftScore > 0)
+	if (hand.IsScoreSoft())
 		cout << "|" << hand.GetScore()-10;
 	
 	cout << endl;

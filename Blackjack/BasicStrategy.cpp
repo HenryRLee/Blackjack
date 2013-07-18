@@ -1,12 +1,14 @@
 #include "BasicStrategy.h"
 #include "Hand.h"
 #include "Table.h"
+#include "Dealer.h"
 
-void BasicStrategy::CreateTables(void)
+void BasicStrategy::CreateDefaultTables(void)
 {
-	int iTempHardTable[PMAX][DMAX] = 
+	int iDfltHardTable[PMAX][DMAX] = 
 	{
 		/*	2	3	4 	5 	6 	7 	8 	9 	X 	A	*/
+		{	H, 	H, 	H, 	H, 	H, 	H, 	H, 	H, 	H, 	H	},	/* 4 */ 
 		{	H, 	H, 	H, 	H, 	H, 	H, 	H, 	H, 	H, 	H	},	/* 5 */ 
 		{	H, 	H, 	H, 	H, 	H, 	H, 	H, 	H, 	H, 	H	},	/* 6 */
 		{	H,	H,	H,	H,	H,	H,	H,	H,	H,	H	},	/* 7 */
@@ -26,10 +28,10 @@ void BasicStrategy::CreateTables(void)
 		{	S,	S,	S,	S,	S,	S,	S,	S,	S,	S	},	/* 21 */
 	};
 
-	int iTempSoftTable[PSMAX][DMAX] = 
+	int iDfltSoftTable[PSMAX][DMAX] = 
 	{
 		/*	2	3	4	5	6	7	8	9	X	A	*/
-		{	P,	P,	P,	P,	P,	P,	P,	P,	P,	P	},	/* A,A */
+		{	H,	H,	H,	DH,	DH,	H,	H,	H,	H,	H	},	/* 12 */
 		{	H,	H,	H,	DH,	DH,	H,	H,	H,	H,	H	},	/* 13 */
 		{	H,	H,	H,	DH,	DH,	H,	H,	H,	H,	H	},	/* 14 */
 		{	H,	H,	DH,	DH,	DH,	H,	H,	H,	H,	H	},	/* 15 */
@@ -38,10 +40,10 @@ void BasicStrategy::CreateTables(void)
 		{	S,	DS,	DS,	DS,	DS,	S,	S,	H,	H,	H	},	/* 18 */
 		{	S,	S,	S,	S,	S,	S,	S,	S,	S,	S	},	/* 19 */
 		{	S,	S,	S,	S,	S,	S,	S,	S,	S,	S	},	/* 20 */
-		{	S,	S,	S,	S,	S,	S,	S,	S,	S,	S	}	/* 21 */
+		{	S,	S,	S,	S,	S,	S,	S,	S,	S,	S	},	/* 21 */
 	};
 
-	int iTempPairTable[PPMAX][DMAX] = 
+	int iDfltPairTable[PPMAX][DMAX] = 
 	{
 		/*	2	3	4	5	6	7	8	9	X	A	*/
 		{	P,	P,	P,	P,	P,	P,	H,	H,	H,	H	},	/* 2,2 */
@@ -52,17 +54,103 @@ void BasicStrategy::CreateTables(void)
 		{	P,	P,	P,	P,	P,	P,	H,	H,	RH,	H	},	/* 7,7 */
 		{	P,	P,	P,	P,	P,	P,	P,	P,	RH,	P	},	/* 8,8 */
 		{	P,	P,	P,	P,	P,	S,	P,	P,	S,	S	},	/* 9,9 */
-		{	S,	S,	S,	S,	S,	S,	S,	S,	S,	S	}	/* X,X */
+		{	S,	S,	S,	S,	S,	S,	S,	S,	S,	S	},	/* X,X */
+		{	P,	P,	P,	P,	P,	P,	P,	P,	P,	P	},	/* A,A */
 	};
+
+	for (int i=0; i<PMAX; i++)
+	{
+		for (int j=0; j<DMAX; j++)
+		{
+			iHardTable[i][j] = iDfltHardTable[i][j];
+		}
+	}
+
+	for (int i=0; i<PSMAX; i++)
+	{
+		for (int j=0; j<DMAX; j++)
+		{
+			iSoftTable[i][j] = iDfltSoftTable[i][j];
+		}
+	}
+
+	for (int i=0; i<PPMAX; i++)
+	{
+		for (int j=0; j<DMAX; j++)
+		{
+			iPairTable[i][j] = iDfltPairTable[i][j];
+		}
+	}
 }
 
-int BasicStrategy::MakeDecision(Hand handCurrent, bitset <5> allowset, 
+int BasicStrategy::MakeDecision(Hand hand, bitset <5> allowset, 
 		Table table)
 {
+	int value = hand.GetScore();
+	bool soft = hand.IsScoreSoft();
+	vector <Hand> handDealer = table.dealer->ShowHand();
+	int iDealerFaceup;
+	int action;
+
+	if (hand.vCard.size() < 2)
+		return -1;
+
+	if (handDealer.size() > 0)
+		iDealerFaceup = handDealer[0].GetScore();
+	else
+		return -1;
+
+	if ((hand.vCard.size() == 2) && 
+			(hand.vCard[0].GetValue() == hand.vCard[1].GetValue()) && 
+			(allowset[SPLIT] == 1))
+	{
+		value = hand.vCard[0].GetValue();
+		action = iPairTable[value-PPDIFF][iDealerFaceup-DDIFF];
+	}
+	else if (soft)
+	{
+		action = iSoftTable[value-PSDIFF][iDealerFaceup-DDIFF];
+	}
+	else
+	{
+		action = iHardTable[value-PDIFF][iDealerFaceup-DDIFF];
+	}
+
+	if (action == DH)
+	{
+		if (allowset[DOUBLE] == 1)
+			action = DOUBLE;
+		else
+			action = HIT;
+	}
+	else if (action == DS)
+	{
+		if (allowset[DOUBLE] == 1)
+			action = DOUBLE;
+		else
+			action = STAND;
+	}
+	else if (action == RH)
+	{
+		if (allowset[SURRENDER] == 1)
+			action = SURRENDER;
+		else
+			action = HIT;
+	}
+	else if (action == RS)
+	{
+		if (allowset[SURRENDER] == 1)
+			action = SURRENDER;
+		else
+			action = STAND;
+	}
+
+	return action;
 }
 
 BasicStrategy::BasicStrategy(void)
 {
+	CreateDefaultTables();
 }
 
 BasicStrategy::~BasicStrategy(void)

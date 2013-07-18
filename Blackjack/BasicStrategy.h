@@ -18,7 +18,7 @@ protected:
 
 	enum PlayerHard
 	{
-		P5 = 0, P6, P7, P8, P9, P10, P11, P12, P13, P14, P15, P16, P17, P18,
+		P4 = 0, P5, P6, P7, P8, P9, P10, P11, P12, P13, P14, P15, P16, P17, P18,
 		P19, P20, P21, PMAX
 	};
 
@@ -29,19 +29,19 @@ protected:
 
 	enum PlayerPair
 	{
-		PP4 = 0, PP6, PP8, PP10, PP12, PP14, PP16, PP18, PP20, PPMAX
+		PP2 = 0, PP3, PP4, PP5, PP6, PP7, PP8, PP9, PP10, PPA, PPMAX
 	};
 
 	enum Difference
 	{
-		DDIFF = 2, PDIFF = 5, PSDIFF = 12, PPDIFF = 4
+		DDIFF = 2, PDIFF = 4, PSDIFF = 12, PPDIFF = 2
 	};
 
 	int iHardTable[PMAX][DMAX];
 	int iSoftTable[PSMAX][DMAX];
 	int iPairTable[PPMAX][DMAX];
 
-	void CreateTables(void);
+	void CreateDefaultTables(void);
 
 public:
 	int MakeDecision(Hand handCurrent, bitset <5> allowset, Table table);
