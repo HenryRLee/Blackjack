@@ -100,9 +100,7 @@ int BasicStrategy::MakeDecision(Hand hand, bitset <5> allowset,
 	else
 		return -1;
 
-	if ((hand.vCard.size() == 2) && 
-			(hand.vCard[0].GetValue() == hand.vCard[1].GetValue()) && 
-			(allowset[SPLIT] == 1))
+	if (allowset[SPLIT] == 1)
 	{
 		value = hand.vCard[0].GetValue();
 		action = iPairTable[value-PPDIFF][iDealerFaceup-DDIFF];

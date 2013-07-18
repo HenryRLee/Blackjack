@@ -6,6 +6,7 @@ class ContinuousShufflingMachine :
 {
 private:
 	vector <Card> vCard;
+	vector <Card> vUsedCard;
 	Deck deck;
 
 public:
