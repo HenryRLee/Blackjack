@@ -22,6 +22,12 @@ void Gambler::CleanHands(void)
 	}
 
 	vHand.clear();
+
+	if (vHand.size() < 1)
+	{
+		Hand firsthand;
+		vHand.push_back(firsthand);
+	}
 }
 
 vector <Hand> Gambler::ShowHand(int iHand)
@@ -36,6 +42,8 @@ string Gambler::ShowName(void)
 
 Gambler::Gambler(void)
 {
+	Hand firsthand;
+	vHand.push_back(firsthand);
 }
 
 Gambler::Gambler(string name)

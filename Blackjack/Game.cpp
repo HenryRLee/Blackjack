@@ -183,11 +183,12 @@ void Game::OneHandRoutine(Dealer * dealer, vector < class Player * > vPlayer,
 {
 	Card cardPop;
 
+	table->CleanTable();
+
 	for (int i=0; i<vPlayer.size(); i++)
 		vPlayer[i]->PlaceBid();
 
 	shuffler->ShuffleCards();
-	table->CleanTable();
 
 	DealInitialCards(dealer, vPlayer);
 

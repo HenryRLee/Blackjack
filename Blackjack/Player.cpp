@@ -44,15 +44,15 @@ void Player::DoubleBid(int hand)
 {
 	if (vHand.size() > hand)
 	{
-		RaiseBid(vHand[hand].iBid);
+		RaiseBid(vHand[hand].iBid, hand);
 	}
 }
 
-void Player::GetPays(double mutiplier, int hand)
+void Player::GetPays(double multiplier, int hand)
 {
 	if (vHand.size() > hand)
 	{
-		iBudget += vHand[hand].iBid * mutiplier;
+		iBudget += vHand[hand].iBid * multiplier;
 	}
 }
 
