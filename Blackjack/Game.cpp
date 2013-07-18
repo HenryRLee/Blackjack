@@ -1,4 +1,5 @@
 #include "Game.h"
+#include "Table.h"
 #include "Player.h"
 #include "Dealer.h"
 #include "ShuffleMachine.h"
@@ -137,6 +138,7 @@ void Game::PlayerAction(Player * player, bitset<5> allowset, int iHand)
 		DealOneCard(player, iHand);
 		PlayerAction(player, allowset, iHand);
 
+		player->PlaceBid(iSplittedHand);
 		DealOneCard(player, iSplittedHand);
 		PlayerAction(player, allowset, iSplittedHand);
 
@@ -181,7 +183,11 @@ void Game::OneHandRoutine(Dealer * dealer, vector < class Player * > vPlayer,
 {
 	Card cardPop;
 
+	for (int i=0; i<vPlayer.size(); i++)
+		vPlayer[i]->PlaceBid();
+
 	shuffler->ShuffleCards();
+	table->CleanTable();
 
 	DealInitialCards(dealer, vPlayer);
 

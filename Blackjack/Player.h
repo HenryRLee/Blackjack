@@ -17,11 +17,14 @@ protected:
 	void GetPays(double multiplier, int hand=0);
 
 public:
+	double iBid;
 	string ShowName(void);
 
 	void SetBudget(double);
+	double ShowBudget(void);
 
-	void PlaceBid(double, int hand=0);
+	void FixBid(double);
+	void PlaceBid(int hand=0);
 	void RaiseBid(double, int hand=0);
 	void DoubleBid(int hand=0);
 

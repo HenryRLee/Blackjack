@@ -19,12 +19,19 @@ int main(int argc, char *argv[])
 
 	Hank->JoinTable(Venetian);
 	Hank->UseStrategy(BStrategy);
+	Hank->FixBid(100);
+	Hank->SetBudget(1000*1000);
 	BJDealer->JoinTable(Venetian);
 	MacauGame->UseStatistics(Logger);
 	Venetian->UseGameType(MacauGame);
 
 	Venetian->CleanTable();
 	Venetian->StartOneGame();
+	Venetian->StartMultipleGames();
+
+//	cout.precision(6);
+	cout << fixed;
+	cout << "Player budget: " << Hank->ShowBudget() << endl;
 
 	return 0;
 }

@@ -4,7 +4,7 @@ namespace GameTerm
 {
 	enum Action
 	{
-		HIT, STAND, DOUBLE, SPLIT, SURRENDER
+		STAND, HIT, DOUBLE, SPLIT, SURRENDER
 	};
 
 	enum Status

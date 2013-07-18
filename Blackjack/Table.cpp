@@ -50,6 +50,15 @@ void Table::StartOneGame(void)
 		gametype->OneHandRoutine(dealer, vPlayer, this);
 }
 
+void Table::StartMultipleGames(int num)
+{
+	if ((dealer != NULL) && (vPlayer.size()>0))
+	{
+		for (int i=0; i<num; i++)
+			gametype->OneHandRoutine(dealer, vPlayer, this);
+	}
+}
+
 Table::Table(void)
 {
 	dealer = NULL;

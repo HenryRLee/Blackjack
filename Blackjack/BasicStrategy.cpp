@@ -145,6 +145,9 @@ int BasicStrategy::MakeDecision(Hand hand, bitset <5> allowset,
 			action = STAND;
 	}
 
+	if ((action == HIT) && (allowset[HIT] ==0))
+		action = STAND;
+
 	return action;
 }
 

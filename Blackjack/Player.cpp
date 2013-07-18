@@ -12,12 +12,22 @@ void Player::SetBudget(double budget)
 	this->iBudget = budget;
 }
 
-void Player::PlaceBid(double bid, int hand)
+double Player::ShowBudget(void)
+{
+	return iBudget;
+}
+
+void Player::FixBid(double bid)
+{
+	iBid = bid;
+}
+
+void Player::PlaceBid(int hand)
 {
 	if (vHand.size() > hand)
 	{
-		vHand[hand].iBid = bid;
-		iBudget -= bid;
+		vHand[hand].iBid = iBid;
+		iBudget -= iBid;
 	}
 }
 
