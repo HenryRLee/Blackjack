@@ -2,6 +2,60 @@
 #include "Hand.h"
 #include "Table.h"
 
+void BasicStrategy::CreateTables(void)
+{
+	int iTempHardTable[PMAX][DMAX] = 
+	{
+		/*	2	3	4 	5 	6 	7 	8 	9 	X 	A	*/
+		{	H, 	H, 	H, 	H, 	H, 	H, 	H, 	H, 	H, 	H	},	/* 5 */ 
+		{	H, 	H, 	H, 	H, 	H, 	H, 	H, 	H, 	H, 	H	},	/* 6 */
+		{	H,	H,	H,	H,	H,	H,	H,	H,	H,	H	},	/* 7 */
+		{	H,	H,	H,	H,	H,	H,	H,	H,	H,	H	},	/* 8 */
+		{	H,	DH, DH, DH, DH, H,	H,	H,	H,	H	},	/* 9 */
+		{	H,	DH, DH, DH, DH, DH, DH, DH, H,	H	},	/* 10 */
+		{	H,	DH, DH, DH, DH, DH, DH, DH, DH, H	},	/* 11 */
+		{	H,	H,	S,	S,	S,	H,	H,	H,	H,	H	},	/* 12 */
+		{	S,	S,	S,	S,	S,	H,	H,	H,	H,	H	},	/* 13 */
+		{	S,	S,	S,	S,	S,	H,	H,	H,	RH, H	},	/* 14 */
+		{	S,	S,	S,	S,	S,	H,	H,	H,	RH, H	},	/* 15 */
+		{	S,	S,	S,	S,	S,	H,	H,	RH, RH, H	},	/* 16 */
+		{	S,	S,	S,	S,	S,	S,	S,	S,	S,	S	},	/* 17 */
+		{	S,	S,	S,	S,	S,	S,	S,	S,	S,	S	},	/* 18 */
+		{	S,	S,	S,	S,	S,	S,	S,	S,	S,	S	},	/* 19 */
+		{	S,	S,	S,	S,	S,	S,	S,	S,	S,	S	},	/* 20 */
+		{	S,	S,	S,	S,	S,	S,	S,	S,	S,	S	},	/* 21 */
+	};
+
+	int iTempSoftTable[PSMAX][DMAX] = 
+	{
+		/*	2	3	4	5	6	7	8	9	X	A	*/
+		{	P,	P,	P,	P,	P,	P,	P,	P,	P,	P	},	/* A,A */
+		{	H,	H,	H,	DH,	DH,	H,	H,	H,	H,	H	},	/* 13 */
+		{	H,	H,	H,	DH,	DH,	H,	H,	H,	H,	H	},	/* 14 */
+		{	H,	H,	DH,	DH,	DH,	H,	H,	H,	H,	H	},	/* 15 */
+		{	H,	H,	DH,	DH,	DH,	H,	H,	H,	H,	H	},	/* 16 */
+		{	H,	DH,	DH,	DH,	DH,	H,	H,	H,	H,	H	},	/* 17 */
+		{	S,	DS,	DS,	DS,	DS,	S,	S,	H,	H,	H	},	/* 18 */
+		{	S,	S,	S,	S,	S,	S,	S,	S,	S,	S	},	/* 19 */
+		{	S,	S,	S,	S,	S,	S,	S,	S,	S,	S	},	/* 20 */
+		{	S,	S,	S,	S,	S,	S,	S,	S,	S,	S	}	/* 21 */
+	};
+
+	int iTempPairTable[PPMAX][DMAX] = 
+	{
+		/*	2	3	4	5	6	7	8	9	X	A	*/
+		{	P,	P,	P,	P,	P,	P,	H,	H,	H,	H	},	/* 2,2 */
+		{	P,	P,	P,	P,	P,	P,	H,	H,	H,	H	},	/* 3,3 */
+		{	H,	H,	H,	P,	P,	H,	H,	H,	H,	H	},	/* 4,4 */
+		{	DH,	DH,	DH,	DH,	DH,	DH,	DH,	DH,	H,	H	},	/* 5,5 */
+		{	P,	P,	P,	P,	P,	H,	H,	H,	H,	H	},	/* 6,6 */
+		{	P,	P,	P,	P,	P,	P,	H,	H,	RH,	H	},	/* 7,7 */
+		{	P,	P,	P,	P,	P,	P,	P,	P,	RH,	P	},	/* 8,8 */
+		{	P,	P,	P,	P,	P,	S,	P,	P,	S,	S	},	/* 9,9 */
+		{	S,	S,	S,	S,	S,	S,	S,	S,	S,	S	}	/* X,X */
+	};
+}
+
 int BasicStrategy::MakeDecision(Hand handCurrent, bitset <5> allowset, 
 		Table table)
 {
