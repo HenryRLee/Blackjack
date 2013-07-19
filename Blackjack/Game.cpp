@@ -130,6 +130,8 @@ void Game::PlayerAction(Player * player, bitset<5> allowset, int iHand)
 				allowset.set(SPLIT, 0);
 			else if (iSplittedHand >= iTimesSplittedAllow)
 				allowset.set(SPLIT, 0);
+			else if ((!bResplitAces) && (handCurrent->vCard[0].GetValue()==11))
+				allowset.set(SPLIT, 0);
 		}
 
 		if (!bLateSurrender)
@@ -214,7 +216,21 @@ void Game::OneHandRoutine(Dealer * dealer, vector < class Player * > vPlayer,
 			allowset.set(DOUBLE);
 
 		if (bSurrender)
+		{
 			allowset.set(SURRENDER);
+
+			if (!bSurrenderVsDealerAce)
+			{
+				if (dealer->vHand.size() > 0)
+				{
+					if (dealer->vHand[0].vCard.size() > 0)
+					{
+						if (dealer->vHand[0].vCard[0].GetValue() == 11)
+							allowset.set(SURRENDER, 0);
+					}
+				}
+			}
+		}
 
 		if (bSplit)
 			allowset.set(SPLIT);

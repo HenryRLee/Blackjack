@@ -27,7 +27,9 @@ protected:
 	bool bDoubleAfterDouble;
 	bool bDoubleAfterSplit;
 	bool bSplitAfterSplit;
+	bool bResplitAces;
 	bool bLateSurrender;
+	bool bSurrenderVsDealerAce;
 	int iTimesSplittedAllow;
 	double dBlackJackPays;
 

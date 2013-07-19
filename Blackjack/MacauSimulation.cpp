@@ -15,7 +15,9 @@ MacauSimulation::MacauSimulation(void)
 	bDoubleAfterDouble = false;
 	bDoubleAfterSplit = true;
 	bSplitAfterSplit = true;
+	bResplitAces = false;
 	bLateSurrender = false;
+	bSurrenderVsDealerAce = false;
 	iTimesSplittedAllow = 3;
 	dBlackJackPays = 2.5;
 }
