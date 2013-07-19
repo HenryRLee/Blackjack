@@ -83,7 +83,7 @@ void BasicStrategy::CreateDefaultTables(void)
 	}
 }
 
-int BasicStrategy::MakeDecision(Hand hand, bitset <5> allowset, 
+int BasicStrategy::MakeDecision(Hand hand, bitset <5> allowSet, 
 		Table table)
 {
 	int value = hand.GetScore();
@@ -100,7 +100,7 @@ int BasicStrategy::MakeDecision(Hand hand, bitset <5> allowset,
 	else
 		return -1;
 
-	if (allowset[SPLIT] == 1)
+	if (allowSet[SPLIT] == 1)
 	{
 		value = hand.vCard[0].GetValue();
 		action = iPairTable[value-PPDIFF][iDealerFaceup-DDIFF];
@@ -116,34 +116,34 @@ int BasicStrategy::MakeDecision(Hand hand, bitset <5> allowset,
 
 	if (action == DH)
 	{
-		if (allowset[DOUBLE] == 1)
+		if (allowSet[DOUBLE] == 1)
 			action = DOUBLE;
 		else
 			action = HIT;
 	}
 	else if (action == DS)
 	{
-		if (allowset[DOUBLE] == 1)
+		if (allowSet[DOUBLE] == 1)
 			action = DOUBLE;
 		else
 			action = STAND;
 	}
 	else if (action == RH)
 	{
-		if (allowset[SURRENDER] == 1)
+		if (allowSet[SURRENDER] == 1)
 			action = SURRENDER;
 		else
 			action = HIT;
 	}
 	else if (action == RS)
 	{
-		if (allowset[SURRENDER] == 1)
+		if (allowSet[SURRENDER] == 1)
 			action = SURRENDER;
 		else
 			action = STAND;
 	}
 
-	if ((action == HIT) && (allowset[HIT] ==0))
+	if ((action == HIT) && (allowSet[HIT] ==0))
 		action = STAND;
 
 	return action;

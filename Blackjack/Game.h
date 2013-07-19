@@ -35,7 +35,7 @@ protected:
 
 	void inline DealInitialCards(Dealer *, vector < class Player * >);
 	void inline DealOneCard(Gambler *, int hand=0);
-	void PlayerAction(Player *, bitset<5> allowset, int hand=0);
+	void PlayerAction(Player *, bitset<5> allowSet, int hand=0);
 	void DealerAction(Dealer *);
 
 	void OneHandRoutine(Dealer * , vector < class Player * >, Table *);

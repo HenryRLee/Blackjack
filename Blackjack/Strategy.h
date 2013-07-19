@@ -10,7 +10,7 @@ class Table;
 class Strategy
 {
 public:
-	virtual int MakeDecision(Hand handCurrent, bitset <5> allowset, Table table) = 0;
+	virtual int MakeDecision(Hand handCurrent, bitset <5> allowSet, Table table) = 0;
 
 	Strategy(void);
 	virtual ~Strategy(void);

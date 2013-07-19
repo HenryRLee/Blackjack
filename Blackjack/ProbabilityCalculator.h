@@ -1,6 +1,8 @@
 #pragma once
 #include "Blackjack.h"
 
+class ProbSet;
+
 class ProbabilityCalculator
 {
 public:

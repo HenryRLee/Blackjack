@@ -79,13 +79,13 @@ void Player::JoinTable(Table * table)
 	this->table = table;
 }
 
-int Player::MakeDecision(bitset<5> actionset, int hand)
+int Player::MakeDecision(bitset<5> allowSet, int hand)
 {
 	if (vHand.size() > hand)
 	{
 		int action;
 
-		action = strategy->MakeDecision(vHand[hand], actionset, *table);
+		action = strategy->MakeDecision(vHand[hand], allowSet, *table);
 		return action;
 	}
 	else

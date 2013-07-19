@@ -2,25 +2,25 @@
 #include "Hand.h"
 #include "Table.h"
 
-void NoStrategy::OutputDialogue(bitset <5> allowset)
+void NoStrategy::OutputDialogue(bitset <5> allowSet)
 {
 	cout << "Input your Selection" << endl;
 	cout << "Available options: ";
 
-	if (allowset[HIT] == 1)
+	if (allowSet[HIT] == 1)
 		cout << "HIT ";
-	if (allowset[STAND] == 1)
+	if (allowSet[STAND] == 1)
 		cout << "STAND ";
-	if (allowset[DOUBLE] == 1)
+	if (allowSet[DOUBLE] == 1)
 		cout << "DOUBLE ";
-	if (allowset[SPLIT] == 1)
+	if (allowSet[SPLIT] == 1)
 		cout << "SPLIT ";
-	if (allowset[SURRENDER] == 1)
+	if (allowSet[SURRENDER] == 1)
 		cout << "SURRENDER ";
 	cout << endl;
 }
 
-int NoStrategy::InputSelection(bitset <5> allowset)
+int NoStrategy::InputSelection(bitset <5> allowSet)
 {
 	string input;
 	int action;
@@ -64,13 +64,13 @@ int NoStrategy::InputSelection(bitset <5> allowset)
 	else
 	{
 		cout << "Action not supported" << endl;
-		return InputSelection(allowset);
+		return InputSelection(allowSet);
 	}
 
-	if (allowset[action] == 0)
+	if (allowSet[action] == 0)
 	{
 		cout << "Action not available" << endl;
-		return InputSelection(allowset);
+		return InputSelection(allowSet);
 	}
 	else
 	{
@@ -78,12 +78,12 @@ int NoStrategy::InputSelection(bitset <5> allowset)
 	}
 }
 
-int NoStrategy::MakeDecision(Hand handCurrent, bitset <5> allowset, Table table)
+int NoStrategy::MakeDecision(Hand handCurrent, bitset <5> allowSet, Table table)
 {
 	int action;
 
-	OutputDialogue(allowset);
-	action = InputSelection(allowset);
+	OutputDialogue(allowSet);
+	action = InputSelection(allowSet);
 
 	return action;
 }

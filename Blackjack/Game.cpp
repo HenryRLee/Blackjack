@@ -31,7 +31,7 @@ void inline Game::DealOneCard(Gambler * gambler, int hand)
 	gambler->GetOneCard(pop, hand);
 }
 
-void Game::PlayerAction(Player * player, bitset<5> allowset, int iHand)
+void Game::PlayerAction(Player * player, bitset<5> allowSet, int iHand)
 {
 	int action;
 	Hand * handCurrent = &(player->vHand[iHand]);
@@ -44,36 +44,36 @@ void Game::PlayerAction(Player * player, bitset<5> allowset, int iHand)
 		if (handCurrent->vCard[0].GetValue() != 
 			handCurrent->vCard[1].GetValue())
 		{
-			allowset.set(SPLIT, 0);
+			allowSet.set(SPLIT, 0);
 		}
 	}
 
 	statistics->Update(*handCurrent);
-	action = player->MakeDecision(allowset, iHand);
+	action = player->MakeDecision(allowSet, iHand);
 
-	if (allowset[action] == 0)
+	if (allowSet[action] == 0)
 	{
 		statistics->Update("Action not available");
-		PlayerAction(player, allowset, iHand);
+		PlayerAction(player, allowSet, iHand);
 	}
 
 	switch (action)
 	{
 	case HIT:
 		if (!bLateSurrender)
-			allowset.set(SURRENDER, 0);
+			allowSet.set(SURRENDER, 0);
 
 		if (!bDoubleAfterHit)
-			allowset.set(DOUBLE, 0);
+			allowSet.set(DOUBLE, 0);
 
-		allowset.set(SPLIT, 0);
+		allowSet.set(SPLIT, 0);
 
 		DealOneCard(player, iHand);
 
 		if (handCurrent->GetScore() > MaxScore)
 			handCurrent->iStatus = BUSTED;
 		else
-			PlayerAction(player, allowset, iHand);
+			PlayerAction(player, allowSet, iHand);
 		break;
 
 	case STAND:
@@ -83,18 +83,18 @@ void Game::PlayerAction(Player * player, bitset<5> allowset, int iHand)
 	case DOUBLE:
 		if (!bHitAfterDouble)
 		{
-			allowset.set(HIT, 0);
-			allowset.set(DOUBLE, 0);
+			allowSet.set(HIT, 0);
+			allowSet.set(DOUBLE, 0);
 		}
 		else if (!bDoubleAfterDouble)
 		{
-			allowset.set(DOUBLE, 0);
+			allowSet.set(DOUBLE, 0);
 		}
 
 		if (!bLateSurrender)
-			allowset.set(SURRENDER, 0);
+			allowSet.set(SURRENDER, 0);
 
-		allowset.set(SPLIT, 0);
+		allowSet.set(SPLIT, 0);
 
 		player->DoubleBid(iHand);
 		DealOneCard(player, iHand);
@@ -102,7 +102,7 @@ void Game::PlayerAction(Player * player, bitset<5> allowset, int iHand)
 		if (handCurrent->GetScore() > MaxScore)
 			handCurrent->iStatus = BUSTED;
 		else
-			PlayerAction(player, allowset, iHand);
+			PlayerAction(player, allowSet, iHand);
 
 		break;
 
@@ -117,32 +117,32 @@ void Game::PlayerAction(Player * player, bitset<5> allowset, int iHand)
 
 		if (!bHitAfterSplit)
 		{
-			allowset.set(HIT, 0);
-			allowset.set(DOUBLE, 0);
-			allowset.set(SPLIT, 0);
+			allowSet.set(HIT, 0);
+			allowSet.set(DOUBLE, 0);
+			allowSet.set(SPLIT, 0);
 		}
 		else
 		{
 			if (!bDoubleAfterSplit)
-				allowset.set(DOUBLE, 0);
+				allowSet.set(DOUBLE, 0);
 
 			if (!bSplitAfterSplit)
-				allowset.set(SPLIT, 0);
+				allowSet.set(SPLIT, 0);
 			else if (iSplittedHand >= iTimesSplittedAllow)
-				allowset.set(SPLIT, 0);
+				allowSet.set(SPLIT, 0);
 			else if ((!bResplitAces) && (handCurrent->vCard[0].GetValue()==11))
-				allowset.set(SPLIT, 0);
+				allowSet.set(SPLIT, 0);
 		}
 
 		if (!bLateSurrender)
-			allowset.set(SURRENDER, 0);
+			allowSet.set(SURRENDER, 0);
 
 		DealOneCard(player, iHand);
-		PlayerAction(player, allowset, iHand);
+		PlayerAction(player, allowSet, iHand);
 
 		player->PlaceBid(iSplittedHand);
 		DealOneCard(player, iSplittedHand);
-		PlayerAction(player, allowset, iSplittedHand);
+		PlayerAction(player, allowSet, iSplittedHand);
 
 		break;
 
@@ -199,7 +199,7 @@ void Game::OneHandRoutine(Dealer * dealer, vector < class Player * > vPlayer,
 
 	for (int i=0; i<vPlayer.size(); i++)
 	{
-		bitset <5> allowset;
+		bitset <5> allowSet;
 
 		if (vPlayer[i]->vHand[0].GetScore() == MaxScore)
 		{
@@ -209,15 +209,15 @@ void Game::OneHandRoutine(Dealer * dealer, vector < class Player * > vPlayer,
 			break;
 		}
 
-		allowset.set(HIT);
-		allowset.set(STAND);
+		allowSet.set(HIT);
+		allowSet.set(STAND);
 
 		if (bDouble)
-			allowset.set(DOUBLE);
+			allowSet.set(DOUBLE);
 
 		if (bSurrender)
 		{
-			allowset.set(SURRENDER);
+			allowSet.set(SURRENDER);
 
 			if (!bSurrenderVsDealerAce)
 			{
@@ -226,16 +226,16 @@ void Game::OneHandRoutine(Dealer * dealer, vector < class Player * > vPlayer,
 					if (dealer->vHand[0].vCard.size() > 0)
 					{
 						if (dealer->vHand[0].vCard[0].GetValue() == 11)
-							allowset.set(SURRENDER, 0);
+							allowSet.set(SURRENDER, 0);
 					}
 				}
 			}
 		}
 
 		if (bSplit)
-			allowset.set(SPLIT);
+			allowSet.set(SPLIT);
 
-		PlayerAction(vPlayer[i], allowset);
+		PlayerAction(vPlayer[i], allowSet);
 	}
 
 	DealOneCard(dealer);

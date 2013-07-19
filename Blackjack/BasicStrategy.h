@@ -44,7 +44,7 @@ protected:
 	void CreateDefaultTables(void);
 
 public:
-	int MakeDecision(Hand handCurrent, bitset <5> allowset, Table table);
+	int MakeDecision(Hand handCurrent, bitset <5> allowSet, Table table);
 
 	BasicStrategy(void);
 	~BasicStrategy(void);

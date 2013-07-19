@@ -12,7 +12,7 @@ protected:
 	Strategy * strategy;
 
 	int SplitCards(int srchand);
-	int MakeDecision(bitset<5> actionset, int hand=0);
+	int MakeDecision(bitset<5> allowSet, int hand=0);
 
 	void GetPays(double multiplier, int hand=0);
 
