@@ -5,14 +5,22 @@ class SimpleCalculator :
 	public ProbabilityCalculator
 {
 protected:
+	enum PlayerAction
+	{
+		NONE, HIT, STAND,
+	};
+
 	double ProbOfGettingCard(int value=0);
+
+	double CalEdge(ProbSet);
 
 	bool DealerHits(HandScore handDealer);
 	HandScore GetOneCard(HandScore hand, int iCardValue);
 
 	ProbSet ProbOfHandsDealerTurn(HandScore player, HandScore dealer);
 
-	ProbSet ProbOfHandsPlayerTurn(HandScore player, HandScore dealer);
+	ProbSet ProbOfHandsPlayerTurn(HandScore player, HandScore dealer, 
+			int action=NONE);
 
 	ProbSet ProbAfterGettingCard(ProbSet current, ProbSet next, int iCardValue);
 

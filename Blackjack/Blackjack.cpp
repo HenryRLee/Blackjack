@@ -38,7 +38,7 @@ int main(int argc, char *argv[])
 	cout << "Player budget: " << Hank->ShowBudget() << endl;
 	*/
 
-	cal->ShowProbSet(17, false, 16, false);
+	cal->ShowProbSet(2, false, 10, false);
 
 	return 0;
 }
