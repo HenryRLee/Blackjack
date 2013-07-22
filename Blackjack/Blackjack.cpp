@@ -7,6 +7,7 @@
 #include "LongTermStats.h"
 #include "NoStrategy.h"
 #include "BasicStrategy.h"
+#include "SimpleCalculator.h"
 
 int main(int argc, char *argv[])
 {
@@ -18,7 +19,9 @@ int main(int argc, char *argv[])
 	Statistics * Logger = new StreamLog;
 	Strategy * UserInput = new NoStrategy;
 	Strategy * BStrategy = new BasicStrategy;
+	ProbabilityCalculator * cal = new SimpleCalculator;
 
+	/*
 	Hank->JoinTable(Venetian);
 	Hank->UseStrategy(BStrategy);
 	Hank->FixBid(100);
@@ -33,6 +36,9 @@ int main(int argc, char *argv[])
 
 	cout << fixed;
 	cout << "Player budget: " << Hank->ShowBudget() << endl;
+	*/
+
+	cal->ShowProbSet(17, false, 16, false);
 
 	return 0;
 }

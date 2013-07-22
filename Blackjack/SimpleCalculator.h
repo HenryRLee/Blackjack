@@ -7,16 +7,14 @@ class SimpleCalculator :
 protected:
 	double ProbOfGettingCard(int value=0);
 
-	bool DealerHits(int iDealerScore, bool bDealerSoft);
-	void GetOneCard(int & iScore, bool & bSoft, int iCardValue);
+	bool DealerHits(HandScore handDealer);
+	HandScore GetOneCard(HandScore hand, int iCardValue);
 
-	ProbSet ProbOfHandsDealerTurn(int iPlayerScore, bool bPlayerSoft, 
-			int iDealerScore, bool bDealerSoft);
+	ProbSet ProbOfHandsDealerTurn(HandScore player, HandScore dealer);
 
-	ProbSet ProbOfHandsPlayerTurn(int iPlayerScore, bool bPlayerSoft, 
-			int iDealerScore, bool bDealerSoft);
+	ProbSet ProbOfHandsPlayerTurn(HandScore player, HandScore dealer);
 
-	ProbSet ProbOfNextCard(ProbSet setNextCard, int iNextCardValue);
+	ProbSet ProbAfterGettingCard(ProbSet current, ProbSet next, int iCardValue);
 
 public:
 	void ShowProbSet(int iPlayerScore, bool bPlayerSoft, int iDealerScore,

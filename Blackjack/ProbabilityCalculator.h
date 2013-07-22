@@ -9,6 +9,12 @@ struct ProbSet
 	double dPush;
 };
 
+struct HandScore
+{
+	int iScore;
+	bool bSoft;
+};
+
 class ProbabilityCalculator
 {
 protected:
