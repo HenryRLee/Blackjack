@@ -7,7 +7,7 @@ class SimpleCalculator :
 protected:
 	enum PlayerAction
 	{
-		NONE, HIT, STAND,
+		NONE, HIT, STAND, DOUBLE,
 	};
 
 	double ProbOfGettingCard(int value=0);
