@@ -99,7 +99,6 @@ ProbSet SimpleCalculator::ProbOfHandsPlayerTurn(HandScore handPlayer,
 {
 	ProbSet pbHit;
 	ProbSet pbStand;
-	ProbSet pbDouble;
 
 	/* Bust */
 	if (handPlayer.iScore > 21)
@@ -138,28 +137,6 @@ ProbSet SimpleCalculator::ProbOfHandsPlayerTurn(HandScore handPlayer,
 		pbStand = ProbOfHandsDealerTurn(handPlayer, handDealer);
 	}
 	/* Stand */
-
-	/* Double */
-	if (action == DOUBLE)
-	{
-		ProbSet pbNew;
-
-		pbDouble.dWin = 0;
-		pbDouble.dLose = 0;
-		pbDouble.dPush = 0;
-
-		for (int i=2; i<=11; i++)
-		{
-			HandScore handCurrent;
-
-			handCurrent = GetOneCard(handPlayer, i);
-			pbNew = ProbOfHandsPlayerTurn(handCurrent, handDealer, STAND);
-
-			pbDouble = ProbAfterGettingCard(pbDouble, pbNew, i);
-		}
-	}
-	/* Double */
-
 	if (action == NONE)
 	{
 		if (CalEdge(pbHit) > CalEdge(pbStand))
@@ -175,10 +152,44 @@ ProbSet SimpleCalculator::ProbOfHandsPlayerTurn(HandScore handPlayer,
 	{
 		return pbStand;
 	}
-	else if (action == DOUBLE)
+	
+}
+
+ProbSet SimpleCalculator::ProbOfHandsPlayerDouble(HandScore handPlayer, 
+		HandScore handDealer)
+{
+	ProbSet pbDouble;
+	ProbSet pbNew;
+
+	pbDouble.dWin = 0;
+	pbDouble.dLose = 0;
+	pbDouble.dPush = 0;
+
+	for (int i=2; i<=11; i++)
 	{
-		return pbDouble;
+		HandScore handCurrent;
+
+		handCurrent = GetOneCard(handPlayer, i);
+		pbNew = ProbOfHandsPlayerTurn(handCurrent, handDealer, STAND);
+
+		pbDouble = ProbAfterGettingCard(pbDouble, pbNew, i);
 	}
+
+	return pbDouble;
+}
+
+ProbSet SimpleCalculator::ProbOfHandsPlayerSplit(HandScore handPlayer, 
+		HandScore handDealer, int iTimesSplitted)
+{
+	ProbSet pbSplit;
+	ProbSet pbNew;
+
+	pbSplit.dWin = 0;
+	pbSplit.dLose = 0;
+	pbSplit.dPush = 0;
+
+
+	return pbSplit;
 }
 
 ProbSet SimpleCalculator::ProbAfterGettingCard(ProbSet pbCurrent, 
@@ -207,7 +218,7 @@ void SimpleCalculator::ShowProbSet(int iPlayerScore, bool bPlayerSoft,
 
 	pbHit = ProbOfHandsPlayerTurn(handPlayer, handDealer, HIT);
 	pbStand = ProbOfHandsPlayerTurn(handPlayer, handDealer, STAND);
-	pbDouble = ProbOfHandsPlayerTurn(handPlayer, handDealer, DOUBLE);
+	pbDouble = ProbOfHandsPlayerDouble(handPlayer, handDealer);
 
 	cout << fixed;
 	cout << "Hit: " << endl;

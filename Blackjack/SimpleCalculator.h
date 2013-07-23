@@ -7,7 +7,7 @@ class SimpleCalculator :
 protected:
 	enum PlayerAction
 	{
-		NONE, HIT, STAND, DOUBLE,
+		NONE, HIT, STAND,
 	};
 
 	double ProbOfGettingCard(int value=0);
@@ -21,6 +21,10 @@ protected:
 
 	ProbSet ProbOfHandsPlayerTurn(HandScore player, HandScore dealer, 
 			int action=NONE);
+
+	ProbSet ProbOfHandsPlayerDouble(HandScore player, HandScore dealer);
+	ProbSet ProbOfHandsPlayerSplit(HandScore player, HandScore dealer, 
+			int iTimesSplitted);
 
 	ProbSet ProbAfterGettingCard(ProbSet current, ProbSet next, int iCardValue);
 
