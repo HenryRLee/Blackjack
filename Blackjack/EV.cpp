@@ -29,6 +29,12 @@ int main(int argc, char * argv[])
 		cal->ShowProbSet(atoi(argv[1]), bPlayerSoft, atoi(argv[2]), 
 				bDealerSoft);
 	}
+	else
+	{
+		cout << "Usage" << endl;
+		cout << "EV <Player Score> <Dealer Score> ";
+		cout << "[<Player Score is Soft> <Delaer Score is Soft>]" << endl;
+	}
 
 	return 0;
 }
