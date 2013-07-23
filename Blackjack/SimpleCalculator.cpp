@@ -215,7 +215,7 @@ void SimpleCalculator::ShowProbSet(int iPlayerScore, bool bPlayerSoft,
 	cout << "Lose " << pbHit.dLose << endl;
 	cout << "Push " << pbHit.dPush << endl;
 	cout << "Edge " << CalEdge(pbHit) << endl;
-	cout << "Expectation " << CalEdge(pbHit) << endl;
+	cout << "EV " << CalEdge(pbHit) << endl;
 	cout << endl;
 
 	cout << "Stand: " << endl;
@@ -223,7 +223,7 @@ void SimpleCalculator::ShowProbSet(int iPlayerScore, bool bPlayerSoft,
 	cout << "Lose " << pbStand.dLose << endl;
 	cout << "Push " << pbStand.dPush << endl;
 	cout << "Edge " << CalEdge(pbStand) << endl;
-	cout << "Expectation " << CalEdge(pbStand) << endl;
+	cout << "EV " << CalEdge(pbStand) << endl;
 	cout << endl;
 
 	cout << "Double: " << endl;
@@ -231,7 +231,7 @@ void SimpleCalculator::ShowProbSet(int iPlayerScore, bool bPlayerSoft,
 	cout << "Lose " << pbDouble.dLose << endl;
 	cout << "Push " << pbDouble.dPush << endl;
 	cout << "Edge " << CalEdge(pbDouble) << endl;
-	cout << "Expectation " << CalEdge(pbDouble)*2 << endl;
+	cout << "EV " << CalEdge(pbDouble)*2 << endl;
 	cout << endl;
 }
 

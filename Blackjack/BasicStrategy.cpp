@@ -31,7 +31,7 @@ void BasicStrategy::CreateDefaultTables(void)
 	int iDfltSoftTable[PSMAX][DMAX] = 
 	{
 		/*	2	3	4	5	6	7	8	9	X	A	*/
-		{	H,	H,	H,	DH,	DH,	H,	H,	H,	H,	H	},	/* 12 */
+		{	H,	H,	H,	H,	H,	H,	H,	H,	H,	H	},	/* 12 */
 		{	H,	H,	H,	DH,	DH,	H,	H,	H,	H,	H	},	/* 13 */
 		{	H,	H,	H,	DH,	DH,	H,	H,	H,	H,	H	},	/* 14 */
 		{	H,	H,	DH,	DH,	DH,	H,	H,	H,	H,	H	},	/* 15 */
