@@ -14,4 +14,4 @@ EV: EV.o ProbabilityCalculator.o SimpleCalculator.o
 	g++ $< ${CFLAGS} -c -o $@
 
 clean:
-	rm -f *.o Blackjack
+	rm -f *.o Blackjack EV

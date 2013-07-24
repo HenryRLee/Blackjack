@@ -181,23 +181,61 @@ ProbSet SimpleCalculator::ProbOfHandsPlayerDouble(HandScore handPlayer,
 ProbSet SimpleCalculator::ProbOfHandsPlayerSplit(HandScore handPlayer, 
 		HandScore handDealer, int iTimesSplitted)
 {
+	ProbSet pbCurrent;
 	ProbSet pbSplit;
-	ProbSet pbNew;
+	ProbSet pbHit;
 
-	pbSplit.dWin = 0;
-	pbSplit.dLose = 0;
-	pbSplit.dPush = 0;
+	pbCurrent.dWin = 0;
+	pbCurrent.dLose = 0;
+	pbCurrent.dPush = 0;
 
+	iTimesSplitted++;
 
-	return pbSplit;
+	for (int i=2; i<=11; i++)
+	{
+		HandScore handCurrent;
+		bool bSplitted = false;
+
+		handCurrent = GetOneCard(handPlayer, i);
+		pbHit = ProbOfHandsPlayerTurn(handCurrent, handDealer);
+
+		if (i == handPlayer.iScore)
+		{
+			if (iTimesSplitted < iMaxTimesSplitted)
+			{
+				if (ResplitAces || (i!=11))
+				{
+					pbSplit = ProbOfHandsPlayerSplit(handPlayer, handDealer,
+							iTimesSplitted);
+					bSplitted = true;
+				}
+			}
+		}
+
+		if (bSplitted)
+		{
+			if (CalEdge(pbHit) > CalEdge(pbSplit)*(double)2)
+				pbCurrent = ProbAfterGettingCard(pbCurrent, pbHit, i);
+			else
+				pbCurrent = ProbAfterGettingCard(pbCurrent, pbSplit, i, 2);
+		}
+		else
+		{
+			pbCurrent = ProbAfterGettingCard(pbCurrent, pbHit, i);
+		}
+	}
+
+	return pbCurrent;
 }
 
-ProbSet SimpleCalculator::ProbAfterGettingCard(ProbSet pbCurrent, 
-		ProbSet pbNextCard, int iCardValue)
+ProbSet SimpleCalculator::ProbAfterGettingCard(ProbSet pbCurrent, ProbSet pbNextCard, int iCardValue, double multiplier)
 {
-	pbCurrent.dWin += ProbOfGettingCard(iCardValue) * pbNextCard.dWin;
-	pbCurrent.dLose += ProbOfGettingCard(iCardValue) * pbNextCard.dLose;
-	pbCurrent.dPush += ProbOfGettingCard(iCardValue) * pbNextCard.dPush;
+	pbCurrent.dWin += ProbOfGettingCard(iCardValue) * 
+		pbNextCard.dWin * multiplier;
+	pbCurrent.dLose += ProbOfGettingCard(iCardValue) * 
+		pbNextCard.dLose * multiplier;
+	pbCurrent.dPush += ProbOfGettingCard(iCardValue) * 
+		pbNextCard.dPush * multiplier;
 
 	return pbCurrent;
 }
@@ -208,6 +246,7 @@ void SimpleCalculator::ShowProbSet(int iPlayerScore, bool bPlayerSoft,
 	ProbSet pbHit;
 	ProbSet pbStand;
 	ProbSet pbDouble;
+	ProbSet pbSplit;
 	HandScore handPlayer;
 	HandScore handDealer;
 
@@ -225,7 +264,6 @@ void SimpleCalculator::ShowProbSet(int iPlayerScore, bool bPlayerSoft,
 	cout << "Win " << pbHit.dWin << endl;
 	cout << "Lose " << pbHit.dLose << endl;
 	cout << "Push " << pbHit.dPush << endl;
-	cout << "Edge " << CalEdge(pbHit) << endl;
 	cout << "EV " << CalEdge(pbHit) << endl;
 	cout << endl;
 
@@ -233,7 +271,6 @@ void SimpleCalculator::ShowProbSet(int iPlayerScore, bool bPlayerSoft,
 	cout << "Win " << pbStand.dWin << endl;
 	cout << "Lose " << pbStand.dLose << endl;
 	cout << "Push " << pbStand.dPush << endl;
-	cout << "Edge " << CalEdge(pbStand) << endl;
 	cout << "EV " << CalEdge(pbStand) << endl;
 	cout << endl;
 
@@ -241,13 +278,30 @@ void SimpleCalculator::ShowProbSet(int iPlayerScore, bool bPlayerSoft,
 	cout << "Win " << pbDouble.dWin << endl;
 	cout << "Lose " << pbDouble.dLose << endl;
 	cout << "Push " << pbDouble.dPush << endl;
-	cout << "Edge " << CalEdge(pbDouble) << endl;
 	cout << "EV " << CalEdge(pbDouble)*2 << endl;
 	cout << endl;
+
+	if ((iPlayerScore >= 4) && (iPlayerScore%2 == 0))
+	{
+		handPlayer.iScore = iPlayerScore/2;
+		if ((iPlayerScore == 12) && (bPlayerSoft))
+			handPlayer.iScore = 11;
+
+		handPlayer.bSoft = bPlayerSoft;
+
+		pbSplit = ProbOfHandsPlayerSplit(handPlayer, handDealer, 0);
+		cout << "Split: " << endl;
+		cout << "Win " << pbSplit.dWin << endl;
+		cout << "Lose " << pbSplit.dLose << endl;
+		cout << "Push " << pbSplit.dPush << endl;
+		cout << "EV " << CalEdge(pbSplit)*2 << endl;
+	}
 }
 
 SimpleCalculator::SimpleCalculator(void)
 {
+	iMaxTimesSplitted = 3;
+	ResplitAces = false;
 }
 
 SimpleCalculator::~SimpleCalculator(void)

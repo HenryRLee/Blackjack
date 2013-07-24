@@ -4,6 +4,10 @@
 class SimpleCalculator :
 	public ProbabilityCalculator
 {
+private:
+	bool ResplitAces;
+	int iMaxTimesSplitted;
+
 protected:
 	enum PlayerAction
 	{
@@ -26,7 +30,8 @@ protected:
 	ProbSet ProbOfHandsPlayerSplit(HandScore player, HandScore dealer, 
 			int iTimesSplitted);
 
-	ProbSet ProbAfterGettingCard(ProbSet current, ProbSet next, int iCardValue);
+	ProbSet ProbAfterGettingCard(ProbSet current, ProbSet next, 
+			int iCardValue, double multiplier=1);
 
 public:
 	void ShowProbSet(int iPlayerScore, bool bPlayerSoft, int iDealerScore,
