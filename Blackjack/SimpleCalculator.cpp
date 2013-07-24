@@ -217,7 +217,7 @@ ProbSet SimpleCalculator::ProbOfHandsPlayerSplit(HandScore handPlayer,
 			if (CalEdge(pbHit) > CalEdge(pbSplit)*(double)2)
 				pbCurrent = ProbAfterGettingCard(pbCurrent, pbHit, i);
 			else
-				pbCurrent = ProbAfterGettingCard(pbCurrent, pbSplit, i, 2);
+				pbCurrent = ProbAfterGettingCard(pbCurrent, pbSplit, i);
 		}
 		else
 		{
