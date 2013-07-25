@@ -235,7 +235,7 @@ ProbSet SimpleCalculator::ProbOfHandsPlayerSplit(HandScore handPlayer,
 
 		handCurrent = GetOneCard(handPlayer, i);
 		pbHit = ProbOfHandsPlayerHitOrStand(handCurrent, handDealer);
-		pbDouble = ProbOfHandsPlayerStand(handCurrent, handDealer);
+		pbDouble = ProbOfHandsPlayerDouble(handCurrent, handDealer);
 
 		if (i == handPlayer.iScore)
 		{
@@ -286,6 +286,8 @@ ProbSet SimpleCalculator::ProbOfHandsPlayerSplit(HandScore handPlayer,
 			}
 		}
 	}
+
+	pbCurrent.dEV *= 2;
 
 	return pbCurrent;
 }
