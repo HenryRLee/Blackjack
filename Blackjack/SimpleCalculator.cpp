@@ -155,6 +155,39 @@ ProbSet SimpleCalculator::ProbOfHandsPlayerTurn(HandScore handPlayer,
 	
 }
 
+ProbSet SimpleCalculator::ProbOfHandsPlayerHit(HandScore handPlayer, 
+		HandScore handDealer)
+{
+	ProbSet pbHit;
+
+	pbHit = ProbOfHandsPlayerTurn(handPlayer, handDealer, HIT);
+	pbHit.dEV = CalEdge(pbHit);
+
+	return pbHit;
+}
+
+ProbSet SimpleCalculator::ProbOfHandsPlayerStand(HandScore handPlayer, 
+		HandScore handDealer)
+{
+	ProbSet pbStand;
+
+	pbStand = ProbOfHandsPlayerTurn(handPlayer, handDealer, STAND);
+	pbStand.dEV = CalEdge(pbStand);
+
+	return pbStand;
+}
+
+ProbSet SimpleCalculator::ProbOfHandsPlayerHitOrStand(HandScore handPlayer, 
+		HandScore handDealer)
+{
+	ProbSet pbCurrent;
+
+	pbCurrent = ProbOfHandsPlayerTurn(handPlayer, handDealer);
+	pbCurrent.dEV = CalEdge(pbCurrent);
+
+	return pbCurrent;
+}
+
 ProbSet SimpleCalculator::ProbOfHandsPlayerDouble(HandScore handPlayer, 
 		HandScore handDealer)
 {
@@ -175,6 +208,8 @@ ProbSet SimpleCalculator::ProbOfHandsPlayerDouble(HandScore handPlayer,
 		pbDouble = ProbAfterGettingCard(pbDouble, pbNew, i);
 	}
 
+	pbDouble.dEV = CalEdge(pbDouble)*(double)2;
+
 	return pbDouble;
 }
 
@@ -184,10 +219,12 @@ ProbSet SimpleCalculator::ProbOfHandsPlayerSplit(HandScore handPlayer,
 	ProbSet pbCurrent;
 	ProbSet pbSplit;
 	ProbSet pbHit;
+	ProbSet pbDouble;
 
 	pbCurrent.dWin = 0;
 	pbCurrent.dLose = 0;
 	pbCurrent.dPush = 0;
+	pbCurrent.dEV = 0;
 
 	iTimesSplitted++;
 
@@ -197,7 +234,8 @@ ProbSet SimpleCalculator::ProbOfHandsPlayerSplit(HandScore handPlayer,
 		bool bSplitted = false;
 
 		handCurrent = GetOneCard(handPlayer, i);
-		pbHit = ProbOfHandsPlayerTurn(handCurrent, handDealer);
+		pbHit = ProbOfHandsPlayerHitOrStand(handCurrent, handDealer);
+		pbDouble = ProbOfHandsPlayerStand(handCurrent, handDealer);
 
 		if (i == handPlayer.iScore)
 		{
@@ -214,28 +252,49 @@ ProbSet SimpleCalculator::ProbOfHandsPlayerSplit(HandScore handPlayer,
 
 		if (bSplitted)
 		{
-			if (CalEdge(pbHit) > CalEdge(pbSplit)*(double)2)
+			if ((pbHit.dEV>=pbSplit.dEV) && (pbHit.dEV>=pbDouble.dEV))
+			{
 				pbCurrent = ProbAfterGettingCard(pbCurrent, pbHit, i);
-			else
+				pbCurrent.dEV += ProbOfGettingCard(i) * pbHit.dEV;
+			}
+			else if ((pbSplit.dEV>=pbHit.dEV) && (pbSplit.dEV>=pbDouble.dEV))
+			{
 				pbCurrent = ProbAfterGettingCard(pbCurrent, pbSplit, i);
+				pbCurrent.dEV += ProbOfGettingCard(i) * pbSplit.dEV;
+			}
+			else if ((pbDouble.dEV>=pbHit.dEV) && (pbDouble.dEV>=pbSplit.dEV))
+			{
+				pbCurrent = ProbAfterGettingCard(pbCurrent, pbDouble, i);
+				pbCurrent.dEV += ProbOfGettingCard(i) * pbDouble.dEV;
+			}
+			else
+			{
+				cout << "Error in Calculating splitting." << endl;
+			}
 		}
 		else
 		{
-			pbCurrent = ProbAfterGettingCard(pbCurrent, pbHit, i);
+			if (pbHit.dEV > pbDouble.dEV)
+			{
+				pbCurrent = ProbAfterGettingCard(pbCurrent, pbHit, i);
+				pbCurrent.dEV += ProbOfGettingCard(i) * pbHit.dEV;
+			}
+			else
+			{
+				pbCurrent = ProbAfterGettingCard(pbCurrent, pbDouble, i);
+				pbCurrent.dEV += ProbOfGettingCard(i) * pbDouble.dEV;
+			}
 		}
 	}
 
 	return pbCurrent;
 }
 
-ProbSet SimpleCalculator::ProbAfterGettingCard(ProbSet pbCurrent, ProbSet pbNextCard, int iCardValue, double multiplier)
+ProbSet SimpleCalculator::ProbAfterGettingCard(ProbSet pbCurrent, ProbSet pbNextCard, int iCardValue)
 {
-	pbCurrent.dWin += ProbOfGettingCard(iCardValue) * 
-		pbNextCard.dWin * multiplier;
-	pbCurrent.dLose += ProbOfGettingCard(iCardValue) * 
-		pbNextCard.dLose * multiplier;
-	pbCurrent.dPush += ProbOfGettingCard(iCardValue) * 
-		pbNextCard.dPush * multiplier;
+	pbCurrent.dWin += ProbOfGettingCard(iCardValue) * pbNextCard.dWin;
+	pbCurrent.dLose += ProbOfGettingCard(iCardValue) * pbNextCard.dLose;
+	pbCurrent.dPush += ProbOfGettingCard(iCardValue) * pbNextCard.dPush;
 
 	return pbCurrent;
 }
@@ -255,8 +314,8 @@ void SimpleCalculator::ShowProbSet(int iPlayerScore, bool bPlayerSoft,
 	handDealer.iScore = iDealerScore;
 	handDealer.bSoft = bDealerSoft;
 
-	pbHit = ProbOfHandsPlayerTurn(handPlayer, handDealer, HIT);
-	pbStand = ProbOfHandsPlayerTurn(handPlayer, handDealer, STAND);
+	pbHit = ProbOfHandsPlayerHit(handPlayer, handDealer);
+	pbStand = ProbOfHandsPlayerStand(handPlayer, handDealer);
 	pbDouble = ProbOfHandsPlayerDouble(handPlayer, handDealer);
 
 	cout << fixed;
@@ -264,21 +323,21 @@ void SimpleCalculator::ShowProbSet(int iPlayerScore, bool bPlayerSoft,
 	cout << "Win " << pbHit.dWin << endl;
 	cout << "Lose " << pbHit.dLose << endl;
 	cout << "Push " << pbHit.dPush << endl;
-	cout << "EV " << CalEdge(pbHit) << endl;
+	cout << "EV " << pbHit.dEV << endl;
 	cout << endl;
 
 	cout << "Stand: " << endl;
 	cout << "Win " << pbStand.dWin << endl;
 	cout << "Lose " << pbStand.dLose << endl;
 	cout << "Push " << pbStand.dPush << endl;
-	cout << "EV " << CalEdge(pbStand) << endl;
+	cout << "EV " << pbStand.dEV << endl;
 	cout << endl;
 
 	cout << "Double: " << endl;
 	cout << "Win " << pbDouble.dWin << endl;
 	cout << "Lose " << pbDouble.dLose << endl;
 	cout << "Push " << pbDouble.dPush << endl;
-	cout << "EV " << CalEdge(pbDouble)*2 << endl;
+	cout << "EV " << pbDouble.dEV << endl;
 	cout << endl;
 
 	if ((iPlayerScore >= 4) && (iPlayerScore%2 == 0))
@@ -294,7 +353,7 @@ void SimpleCalculator::ShowProbSet(int iPlayerScore, bool bPlayerSoft,
 		cout << "Win " << pbSplit.dWin << endl;
 		cout << "Lose " << pbSplit.dLose << endl;
 		cout << "Push " << pbSplit.dPush << endl;
-		cout << "EV " << CalEdge(pbSplit)*2 << endl;
+		cout << "EV " << pbSplit.dEV << endl;
 	}
 }
 

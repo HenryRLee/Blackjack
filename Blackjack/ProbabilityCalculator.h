@@ -7,6 +7,7 @@ struct ProbSet
 	double dWin;
 	double dLose;
 	double dPush;
+	double dEV;
 };
 
 struct HandScore

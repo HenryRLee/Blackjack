@@ -26,12 +26,14 @@ protected:
 	ProbSet ProbOfHandsPlayerTurn(HandScore player, HandScore dealer, 
 			int action=NONE);
 
+	ProbSet ProbOfHandsPlayerHit(HandScore player, HandScore dealer);
+	ProbSet ProbOfHandsPlayerStand(HandScore player, HandScore dealer);
+	ProbSet ProbOfHandsPlayerHitOrStand(HandScore player, HandScore dealer);
 	ProbSet ProbOfHandsPlayerDouble(HandScore player, HandScore dealer);
 	ProbSet ProbOfHandsPlayerSplit(HandScore player, HandScore dealer, 
 			int iTimesSplitted);
 
-	ProbSet ProbAfterGettingCard(ProbSet current, ProbSet next, 
-			int iCardValue, double multiplier=1);
+	ProbSet ProbAfterGettingCard(ProbSet current, ProbSet next, int iCardValue);
 
 public:
 	void ShowProbSet(int iPlayerScore, bool bPlayerSoft, int iDealerScore,
