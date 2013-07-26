@@ -31,9 +31,37 @@ int main(int argc, char * argv[])
 	}
 	else
 	{
+		int iPlayerScore;
+		int iDealerScore;
+		int iPlayerSoft;
+		int iDealerSoft;
+		bool bPlayerSoft;
+		bool bDealerSoft;
+
 		cout << "Usage" << endl;
 		cout << "EV <Player Score> <Dealer Score> ";
 		cout << "[<Player Score is Soft> <Delaer Score is Soft>]" << endl;
+		cout << "Player Score [2-21] ";
+		cin >> iPlayerScore;
+		cout << "Dealer Score [2-21] ";
+		cin >> iDealerScore;
+		cout << "Player Score is Soft [0-1] ";
+		cin >> iPlayerSoft;
+		cout << "Dealer Score is Soft [0-1] ";
+		cin >> iDealerSoft;
+
+		if (iPlayerSoft == 1)
+			bPlayerSoft = true;
+		else
+			bDealerSoft = false;
+
+		if (iDealerSoft == 1)
+			bDealerSoft = true;
+		else
+			bDealerSoft = false;
+
+		cal->ShowProbSet(iPlayerScore, bPlayerSoft, iDealerScore, 
+				bDealerSoft);
 	}
 
 	return 0;
