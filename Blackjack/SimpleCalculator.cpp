@@ -110,8 +110,11 @@ ProbSet SimpleCalculator::ProbOfHandsPlayerTurn(HandScore handPlayer,
 		return pbStand;
 	}
 
+	if (handPlayer.iScore == 21)
+		action = STAND;
+
 	/* Hit */
-	if ((handPlayer.iScore < 21) && ((action == HIT) || (action == NONE)))
+	if ((action == HIT) || (action == NONE))
 	{
 		ProbSet pbNew;
 
