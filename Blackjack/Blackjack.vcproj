@@ -207,6 +207,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\LongTermStats.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\MacauSimulation.cpp"
 				>
 			</File>
@@ -290,6 +294,10 @@
 			</File>
 			<File
 				RelativePath=".\Hand.h"
+				>
+			</File>
+			<File
+				RelativePath=".\LongTermStats.h"
 				>
 			</File>
 			<File

@@ -14,11 +14,11 @@ protected:
 		NONE, HIT, STAND,
 	};
 
-	double ProbOfGettingCard(int value=0);
+	inline double ProbOfGettingCard(int value=0);
 
-	double CalEdge(ProbSet);
+	inline double CalEdge(ProbSet);
 
-	bool DealerHits(HandScore handDealer);
+	inline bool DealerHits(HandScore handDealer);
 	HandScore GetOneCard(HandScore hand, int iCardValue);
 
 	ProbSet ProbOfHandsDealerTurn(HandScore player, HandScore dealer);

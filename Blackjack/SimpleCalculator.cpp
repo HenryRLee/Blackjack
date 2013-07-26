@@ -1,6 +1,6 @@
 #include "SimpleCalculator.h"
 
-double SimpleCalculator::ProbOfGettingCard(int value)
+inline double SimpleCalculator::ProbOfGettingCard(int value)
 {
 	double prob;
 
@@ -12,7 +12,7 @@ double SimpleCalculator::ProbOfGettingCard(int value)
 	return prob;
 }
 
-double SimpleCalculator::CalEdge(ProbSet pb)
+inline double SimpleCalculator::CalEdge(ProbSet pb)
 {
 	double edge;
 
@@ -21,7 +21,7 @@ double SimpleCalculator::CalEdge(ProbSet pb)
 	return edge;
 }
 
-bool SimpleCalculator::DealerHits(HandScore hand)
+inline bool SimpleCalculator::DealerHits(HandScore hand)
 {
 	if (hand.iScore < 17)
 		return true;
@@ -342,7 +342,8 @@ void SimpleCalculator::ShowProbSet(int iPlayerScore, bool bPlayerSoft,
 	cout << "EV " << pbDouble.dEV << endl;
 	cout << endl;
 
-	if ((iPlayerScore >= 4) && (iPlayerScore%2 == 0))
+	if ((iPlayerScore >= 4) && (iPlayerScore%2 == 0) && 
+			(!bPlayerSoft || (iPlayerScore == 12)))
 	{
 		handPlayer.iScore = iPlayerScore/2;
 		if ((iPlayerScore == 12) && (bPlayerSoft))
