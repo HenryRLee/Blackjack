@@ -130,7 +130,7 @@ void Game::PlayerAction(Player * player, bitset<5> allowSet, int iHand)
 				allowSet.set(SPLIT, 0);
 			else if (iSplittedHand >= iTimesSplittedAllow)
 				allowSet.set(SPLIT, 0);
-			else if ((!bResplitAces) && (handCurrent->vCard[0].GetValue()==11))
+			else if ((!bResplitAces) && (player->vHand[iHand].vCard[0].GetValue()==11))
 				allowSet.set(SPLIT, 0);
 		}
 
