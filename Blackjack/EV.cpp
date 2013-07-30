@@ -9,7 +9,7 @@ int main(int argc, char * argv[])
 
 	if (argc == 3)
 	{
-		cal->ShowProbSet(atoi(argv[1]), false, atoi(argv[2]), false);
+		cal->ShowProbSetDetail(atoi(argv[1]), false, atoi(argv[2]), false);
 	}
 	else if (argc >= 5)
 	{
@@ -26,7 +26,7 @@ int main(int argc, char * argv[])
 		else
 			bDealerSoft = false;
 
-		cal->ShowProbSet(atoi(argv[1]), bPlayerSoft, atoi(argv[2]), 
+		cal->ShowProbSetDetail(atoi(argv[1]), bPlayerSoft, atoi(argv[2]), 
 				bDealerSoft);
 	}
 	else

@@ -363,6 +363,47 @@ void SimpleCalculator::ShowProbSet(int iPlayerScore, bool bPlayerSoft,
 	}
 }
 
+void SimpleCalculator::ShowProbSetDetail(int iPlayerScore, bool bPlayerSoft, 
+		int iDealerScore, bool bDealerSoft, Table * table)
+{
+	ProbSet pbHit;
+	ProbSet pbStand;
+	ProbSet pbHitTotal;
+	ProbSet pbStandTotal;
+	HandScore handPlayer;
+	HandScore handDealer;
+
+	pbHitTotal.dEV = 0;
+	pbStandTotal.dEV = 0;
+
+	handPlayer.iScore = iPlayerScore;
+	handPlayer.bSoft = bPlayerSoft;
+	handDealer.iScore = iDealerScore;
+	handDealer.bSoft = bDealerSoft;
+
+	for (int i=2; i<=11; i++)
+	{
+		HandScore handCurrent;
+
+		handCurrent = GetOneCard(handPlayer, i);
+		pbHit = ProbOfHandsPlayerHitOrStand(handCurrent, handDealer);
+
+		handCurrent = GetOneCard(handDealer, i);
+		pbStand = ProbOfHandsPlayerStand(handPlayer, handCurrent);
+
+		pbHitTotal.dEV += ProbOfGettingCard(i) * pbHit.dEV;
+		pbStandTotal.dEV += ProbOfGettingCard(i) * pbStand.dEV;
+
+		cout << "Card " << i << "\tProb " << ProbOfGettingCard(i);
+		cout << "\tHit " << pbHit.dEV << "\tStand " << pbStand.dEV;
+		cout << endl;
+	}
+
+	cout << "Total Hit " << pbHitTotal.dEV << " Stand " << pbStandTotal.dEV;
+	cout << endl;
+
+}
+
 SimpleCalculator::SimpleCalculator(void)
 {
 	iMaxTimesSplitted = 3;
