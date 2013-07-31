@@ -62,10 +62,6 @@ ProbSet SimpleCalculator::ProbOfHandsDealerTurn(HandScore handPlayer,
 {
 	ProbSet pbCurrent;
 
-	pbCurrent.dWin = 0;
-	pbCurrent.dLose = 0;
-	pbCurrent.dPush = 0;
-
 	if (DealerHits(handDealer))
 	{
 		for (int i=2; i<=11; i++)
@@ -117,10 +113,6 @@ ProbSet SimpleCalculator::ProbOfHandsPlayerTurn(HandScore handPlayer,
 	if ((action == HIT) || (action == NONE))
 	{
 		ProbSet pbNew;
-
-		pbHit.dWin = 0;
-		pbHit.dLose = 0;
-		pbHit.dPush = 0;
 
 		for (int i=2; i<=11; i++)
 		{
@@ -197,10 +189,6 @@ ProbSet SimpleCalculator::ProbOfHandsPlayerDouble(HandScore handPlayer,
 	ProbSet pbDouble;
 	ProbSet pbNew;
 
-	pbDouble.dWin = 0;
-	pbDouble.dLose = 0;
-	pbDouble.dPush = 0;
-
 	for (int i=2; i<=11; i++)
 	{
 		HandScore handCurrent;
@@ -223,11 +211,6 @@ ProbSet SimpleCalculator::ProbOfHandsPlayerSplit(HandScore handPlayer,
 	ProbSet pbSplit;
 	ProbSet pbHit;
 	ProbSet pbDouble;
-
-	pbCurrent.dWin = 0;
-	pbCurrent.dLose = 0;
-	pbCurrent.dPush = 0;
-	pbCurrent.dEV = 0;
 
 	iTimesSplitted++;
 
@@ -372,9 +355,6 @@ void SimpleCalculator::ShowProbSetDetail(int iPlayerScore, bool bPlayerSoft,
 	ProbSet pbStandTotal;
 	HandScore handPlayer;
 	HandScore handDealer;
-
-	pbHitTotal.dEV = 0;
-	pbStandTotal.dEV = 0;
 
 	handPlayer.iScore = iPlayerScore;
 	handPlayer.bSoft = bPlayerSoft;

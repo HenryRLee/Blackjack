@@ -2,13 +2,8 @@
 #include "Blackjack.h"
 #include "Table.h"
 
-struct ProbSet
-{
-	double dWin;
-	double dLose;
-	double dPush;
-	double dEV;
-};
+
+class ProbSet;
 
 struct HandScore
 {
@@ -29,4 +24,22 @@ public:
 
 	ProbabilityCalculator(void);
 	~ProbabilityCalculator(void);
+};
+
+class ProbSet
+{
+public:
+	double dWin;
+	double dLose;
+	double dPush;
+	double dEV;
+
+	ProbSet(void)
+	{
+		dWin = 0;
+		dLose = 0;
+		dPush = 0;
+		dEV = 0;
+	}
+
 };
