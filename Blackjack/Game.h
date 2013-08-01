@@ -14,6 +14,7 @@ class Statistics;
 class Game
 {
 protected:
+	Table * table;
 	ShuffleMachine * shuffler;
 	Statistics * statistics;
 

@@ -11,14 +11,17 @@ void inline Game::DealInitialCards(Dealer * dealer,
 	Card pop;
 
 	pop = shuffler->PopOneCard();
+	table->GetOneCard(pop);
 	dealer->GetOneCard(pop);
 
 	for (int i=0; i<vPlayer.size(); i++)
 	{
 		pop = shuffler->PopOneCard();
+		table->GetOneCard(pop);
 		vPlayer[i]->GetOneCard(pop);
 
 		pop = shuffler->PopOneCard();
+		table->GetOneCard(pop);
 		vPlayer[i]->GetOneCard(pop);
 	}
 }
@@ -28,6 +31,7 @@ void inline Game::DealOneCard(Gambler * gambler, int hand)
 	Card pop;
 	
 	pop = shuffler->PopOneCard();
+	table->GetOneCard(pop);
 	gambler->GetOneCard(pop, hand);
 }
 
@@ -185,6 +189,7 @@ void Game::OneHandRoutine(Dealer * dealer, vector < class Player * > vPlayer,
 {
 	Card cardPop;
 
+	this->table = table;
 	table->CleanTable();
 
 	for (int i=0; i<vPlayer.size(); i++)
@@ -303,6 +308,8 @@ void Game::OneHandRoutine(Dealer * dealer, vector < class Player * > vPlayer,
 					
 	statistics->Update(" ");
 	statistics->Update(table, "Game complete");
+
+	this->table = NULL;
 }
 
 void Game::UseStatistics(Statistics * statistics)

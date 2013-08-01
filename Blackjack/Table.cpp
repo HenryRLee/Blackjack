@@ -59,6 +59,16 @@ void Table::StartMultipleGames(int num)
 	}
 }
 
+void Table::GetOneCard(Card card)
+{
+	vCard.push_back(card);
+}
+
+vector <Card> Table::ShowCards(void)
+{
+	return vCard;
+}
+
 Table::Table(void)
 {
 	dealer = NULL;
