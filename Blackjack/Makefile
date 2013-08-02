@@ -7,7 +7,8 @@ Blackjack: Blackjack.o Card.o Dealer.o Deck.o Gambler.o Game.o \
 		NoStrategy.o LongTermStats.o
 	g++ $^ ${CFLAGS} -o $@
 
-EV: EV.o ProbabilityCalculator.o SimpleCalculator.o
+EV: EV.o ProbabilityCalculator.o SimpleCalculator.o AdvancedFastCalculator.o \
+		SimpleFastCalculator.o
 	g++ $^ ${CFLAGS} -o $@
 
 %.o: %.cpp

@@ -1,8 +1,6 @@
 #pragma once
 #include "ProbabilityCalculator.h"
 
-class StoredEv;
-
 class SimpleCalculator :
 	public ProbabilityCalculator
 {
@@ -48,15 +46,3 @@ public:
 	~SimpleCalculator(void);
 };
 
-class StoredEv
-{
-public:
-	double dEV;
-	bool bSet;
-
-	StoredEv(void)
-	{
-		dEV = 0;
-		bSet = false;
-	}
-};
