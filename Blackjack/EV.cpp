@@ -1,11 +1,11 @@
 #include <iostream>
-#include "SimpleCalculator.h"
+#include "SimpleFastCalculator.h"
 
 using namespace std;
 
 int main(int argc, char * argv[])
 {
-	ProbabilityCalculator * cal = new SimpleCalculator;
+	ProbabilityCalculator * cal = new SimpleFastCalculator;
 
 	if (argc == 3)
 	{
@@ -33,10 +33,10 @@ int main(int argc, char * argv[])
 	{
 		int iPlayerScore;
 		int iDealerScore;
-		int iPlayerSoft;
-		int iDealerSoft;
-		bool bPlayerSoft;
-		bool bDealerSoft;
+		int iPlayerSoft = 0;
+		int iDealerSoft = 0;
+		bool bPlayerSoft = false;
+		bool bDealerSoft = false;
 
 		cout << "Usage" << endl;
 		cout << "EV <Player Score> <Dealer Score> ";
@@ -45,10 +45,18 @@ int main(int argc, char * argv[])
 		cin >> iPlayerScore;
 		cout << "Dealer Score [2-21] ";
 		cin >> iDealerScore;
-		cout << "Player Score is Soft [0-1] ";
-		cin >> iPlayerSoft;
-		cout << "Dealer Score is Soft [0-1] ";
-		cin >> iDealerSoft;
+
+		if (iPlayerScore >= 11)
+		{
+			cout << "Player Score is Soft [0-1] ";
+			cin >> iPlayerSoft;
+		}
+
+		if (iDealerScore >= 11)
+		{
+			cout << "Dealer Score is Soft [0-1] ";
+			cin >> iDealerSoft;
+		}
 
 		if (iPlayerSoft == 1)
 			bPlayerSoft = true;
@@ -63,6 +71,8 @@ int main(int argc, char * argv[])
 		cal->ShowProbSet(iPlayerScore, bPlayerSoft, iDealerScore, 
 				bDealerSoft);
 	}
+
+	system("Pause");
 
 	return 0;
 }

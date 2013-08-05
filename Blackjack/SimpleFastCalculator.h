@@ -1,25 +1,33 @@
 #pragma once
 #include "SimpleCalculator.h"
 
-class StoredEv;
-
-class SimpleFastCalculator :
-	public SimpleCalculator
-{
-public:
-	SimpleFastCalculator(void);
-	~SimpleFastCalculator(void);
-};
-
 class StoredEv
 {
 public:
 	double dEV;
-	bool bSet;
+	bool bMark;
 
 	StoredEv(void)
 	{
 		dEV = 0;
-		bSet = false;
+		bMark = false;
 	}
+};
+
+class SimpleFastCalculator :
+	public SimpleCalculator
+{
+private:
+	StoredEv sePlayer[22][22][2][2];
+	StoredEv seDealer[22][22][2][2];
+
+protected:
+	ProbSet ProbOfHandsDealerTurn(HandScore player, HandScore dealer);
+
+	ProbSet ProbOfHandsPlayerTurn(HandScore player, HandScore dealer, 
+			int action=NONE);
+
+public:
+	SimpleFastCalculator(void);
+	~SimpleFastCalculator(void);
 };
