@@ -14,8 +14,8 @@ void BasicStrategy::CreateDefaultTables(void)
 		{	H,	H,	H,	H,	H,	H,	H,	H,	H,	H	},	/* 7 */
 		{	H,	H,	H,	H,	H,	H,	H,	H,	H,	H	},	/* 8 */
 		{	H,	DH, DH, DH, DH, H,	H,	H,	H,	H	},	/* 9 */
-		{	H,	DH, DH, DH, DH, DH, DH, DH, H,	H	},	/* 10 */
-		{	H,	DH, DH, DH, DH, DH, DH, DH, DH, H	},	/* 11 */
+		{	DH,	DH, DH, DH, DH, DH, DH, DH, H,	H	},	/* 10 */
+		{	DH,	DH, DH, DH, DH, DH, DH, DH, DH, H	},	/* 11 */
 		{	H,	H,	S,	S,	S,	H,	H,	H,	H,	H	},	/* 12 */
 		{	S,	S,	S,	S,	S,	H,	H,	H,	H,	H	},	/* 13 */
 		{	S,	S,	S,	S,	S,	H,	H,	H,	RH, H	},	/* 14 */

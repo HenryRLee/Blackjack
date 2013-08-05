@@ -72,7 +72,5 @@ int main(int argc, char * argv[])
 				bDealerSoft);
 	}
 
-	system("Pause");
-
 	return 0;
 }

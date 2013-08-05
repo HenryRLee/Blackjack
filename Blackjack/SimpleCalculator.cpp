@@ -361,6 +361,8 @@ void SimpleCalculator::ShowProbSetDetail(int iPlayerScore, bool bPlayerSoft,
 	handDealer.iScore = iDealerScore;
 	handDealer.bSoft = bDealerSoft;
 
+	cout << fixed;
+
 	for (int i=2; i<=11; i++)
 	{
 		HandScore handCurrent;
