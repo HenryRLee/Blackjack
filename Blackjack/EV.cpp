@@ -1,5 +1,5 @@
 #include <iostream>
-#include "SimpleFastCalculator.h"
+#include "AdvancedFastCalculator.h"
 
 using namespace std;
 

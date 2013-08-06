@@ -288,7 +288,7 @@ ProbSet SimpleCalculator::ProbAfterGettingCard(ProbSet pbCurrent, ProbSet pbNext
 }
 
 void SimpleCalculator::ShowProbSet(int iPlayerScore, bool bPlayerSoft, 
-		int iDealerScore, bool bDealerSoft, Table * table)
+		int iDealerScore, bool bDealerSoft, UsedCard *)
 {
 	ProbSet pbHit;
 	ProbSet pbStand;
@@ -347,7 +347,7 @@ void SimpleCalculator::ShowProbSet(int iPlayerScore, bool bPlayerSoft,
 }
 
 void SimpleCalculator::ShowProbSetDetail(int iPlayerScore, bool bPlayerSoft, 
-		int iDealerScore, bool bDealerSoft, Table * table)
+		int iDealerScore, bool bDealerSoft, UsedCard *)
 {
 	ProbSet pbHit;
 	ProbSet pbStand;

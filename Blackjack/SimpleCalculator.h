@@ -37,10 +37,10 @@ protected:
 
 public:
 	void ShowProbSet(int iPlayerScore, bool bPlayerSoft, int iDealerScore,
-			bool bDealerSoft, Table * table=NULL);
+			bool bDealerSoft, UsedCard * usedcard=NULL);
 
 	void ShowProbSetDetail(int iPlayerScore, bool bPlayerSoft, int iDealerScore,
-			bool bDealerSoft, Table * table=NULL);
+			bool bDealerSoft, UsedCard * usedcard=NULL);
 
 	SimpleCalculator(void);
 	~SimpleCalculator(void);
