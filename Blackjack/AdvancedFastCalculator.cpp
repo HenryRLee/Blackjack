@@ -1,20 +1,31 @@
 #include "AdvancedFastCalculator.h"
 #include "UsedCard.h"
 
-inline void AdvancedFastCalculator::InitiateProbOfCard(UsedCard * usedcard)
+void AdvancedFastCalculator::InitiateProbOfCard(UsedCard * usedcard)
 {
 	vector <Card> vCard;
-	int count[12] = {0};		// Use count[0] for total count
+	int count[12];		// Use count[0] for total count
 
-	vCard = usedcard->ShowCards();
-
-	for (int i=0; i<vCard.size(); i++)
+	for (int i=2; i<=11; i++)
 	{
-		int value;
-		value = vCard[i].GetValue();
+		count[i] = 24;
+	}
 
-		count[value]++;
-		count[0]++;
+	count[0] = 312;
+	count[10] = 96;
+
+	if (usedcard != NULL)
+	{
+		vCard = usedcard->ShowCards();
+
+		for (int i=0; i<vCard.size(); i++)
+		{
+			int value;
+			value = vCard[i].GetValue();
+
+			count[value]--;
+			count[0]--;
+		}
 	}
 
 	for (int i=2; i<=11; i++)
@@ -23,7 +34,7 @@ inline void AdvancedFastCalculator::InitiateProbOfCard(UsedCard * usedcard)
 	}
 }
 
-inline double AdvancedFastCalculator::ProbOfGettingCard(int value)
+double AdvancedFastCalculator::ProbOfGettingCard(int value)
 {
 	double prob;
 	
@@ -39,6 +50,15 @@ void AdvancedFastCalculator::ShowProbSet(int iPlayerScore, bool bPlayerSoft,
 	InitiateProbOfCard(usedcard);
 	SimpleCalculator::ShowProbSet(iPlayerScore, bPlayerSoft, iDealerScore, 
 			bDealerSoft, usedcard);
+}
+
+void AdvancedFastCalculator::ShowProbSetDetail(int iPlayerScore, 
+		bool bPlayerSoft, int iDealerScore, bool bDealerSoft, 
+		UsedCard * usedcard)
+{
+	InitiateProbOfCard(usedcard);
+	SimpleCalculator::ShowProbSetDetail(iPlayerScore, bPlayerSoft, 
+			iDealerScore, bDealerSoft, usedcard);
 }
 
 AdvancedFastCalculator::AdvancedFastCalculator(void)

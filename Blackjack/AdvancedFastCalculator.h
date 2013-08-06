@@ -6,13 +6,16 @@ class AdvancedFastCalculator :
 {
 protected:
 	double pbCard[12];
-	inline void InitiateProbOfCard(UsedCard *);
+	void InitiateProbOfCard(UsedCard *);
 
-	inline double ProbOfGettingCard(int value=0);
+	double ProbOfGettingCard(int value=0);
 
 public:
 	void ShowProbSet(int iPlayerScore, bool bPlayerSoft, int iDealerScore,
 			bool bDealerSoft, UsedCard * usedcard);
+
+	void ShowProbSetDetail(int iPlayerScore, bool bPlayerSoft, int iDealerScore,
+			bool bDealerSoft, UsedCard * usedcard=NULL);
 
 	AdvancedFastCalculator(void);
 	~AdvancedFastCalculator(void);

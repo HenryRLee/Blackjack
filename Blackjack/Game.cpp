@@ -11,17 +11,14 @@ void inline Game::DealInitialCards(Dealer * dealer,
 	Card pop;
 
 	pop = shuffler->PopOneCard();
-	table->GetOneCard(pop);
 	dealer->GetOneCard(pop);
 
 	for (int i=0; i<vPlayer.size(); i++)
 	{
 		pop = shuffler->PopOneCard();
-		table->GetOneCard(pop);
 		vPlayer[i]->GetOneCard(pop);
 
 		pop = shuffler->PopOneCard();
-		table->GetOneCard(pop);
 		vPlayer[i]->GetOneCard(pop);
 	}
 }
@@ -31,7 +28,6 @@ void inline Game::DealOneCard(Gambler * gambler, int hand)
 	Card pop;
 	
 	pop = shuffler->PopOneCard();
-	table->GetOneCard(pop);
 	gambler->GetOneCard(pop, hand);
 }
 

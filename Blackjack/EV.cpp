@@ -5,7 +5,7 @@ using namespace std;
 
 int main(int argc, char * argv[])
 {
-	ProbabilityCalculator * cal = new SimpleFastCalculator;
+	ProbabilityCalculator * cal = new AdvancedFastCalculator;
 
 	if (argc == 3)
 	{

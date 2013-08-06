@@ -1,6 +1,6 @@
 #include "SimpleCalculator.h"
 
-inline double SimpleCalculator::ProbOfGettingCard(int value)
+double SimpleCalculator::ProbOfGettingCard(int value)
 {
 	double prob;
 
