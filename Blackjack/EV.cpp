@@ -49,13 +49,13 @@ void EvMain(string arg)
 			{
 				cal->ShowProbSetByNextCard(atoi(sPScore.c_str()), 
 						atoi(sPSoft.c_str()), atoi(sDScore.c_str()), 
-						atoi(sDSoft.c_str()));
+						atoi(sDSoft.c_str()), &usedcard);
 			}
 			else
 			{
 				cal->ShowProbSetByAction(atoi(sPScore.c_str()), 
 						atoi(sPSoft.c_str()), atoi(sDScore.c_str()), 
-						atoi(sDSoft.c_str()));
+						atoi(sDSoft.c_str()), &usedcard);
 			}
 		}
 		else
@@ -69,12 +69,12 @@ void EvMain(string arg)
 		if (bShowDetail)
 		{
 			cal->ShowProbSetByNextCard(atoi(sPScore.c_str()), false, 
-					atoi(sDScore.c_str()), false);
+					atoi(sDScore.c_str()), false, &usedcard);
 		}
 		else
 		{
 			cal->ShowProbSetByAction(atoi(sPScore.c_str()), false, 
-					atoi(sDScore.c_str()), false);
+					atoi(sDScore.c_str()), false, &usedcard);
 		}
 	}
 
@@ -159,6 +159,11 @@ void InteractiveMode(void)
 	else if (cmdhead.compare("push") == 0)
 	{
 		PushCards(cmdarg);
+		InteractiveMode();
+	}
+	else if (cmdhead.compare("clear") == 0)
+	{
+		usedcard.Clear();
 		InteractiveMode();
 	}
 	else if (cmdhead.compare("exit") == 0)
