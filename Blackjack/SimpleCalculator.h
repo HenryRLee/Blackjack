@@ -36,11 +36,11 @@ protected:
 	ProbSet ProbAfterGettingCard(ProbSet current, ProbSet next, int iCardValue);
 
 public:
-	void ShowProbSet(int iPlayerScore, bool bPlayerSoft, int iDealerScore,
-			bool bDealerSoft, UsedCard * usedcard=NULL);
+	void ShowProbSetByAction(int iPlayerScore, bool bPlayerSoft, 
+			int iDealerScore, bool bDealerSoft, UsedCard * usedcard=NULL);
 
-	void ShowProbSetDetail(int iPlayerScore, bool bPlayerSoft, int iDealerScore,
-			bool bDealerSoft, UsedCard * usedcard=NULL);
+	void ShowProbSetByNextCard(int iPlayerScore, bool bPlayerSoft, 
+			int iDealerScore, bool bDealerSoft, UsedCard * usedcard=NULL);
 
 	SimpleCalculator(void);
 	~SimpleCalculator(void);

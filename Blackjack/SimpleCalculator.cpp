@@ -278,7 +278,8 @@ ProbSet SimpleCalculator::ProbOfHandsPlayerSplit(HandScore handPlayer,
 	return pbCurrent;
 }
 
-ProbSet SimpleCalculator::ProbAfterGettingCard(ProbSet pbCurrent, ProbSet pbNextCard, int iCardValue)
+ProbSet SimpleCalculator::ProbAfterGettingCard(ProbSet pbCurrent, 
+		ProbSet pbNextCard, int iCardValue)
 {
 	pbCurrent.dWin += ProbOfGettingCard(iCardValue) * pbNextCard.dWin;
 	pbCurrent.dLose += ProbOfGettingCard(iCardValue) * pbNextCard.dLose;
@@ -287,7 +288,7 @@ ProbSet SimpleCalculator::ProbAfterGettingCard(ProbSet pbCurrent, ProbSet pbNext
 	return pbCurrent;
 }
 
-void SimpleCalculator::ShowProbSet(int iPlayerScore, bool bPlayerSoft, 
+void SimpleCalculator::ShowProbSetByAction(int iPlayerScore, bool bPlayerSoft, 
 		int iDealerScore, bool bDealerSoft, UsedCard *)
 {
 	ProbSet pbHit;
@@ -346,8 +347,7 @@ void SimpleCalculator::ShowProbSet(int iPlayerScore, bool bPlayerSoft,
 	}
 }
 
-void SimpleCalculator::ShowProbSetDetail(int iPlayerScore, bool bPlayerSoft, 
-		int iDealerScore, bool bDealerSoft, UsedCard *)
+void SimpleCalculator::ShowProbSetByNextCard(int iPlayerScore, bool bPlayerSoft,	int iDealerScore, bool bDealerSoft, UsedCard *)
 {
 	ProbSet pbHit;
 	ProbSet pbStand;

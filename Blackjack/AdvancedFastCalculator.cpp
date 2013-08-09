@@ -44,20 +44,21 @@ double AdvancedFastCalculator::ProbOfGettingCard(int value)
 	return prob;
 }
 
-void AdvancedFastCalculator::ShowProbSet(int iPlayerScore, bool bPlayerSoft, 
-		int iDealerScore, bool bDealerSoft, UsedCard * usedcard)
-{
-	InitiateProbOfCard(usedcard);
-	SimpleCalculator::ShowProbSet(iPlayerScore, bPlayerSoft, iDealerScore, 
-			bDealerSoft, usedcard);
-}
-
-void AdvancedFastCalculator::ShowProbSetDetail(int iPlayerScore, 
+void AdvancedFastCalculator::ShowProbSetByAction(int iPlayerScore, 
 		bool bPlayerSoft, int iDealerScore, bool bDealerSoft, 
 		UsedCard * usedcard)
 {
 	InitiateProbOfCard(usedcard);
-	SimpleCalculator::ShowProbSetDetail(iPlayerScore, bPlayerSoft, 
+	SimpleCalculator::ShowProbSetByAction(iPlayerScore, bPlayerSoft, 
+			iDealerScore, bDealerSoft, usedcard);
+}
+
+void AdvancedFastCalculator::ShowProbSetByNextCard(int iPlayerScore, 
+		bool bPlayerSoft, int iDealerScore, bool bDealerSoft, 
+		UsedCard * usedcard)
+{
+	InitiateProbOfCard(usedcard);
+	SimpleCalculator::ShowProbSetByNextCard(iPlayerScore, bPlayerSoft, 
 			iDealerScore, bDealerSoft, usedcard);
 }
 

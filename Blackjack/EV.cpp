@@ -47,14 +47,15 @@ void EvMain(string arg)
 
 			if (bShowDetail)
 			{
-				cal->ShowProbSetDetail(atoi(sPScore.c_str()), 
+				cal->ShowProbSetByNextCard(atoi(sPScore.c_str()), 
 						atoi(sPSoft.c_str()), atoi(sDScore.c_str()), 
 						atoi(sDSoft.c_str()));
 			}
 			else
 			{
-				cal->ShowProbSet(atoi(sPScore.c_str()), atoi(sPSoft.c_str()), 
-						atoi(sDScore.c_str()), atoi(sDSoft.c_str()));
+				cal->ShowProbSetByAction(atoi(sPScore.c_str()), 
+						atoi(sPSoft.c_str()), atoi(sDScore.c_str()), 
+						atoi(sDSoft.c_str()));
 			}
 		}
 		else
@@ -67,12 +68,12 @@ void EvMain(string arg)
 	{
 		if (bShowDetail)
 		{
-			cal->ShowProbSetDetail(atoi(sPScore.c_str()), false, 
+			cal->ShowProbSetByNextCard(atoi(sPScore.c_str()), false, 
 					atoi(sDScore.c_str()), false);
 		}
 		else
 		{
-			cal->ShowProbSet(atoi(sPScore.c_str()), false, 
+			cal->ShowProbSetByAction(atoi(sPScore.c_str()), false, 
 					atoi(sDScore.c_str()), false);
 		}
 	}
@@ -120,7 +121,7 @@ void InteractiveMode(void)
 	string cmdarg;
 	size_t delim;
 
-	cout << ">";
+	cout << "> ";
 	getline(cin, fullcmd);
 
 	delim = fullcmd.find(" ");

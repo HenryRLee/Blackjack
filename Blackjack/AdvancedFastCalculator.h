@@ -11,11 +11,11 @@ protected:
 	double ProbOfGettingCard(int value=0);
 
 public:
-	void ShowProbSet(int iPlayerScore, bool bPlayerSoft, int iDealerScore,
-			bool bDealerSoft, UsedCard * usedcard);
+	void ShowProbSetByAction(int iPlayerScore, bool bPlayerSoft, 
+			int iDealerScore, bool bDealerSoft, UsedCard * usedcard);
 
-	void ShowProbSetDetail(int iPlayerScore, bool bPlayerSoft, int iDealerScore,
-			bool bDealerSoft, UsedCard * usedcard=NULL);
+	void ShowProbSetByNextCard(int iPlayerScore, bool bPlayerSoft, 
+			int iDealerScore, bool bDealerSoft, UsedCard * usedcard=NULL);
 
 	AdvancedFastCalculator(void);
 	~AdvancedFastCalculator(void);

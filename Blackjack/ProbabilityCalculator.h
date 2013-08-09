@@ -15,10 +15,10 @@ class ProbabilityCalculator
 protected:
 
 public:
-	virtual void ShowProbSet(int iPlayerScore, bool bPlayerSoft, 
+	virtual void ShowProbSetByAction(int iPlayerScore, bool bPlayerSoft, 
 			int iDealerScore, bool bDealerSoft, UsedCard * usedcard=NULL) = 0;
 
-	virtual void ShowProbSetDetail(int iPlayerScore, bool bPlayerSoft, 
+	virtual void ShowProbSetByNextCard(int iPlayerScore, bool bPlayerSoft, 
 			int iDealerScore, bool bDealerSoft, UsedCard * usedcard=NULL) = 0;
 
 	ProbabilityCalculator(void);
