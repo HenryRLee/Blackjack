@@ -376,7 +376,7 @@ void SimpleCalculator::ShowProbSetByNextCard(int iPlayerScore, bool bPlayerSoft,
 		pbHitTotal.dEV += ProbOfGettingCard(i) * pbHit.dEV;
 		pbStandTotal.dEV += ProbOfGettingCard(i) * pbStand.dEV;
 
-		cout << "Card " << i << "\tProb " << ProbOfGettingCard(i);
+		cout << "Hand " << i << "\tProb " << ProbOfGettingCard(i);
 		cout << "\tHit " << pbHit.dEV << "\tStand " << pbStand.dEV;
 		cout << endl;
 	}

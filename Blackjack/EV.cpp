@@ -156,7 +156,7 @@ void InteractiveMode(void)
 		}
 		InteractiveMode();
 	}
-	else if (cmdhead.compare("push") == 0)
+	else if (cmdhead.compare("pull") == 0)
 	{
 		PushCards(cmdarg);
 		InteractiveMode();
