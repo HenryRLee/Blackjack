@@ -175,6 +175,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\Card.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\EV.cpp"
 				>
 			</File>
@@ -190,6 +194,10 @@
 				RelativePath=".\SimpleFastCalculator.cpp"
 				>
 			</File>
+			<File
+				RelativePath=".\UsedCard.cpp"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="Header Files"
@@ -198,6 +206,10 @@
 			>
 			<File
 				RelativePath=".\AdvancedFastCalculator.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Card.h"
 				>
 			</File>
 			<File
@@ -210,6 +222,10 @@
 			</File>
 			<File
 				RelativePath=".\SimpleFastCalculator.h"
+				>
+			</File>
+			<File
+				RelativePath=".\UsedCard.h"
 				>
 			</File>
 		</Filter>

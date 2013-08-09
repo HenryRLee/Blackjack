@@ -1,76 +1,184 @@
 #include <iostream>
+#include <string>
 #include "AdvancedFastCalculator.h"
 
 using namespace std;
 
-int main(int argc, char * argv[])
+bool bShowDetail;
+UsedCard usedcard;
+
+void EvMain(string arg)
 {
 	ProbabilityCalculator * cal = new AdvancedFastCalculator;
+	string sPScore;
+	string sDScore;
+	string sPSoft;
+	string sDSoft;
+	string rest;
+	size_t delim;
 
-	if (argc == 3)
+	delim = arg.find(" ");
+
+	if (delim != string::npos)
 	{
-		cal->ShowProbSetDetail(atoi(argv[1]), false, atoi(argv[2]), false);
-	}
-	else if (argc >= 5)
-	{
-		bool bPlayerSoft;
-		bool bDealerSoft;
-
-		if (strcmp(argv[3], "1") == 0)
-			bPlayerSoft = true;
-		else
-			bPlayerSoft = false;
-
-		if (strcmp(argv[4], "1") == 0)
-			bDealerSoft = true;
-		else
-			bDealerSoft = false;
-
-		cal->ShowProbSetDetail(atoi(argv[1]), bPlayerSoft, atoi(argv[2]), 
-				bDealerSoft);
+		sPScore = arg.substr(0, delim);
+		rest = arg.substr(delim+1);
+		sDScore = rest.substr(0, delim);
 	}
 	else
 	{
-		int iPlayerScore;
-		int iDealerScore;
-		int iPlayerSoft = 0;
-		int iDealerSoft = 0;
-		bool bPlayerSoft = false;
-		bool bDealerSoft = false;
-
-		cout << "Usage" << endl;
-		cout << "EV <Player Score> <Dealer Score> ";
-		cout << "[<Player Score is Soft> <Delaer Score is Soft>]" << endl;
-		cout << "Player Score [2-21] ";
-		cin >> iPlayerScore;
-		cout << "Dealer Score [2-21] ";
-		cin >> iDealerScore;
-
-		if (iPlayerScore >= 11)
-		{
-			cout << "Player Score is Soft [0-1] ";
-			cin >> iPlayerSoft;
-		}
-
-		if (iDealerScore >= 11)
-		{
-			cout << "Dealer Score is Soft [0-1] ";
-			cin >> iDealerSoft;
-		}
-
-		if (iPlayerSoft == 1)
-			bPlayerSoft = true;
-		else
-			bDealerSoft = false;
-
-		if (iDealerSoft == 1)
-			bDealerSoft = true;
-		else
-			bDealerSoft = false;
-
-		cal->ShowProbSet(iPlayerScore, bPlayerSoft, iDealerScore, 
-				bDealerSoft);
+		cout << "run <Player Score> <Dealer Score> [<Player is Soft> <Dealer is Soft>]" << endl;
+		return;
 	}
+
+	delim = rest.find(" ");
+	if (delim != string::npos)
+	{
+		rest = rest.substr(delim+1);
+
+		delim = rest.find(" ");
+
+		if (delim != string::npos)
+		{
+			sPSoft = rest.substr(0, delim);
+			rest = rest.substr(delim+1);
+
+			sDSoft = rest.substr(0, delim);
+
+			if (bShowDetail)
+			{
+				cal->ShowProbSetDetail(atoi(sPScore.c_str()), 
+						atoi(sPSoft.c_str()), atoi(sDScore.c_str()), 
+						atoi(sDSoft.c_str()));
+			}
+			else
+			{
+				cal->ShowProbSet(atoi(sPScore.c_str()), atoi(sPSoft.c_str()), 
+						atoi(sDScore.c_str()), atoi(sDSoft.c_str()));
+			}
+		}
+		else
+		{
+			cout << "run <Player Score> <Dealer Score> [<Player is Soft> <Dealer is Soft>]" << endl;
+			return;
+		}
+	}
+	else
+	{
+		if (bShowDetail)
+		{
+			cal->ShowProbSetDetail(atoi(sPScore.c_str()), false, 
+					atoi(sDScore.c_str()), false);
+		}
+		else
+		{
+			cal->ShowProbSet(atoi(sPScore.c_str()), false, 
+					atoi(sDScore.c_str()), false);
+		}
+	}
+
+}
+
+void PushCards(string arg)
+{
+	string cur;
+	string rest;
+	size_t delim;
+
+	delim = arg.find(" ");
+
+	if (delim != string::npos)
+	{
+		cur = arg.substr(0, delim);
+		rest = arg.substr(delim+1);
+	}
+	else
+	{
+		cur = arg;
+		rest = arg;
+	}
+
+	while(delim != string::npos)
+	{
+		usedcard.GetOneCard(atoi(cur.c_str()));
+		delim = rest.find(" ");
+
+		if (delim != string::npos)
+		{
+			cur = rest.substr(0, delim);
+			rest = rest.substr(delim+1);
+		}
+	}
+
+	usedcard.GetOneCard(atoi(rest.c_str()));
+}
+
+void InteractiveMode(void)
+{
+	string fullcmd;
+	string cmdhead;
+	string cmdarg;
+	size_t delim;
+
+	cout << ">";
+	getline(cin, fullcmd);
+
+	delim = fullcmd.find(" ");
+
+	if (delim != string::npos)
+	{
+		cmdhead = fullcmd.substr(0, delim);
+		cmdarg = fullcmd.substr(delim+1);
+	}
+	else
+	{
+		cmdhead = fullcmd;
+		cmdarg = "";
+	}
+
+	if (cmdhead.compare("run") == 0)
+	{
+		EvMain(cmdarg);
+		InteractiveMode();
+	}
+	else if (cmdhead.compare("detail") == 0)
+	{
+		if (cmdarg.compare("off") == 0)
+		{
+			bShowDetail = false;
+			cout << "Detail off" << endl;
+		}
+		else
+		{
+			bShowDetail = true;
+			cout << "Detail on" << endl;
+		}
+		InteractiveMode();
+	}
+	else if (cmdhead.compare("push") == 0)
+	{
+		PushCards(cmdarg);
+		InteractiveMode();
+	}
+	else if (cmdhead.compare("exit") == 0)
+	{
+		exit(0);
+	}
+	else if (cmdhead.compare("quit") == 0)
+	{
+		exit(0);
+	}
+	else
+	{
+		cout << "Unknown command" << endl;
+		InteractiveMode();
+	}
+
+}
+
+int main(int argc, char * argv[])
+{
+	InteractiveMode();
 
 	return 0;
 }
