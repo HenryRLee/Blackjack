@@ -14,7 +14,7 @@ protected:
 		NONE, HIT, STAND,
 	};
 
-	virtual double ProbOfGettingCard(int value=0);
+	virtual double ProbOfGettingCard(int value);
 
 	inline double CalEdge(ProbSet);
 
