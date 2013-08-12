@@ -2,14 +2,6 @@
 #include "Blackjack.h"
 #include "UsedCard.h"
 
-class ProbSet;
-
-struct HandScore
-{
-	int iScore;
-	bool bSoft;
-};
-
 class ProbabilityCalculator
 {
 protected:
@@ -25,20 +17,3 @@ public:
 	~ProbabilityCalculator(void);
 };
 
-class ProbSet
-{
-public:
-	double dWin;
-	double dLose;
-	double dPush;
-	double dEV;
-
-	ProbSet(void)
-	{
-		dWin = 0;
-		dLose = 0;
-		dPush = 0;
-		dEV = 0;
-	}
-
-};

@@ -1,6 +1,14 @@
 #pragma once
 #include "ProbabilityCalculator.h"
 
+class ProbSet;
+
+struct HandScore
+{
+	int iScore;
+	bool bSoft;
+};
+
 class SimpleCalculator :
 	public ProbabilityCalculator
 {
@@ -46,3 +54,21 @@ public:
 	~SimpleCalculator(void);
 };
 
+
+class ProbSet
+{
+public:
+	double dWin;
+	double dLose;
+	double dPush;
+	double dEV;
+
+	ProbSet(void)
+	{
+		dWin = 0;
+		dLose = 0;
+		dPush = 0;
+		dEV = 0;
+	}
+
+};
