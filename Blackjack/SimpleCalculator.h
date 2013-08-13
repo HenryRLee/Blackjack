@@ -24,9 +24,9 @@ protected:
 
 	virtual double ProbOfGettingCard(int value);
 
-	inline double CalEdge(ProbSet);
+	double CalEdge(ProbSet);
 
-	inline bool DealerHits(HandScore handDealer);
+	bool DealerHits(HandScore handDealer);
 	HandScore GetOneCard(HandScore hand, int iCardValue);
 
 	ProbSet ProbOfHandsDealerTurn(HandScore player, HandScore dealer);
@@ -34,11 +34,12 @@ protected:
 	ProbSet ProbOfHandsPlayerTurn(HandScore player, HandScore dealer, 
 			int action=NONE);
 
-	ProbSet ProbOfHandsPlayerHit(HandScore player, HandScore dealer);
-	ProbSet ProbOfHandsPlayerStand(HandScore player, HandScore dealer);
-	ProbSet ProbOfHandsPlayerHitOrStand(HandScore player, HandScore dealer);
-	ProbSet ProbOfHandsPlayerDouble(HandScore player, HandScore dealer);
-	ProbSet ProbOfHandsPlayerSplit(HandScore player, HandScore dealer, 
+	virtual ProbSet ProbOfHandsPlayerHit(HandScore player, HandScore dealer);
+	virtual ProbSet ProbOfHandsPlayerStand(HandScore player, HandScore dealer);
+	virtual ProbSet ProbOfHandsPlayerHitOrStand(HandScore player,
+			HandScore dealer);
+	virtual ProbSet ProbOfHandsPlayerDouble(HandScore player, HandScore dealer);
+	virtual ProbSet ProbOfHandsPlayerSplit(HandScore player, HandScore dealer, 
 			int iTimesSplitted);
 
 	ProbSet ProbAfterGettingCard(ProbSet current, ProbSet next, int iCardValue);

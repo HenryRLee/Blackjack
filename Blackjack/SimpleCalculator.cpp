@@ -12,7 +12,7 @@ double SimpleCalculator::ProbOfGettingCard(int value)
 	return prob;
 }
 
-inline double SimpleCalculator::CalEdge(ProbSet pb)
+double SimpleCalculator::CalEdge(ProbSet pb)
 {
 	double edge;
 
@@ -21,7 +21,7 @@ inline double SimpleCalculator::CalEdge(ProbSet pb)
 	return edge;
 }
 
-inline bool SimpleCalculator::DealerHits(HandScore hand)
+bool SimpleCalculator::DealerHits(HandScore hand)
 {
 	if (hand.iScore < 17)
 		return true;

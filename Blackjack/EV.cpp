@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include "AdvancedCalculator.h"
+#include "AdvancedFastCalculator.h"
 
 using namespace std;
 
@@ -10,6 +11,7 @@ UsedCard usedcard;
 void EvMain(string arg)
 {
 	ProbabilityCalculator * cal = new AdvancedCalculator;
+//	ProbabilityCalculator * cal = new AdvancedFastCalculator;
 	string sPScore;
 	string sDScore;
 	string sPSoft;
