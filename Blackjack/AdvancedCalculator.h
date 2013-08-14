@@ -28,10 +28,12 @@ protected:
 
 public:
 	void ShowProbSetByAction(int iPlayerScore, bool bPlayerSoft, 
-			int iDealerScore, bool bDealerSoft, UsedCard * usedcard=NULL);
+			int iDealerScore, bool bDealerSoft, int action=0,
+			UsedCard * usedcard=NULL);
 
 	void ShowProbSetByNextCard(int iPlayerScore, bool bPlayerSoft, 
-			int iDealerScore, bool bDealerSoft, UsedCard * usedcard=NULL);
+			int iDealerScore, bool bDealerSoft, int action=0,
+			UsedCard * usedcard=NULL);
 
 	AdvancedCalculator(void);
 	~AdvancedCalculator(void);

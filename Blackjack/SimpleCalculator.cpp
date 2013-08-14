@@ -289,7 +289,7 @@ ProbSet SimpleCalculator::ProbAfterGettingCard(ProbSet pbCurrent,
 }
 
 void SimpleCalculator::ShowProbSetByAction(int iPlayerScore, bool bPlayerSoft, 
-		int iDealerScore, bool bDealerSoft, UsedCard *)
+		int iDealerScore, bool bDealerSoft, int action, UsedCard *)
 {
 	ProbSet pbHit;
 	ProbSet pbStand;
@@ -304,8 +304,6 @@ void SimpleCalculator::ShowProbSetByAction(int iPlayerScore, bool bPlayerSoft,
 	handDealer.bSoft = bDealerSoft;
 
 	pbHit = ProbOfHandsPlayerHit(handPlayer, handDealer);
-	pbStand = ProbOfHandsPlayerStand(handPlayer, handDealer);
-	pbDouble = ProbOfHandsPlayerDouble(handPlayer, handDealer);
 
 	cout << fixed;
 	cout << "Hit: " << endl;
@@ -315,6 +313,8 @@ void SimpleCalculator::ShowProbSetByAction(int iPlayerScore, bool bPlayerSoft,
 	cout << "EV " << pbHit.dEV << endl;
 	cout << endl;
 
+	pbStand = ProbOfHandsPlayerStand(handPlayer, handDealer);
+
 	cout << "Stand: " << endl;
 	cout << "Win " << pbStand.dWin << endl;
 	cout << "Lose " << pbStand.dLose << endl;
@@ -322,32 +322,40 @@ void SimpleCalculator::ShowProbSetByAction(int iPlayerScore, bool bPlayerSoft,
 	cout << "EV " << pbStand.dEV << endl;
 	cout << endl;
 
-	cout << "Double: " << endl;
-	cout << "Win " << pbDouble.dWin << endl;
-	cout << "Lose " << pbDouble.dLose << endl;
-	cout << "Push " << pbDouble.dPush << endl;
-	cout << "EV " << pbDouble.dEV << endl;
-	cout << endl;
-
-	if ((iPlayerScore >= 4) && (iPlayerScore%2 == 0) && 
-			(!bPlayerSoft || (iPlayerScore == 12)))
+	if ((action & DOUBLE) == DOUBLE)
 	{
-		handPlayer.iScore = iPlayerScore/2;
-		if ((iPlayerScore == 12) && (bPlayerSoft))
-			handPlayer.iScore = 11;
+		pbDouble = ProbOfHandsPlayerDouble(handPlayer, handDealer);
 
-		handPlayer.bSoft = bPlayerSoft;
+		cout << "Double: " << endl;
+		cout << "Win " << pbDouble.dWin << endl;
+		cout << "Lose " << pbDouble.dLose << endl;
+		cout << "Push " << pbDouble.dPush << endl;
+		cout << "EV " << pbDouble.dEV << endl;
+		cout << endl;
+	}
 
-		pbSplit = ProbOfHandsPlayerSplit(handPlayer, handDealer, 0);
-		cout << "Split: " << endl;
-		cout << "Win " << pbSplit.dWin << endl;
-		cout << "Lose " << pbSplit.dLose << endl;
-		cout << "Push " << pbSplit.dPush << endl;
-		cout << "EV " << pbSplit.dEV << endl;
+	if ((action & SPLIT) == SPLIT)
+	{
+		if ((iPlayerScore >= 4) && (iPlayerScore%2 == 0) && 
+				(!bPlayerSoft || (iPlayerScore == 12)))
+		{
+			handPlayer.iScore = iPlayerScore/2;
+			if ((iPlayerScore == 12) && (bPlayerSoft))
+				handPlayer.iScore = 11;
+
+			handPlayer.bSoft = bPlayerSoft;
+
+			pbSplit = ProbOfHandsPlayerSplit(handPlayer, handDealer, 0);
+			cout << "Split: " << endl;
+			cout << "Win " << pbSplit.dWin << endl;
+			cout << "Lose " << pbSplit.dLose << endl;
+			cout << "Push " << pbSplit.dPush << endl;
+			cout << "EV " << pbSplit.dEV << endl;
+		}
 	}
 }
 
-void SimpleCalculator::ShowProbSetByNextCard(int iPlayerScore, bool bPlayerSoft,	int iDealerScore, bool bDealerSoft, UsedCard *)
+void SimpleCalculator::ShowProbSetByNextCard(int iPlayerScore, bool bPlayerSoft,	int iDealerScore, bool bDealerSoft, int action, UsedCard *)
 {
 	ProbSet pbHit;
 	ProbSet pbStand;

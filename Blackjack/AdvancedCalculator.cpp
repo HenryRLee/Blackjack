@@ -248,20 +248,20 @@ ProbSet AdvancedCalculator::ProbAfterGettingCard(ProbSet pbCurrent,
 }
 
 void AdvancedCalculator::ShowProbSetByAction(int iPlayerScore, bool bPlayerSoft,
-		int iDealerScore, bool bDealerSoft, UsedCard * usedcard)
+		int iDealerScore, bool bDealerSoft, int action, UsedCard * usedcard)
 {
 	InitiateCardCounts(usedcard);
 	SimpleCalculator::ShowProbSetByAction(iPlayerScore, bPlayerSoft, 
-			iDealerScore, bDealerSoft, usedcard);
+			iDealerScore, bDealerSoft, action, usedcard);
 }
 
 void AdvancedCalculator::ShowProbSetByNextCard(int iPlayerScore, 
-		bool bPlayerSoft, int iDealerScore, bool bDealerSoft, 
+		bool bPlayerSoft, int iDealerScore, bool bDealerSoft, int action,
 		UsedCard * usedcard)
 {
 	InitiateCardCounts(usedcard);
 	SimpleCalculator::ShowProbSetByNextCard(iPlayerScore, bPlayerSoft, 
-			iDealerScore, bDealerSoft, usedcard);
+			iDealerScore, bDealerSoft, action, usedcard);
 }
 
 AdvancedCalculator::AdvancedCalculator(void)

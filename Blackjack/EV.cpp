@@ -7,6 +7,12 @@ using namespace std;
 
 bool bShowDetail;
 UsedCard usedcard;
+int iAction;
+
+enum ActionAllowed
+{
+	DOUBLE=1, SPLIT=2,
+};
 
 void EvMain(string arg)
 {
@@ -51,13 +57,13 @@ void EvMain(string arg)
 			{
 				cal->ShowProbSetByNextCard(atoi(sPScore.c_str()), 
 						atoi(sPSoft.c_str()), atoi(sDScore.c_str()), 
-						atoi(sDSoft.c_str()), &usedcard);
+						atoi(sDSoft.c_str()), iAction, &usedcard);
 			}
 			else
 			{
 				cal->ShowProbSetByAction(atoi(sPScore.c_str()), 
 						atoi(sPSoft.c_str()), atoi(sDScore.c_str()), 
-						atoi(sDSoft.c_str()), &usedcard);
+						atoi(sDSoft.c_str()), iAction, &usedcard);
 			}
 		}
 		else
@@ -71,12 +77,12 @@ void EvMain(string arg)
 		if (bShowDetail)
 		{
 			cal->ShowProbSetByNextCard(atoi(sPScore.c_str()), false, 
-					atoi(sDScore.c_str()), false, &usedcard);
+					atoi(sDScore.c_str()), false, iAction, &usedcard);
 		}
 		else
 		{
 			cal->ShowProbSetByAction(atoi(sPScore.c_str()), false, 
-					atoi(sDScore.c_str()), false, &usedcard);
+					atoi(sDScore.c_str()), false, iAction, &usedcard);
 		}
 	}
 
@@ -166,6 +172,34 @@ void InteractiveMode(void)
 	else if (cmdhead.compare("clear") == 0)
 	{
 		usedcard.Clear();
+		InteractiveMode();
+	}
+	else if (cmdhead.compare("split") == 0)
+	{
+		if (cmdarg.compare("off") == 0)
+		{
+			iAction &= ~SPLIT;
+			cout << "Split off" << endl;
+		}
+		else
+		{
+			iAction |= SPLIT;
+			cout << "Split on" << endl;
+		}
+		InteractiveMode();
+	}
+	else if (cmdhead.compare("double") == 0)
+	{
+		if (cmdarg.compare("off") == 0)
+		{
+			iAction &= ~DOUBLE;
+			cout << "Double off" << endl;
+		}
+		else
+		{
+			iAction |= DOUBLE;
+			cout << "Double on" << endl;
+		}
 		InteractiveMode();
 	}
 	else if (cmdhead.compare("exit") == 0)
