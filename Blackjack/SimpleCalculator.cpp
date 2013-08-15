@@ -389,7 +389,8 @@ void SimpleCalculator::ShowProbSetByNextCard(int iPlayerScore, bool bPlayerSoft,
 		cout << endl;
 	}
 
-	cout << "Total Hit " << pbHitTotal.dEV << " Stand " << pbStandTotal.dEV;
+	cout << "Total\tHit " << pbHitTotal.dEV << "\tStand " << pbStandTotal.dEV;
+	cout << "\tDifference " << (pbHitTotal.dEV-pbStandTotal.dEV);
 	cout << endl;
 
 }
