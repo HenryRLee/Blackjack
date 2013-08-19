@@ -16,7 +16,7 @@ public:
 
 	int iStatus;
 
-	double iBid;
+	double iBet;
 
 	int GetScore(void);
 	bool IsScoreSoft(void);

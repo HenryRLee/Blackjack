@@ -96,7 +96,7 @@ void Game::PlayerAction(Player * player, bitset<5> allowSet, int iHand)
 
 		allowSet.set(SPLIT, 0);
 
-		player->DoubleBid(iHand);
+		player->DoubleBet(iHand);
 		DealOneCard(player, iHand);
 
 		if (handCurrent->GetScore() > MaxScore)
@@ -140,7 +140,7 @@ void Game::PlayerAction(Player * player, bitset<5> allowSet, int iHand)
 		DealOneCard(player, iHand);
 		PlayerAction(player, allowSet, iHand);
 
-		player->PlaceBid(iSplittedHand);
+		player->PlaceBet(iSplittedHand);
 		DealOneCard(player, iSplittedHand);
 		PlayerAction(player, allowSet, iSplittedHand);
 
@@ -189,7 +189,7 @@ void Game::OneHandRoutine(Dealer * dealer, vector < class Player * > vPlayer,
 	table->CleanTable();
 
 	for (int i=0; i<vPlayer.size(); i++)
-		vPlayer[i]->PlaceBid();
+		vPlayer[i]->PlaceBet();
 
 	shuffler->ShuffleCards();
 

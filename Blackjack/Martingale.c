@@ -6,8 +6,8 @@ int main(int argc, char *argv[])
 {
 	int times = 100;
 	long long budget = 1000;
-	long long bid = 1;
-	int maxbid = 50;
+	long long bet = 1;
+	int maxbet = 50;
 	int i;
 
 	srand(time(NULL));
@@ -16,18 +16,18 @@ int main(int argc, char *argv[])
 	{
 		if ((rand() % 2) == 0)
 		{
-			budget += bid;
-			bid = 1;
+			budget += bet;
+			bet = 1;
 		}
 		else
 		{
-			if ((bid > budget) || (bid > maxbid))
+			if ((bet > budget) || (bet > maxbet))
 			{
-				printf("Bankrupt! Round %d, bid %lld\n", i, bid);
+				printf("Bankrupt! Round %d, bet %lld\n", i, bet);
 				break;
 			}
-			budget -= bid;
-			bid = bid * 2;
+			budget -= bet;
+			bet = bet * 2;
 		}
 	}
 

@@ -17,16 +17,16 @@ protected:
 	void GetPays(double multiplier, int hand=0);
 
 public:
-	double iBid;
+	double iBet;
 	string ShowName(void);
 
 	void SetBudget(double);
 	double ShowBudget(void);
 
-	void FixBid(double);
-	void PlaceBid(int hand=0);
-	void RaiseBid(double, int hand=0);
-	void DoubleBid(int hand=0);
+	void FixBet(double);
+	void PlaceBet(int hand=0);
+	void RaiseBet(double, int hand=0);
+	void DoubleBet(int hand=0);
 
 	void JoinTable(Table *);
 

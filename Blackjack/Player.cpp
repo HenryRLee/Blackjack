@@ -17,34 +17,34 @@ double Player::ShowBudget(void)
 	return iBudget;
 }
 
-void Player::FixBid(double bid)
+void Player::FixBet(double bet)
 {
-	iBid = bid;
+	iBet = bet;
 }
 
-void Player::PlaceBid(int hand)
+void Player::PlaceBet(int hand)
 {
 	if (vHand.size() > hand)
 	{
-		vHand[hand].iBid = iBid;
-		iBudget -= iBid;
+		vHand[hand].iBet = iBet;
+		iBudget -= iBet;
 	}
 }
 
-void Player::RaiseBid(double bid, int hand)
+void Player::RaiseBet(double bet, int hand)
 {
 	if (vHand.size() > hand)
 	{
-		vHand[hand].iBid += bid;
-		iBudget -= bid;
+		vHand[hand].iBet += bet;
+		iBudget -= bet;
 	}
 }
 
-void Player::DoubleBid(int hand)
+void Player::DoubleBet(int hand)
 {
 	if (vHand.size() > hand)
 	{
-		RaiseBid(vHand[hand].iBid, hand);
+		RaiseBet(vHand[hand].iBet, hand);
 	}
 }
 
@@ -52,7 +52,7 @@ void Player::GetPays(double multiplier, int hand)
 {
 	if (vHand.size() > hand)
 	{
-		iBudget += vHand[hand].iBid * multiplier;
+		iBudget += vHand[hand].iBet * multiplier;
 	}
 }
 

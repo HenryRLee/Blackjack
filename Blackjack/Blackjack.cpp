@@ -23,7 +23,7 @@ int main(int argc, char *argv[])
 	Hank->JoinTable(Venetian);
 	Hank->UseStrategy(BStrategy);
 //	Hank->UseStrategy(UserInput);
-	Hank->FixBid(100);
+	Hank->FixBet(100);
 	Hank->SetBudget(500*1000);
 	BJDealer->JoinTable(Venetian);
 	MacauGame->UseStatistics(NoLogger);
