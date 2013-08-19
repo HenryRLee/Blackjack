@@ -4,7 +4,7 @@
 
 int main(int argc, char *argv[])
 {
-	int times = 100;
+	int times = 100*1000;
 	long long budget = 1000;
 	long long bet = 1;
 	int maxbet = 50;
@@ -14,20 +14,29 @@ int main(int argc, char *argv[])
 
 	for (i=0; i<times; i++)
 	{
-		if ((rand() % 2) == 0)
+		if ((rand() % 1000) < 505)
 		{
+			/* Win */
 			budget += bet;
 			bet = 1;
 		}
 		else
 		{
-			if ((bet > budget) || (bet > maxbet))
+			/* Lose */
+			if (bet > budget)
 			{
 				printf("Bankrupt! Round %d, bet %lld\n", i, bet);
 				break;
 			}
+
 			budget -= bet;
 			bet = bet * 2;
+
+			if (bet > maxbet)
+			{
+				printf("Overflow max bet\n");
+				bet = 1;
+			}
 		}
 	}
 
