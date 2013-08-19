@@ -11,8 +11,11 @@ EV: EV.o ProbabilityCalculator.o SimpleCalculator.o AdvancedFastCalculator.o \
 		SimpleFastCalculator.o AdvancedCalculator.o Card.o UsedCard.o
 	g++ ${CFLAGS} $^ -o $@
 
+Martingale: Martingale.c
+	gcc Martingale.c -o Martingale
+
 %.o: %.cpp
 	g++ ${CFLAGS} $< -c -o $@
 
 clean:
-	rm -f *.o Blackjack EV
+	rm -f *.o Blackjack EV Martingale
