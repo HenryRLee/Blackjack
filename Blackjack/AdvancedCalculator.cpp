@@ -179,6 +179,9 @@ ProbSet AdvancedCalculator::ProbOfHandsPlayerHit(HandScore handPlayer,
 	ProbSet pbHit;
 	vector <int> vStart(vInitialCount);
 
+	if (handPlayer.bSoft)
+		vStart = CardFlowing(11, vStart);
+
 	if (handDealer.iScore <= 11)
 		vStart = CardFlowing(handDealer.iScore, vStart);
 
@@ -194,6 +197,9 @@ ProbSet AdvancedCalculator::ProbOfHandsPlayerStand(HandScore handPlayer,
 	ProbSet pbStand;
 	vector <int> vStart(vInitialCount);
 
+	if (handPlayer.bSoft)
+		vStart = CardFlowing(11, vStart);
+
 	if (handDealer.iScore <= 11)
 		vStart = CardFlowing(handDealer.iScore, vStart);
 
@@ -208,6 +214,9 @@ ProbSet AdvancedCalculator::ProbOfHandsPlayerHitOrStand(HandScore handPlayer,
 {
 	ProbSet pbCurrent;
 	vector <int> vStart(vInitialCount);
+
+	if (handPlayer.bSoft)
+		vStart = CardFlowing(11, vStart);
 
 	if (handDealer.iScore <= 11)
 		vStart = CardFlowing(handDealer.iScore, vStart);
@@ -228,6 +237,9 @@ ProbSet AdvancedCalculator::ProbOfHandsPlayerDouble(HandScore handPlayer,
 	{
 		HandScore handCurrent;
 		vector <int> vStart(vInitialCount);
+
+		if (handPlayer.bSoft)
+			vStart = CardFlowing(11, vStart);
 
 		if (handDealer.iScore <= 11)
 			vStart = CardFlowing(handDealer.iScore, vStart);
