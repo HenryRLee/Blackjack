@@ -12,12 +12,12 @@
 inline int RunMultipleGames(int times, Table * table, Player * player,
 		Statistics * stat=NULL)
 {
-	double peak = player->ShowBudget();
-	double dip = player->ShowBudget();
+	long long peak = player->ShowBudget();
+	long long dip = player->ShowBudget();
 
 	for (int i=0; i<times; i++)
 	{
-		double current;
+		long long current;
 		
 		table->StartOneGame();
 
@@ -52,11 +52,13 @@ int main(int argc, char *argv[])
 	Venetian->UseGameType(MacauGame);
 
 	Venetian->CleanTable();
-	Venetian->StartOneGame();
+//	Venetian->StartOneGame();
 
 	cout << fixed;
 	cout.precision(0);
-	RunMultipleGames(100*1000, Venetian, Hank);
+
+//	Venetian->StartMultipleGames(100*1000);
+	RunMultipleGames(10*1000, Venetian, Hank);
 
 	cout << "Player budget: " << Hank->ShowBudget() << endl;
 
