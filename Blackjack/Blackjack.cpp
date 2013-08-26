@@ -56,7 +56,7 @@ int main(int argc, char *argv[])
 
 	cout << fixed;
 	cout.precision(0);
-	RunMultipleGames(1000, Venetian, Hank);
+	RunMultipleGames(100*1000, Venetian, Hank);
 
 	cout << "Player budget: " << Hank->ShowBudget() << endl;
 

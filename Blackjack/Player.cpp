@@ -7,17 +7,17 @@ string Player::ShowName(void)
 	return "[Player]" + name;
 }
 
-void Player::SetBudget(double budget)
+void Player::SetBudget(long long budget)
 {
 	this->iBudget = budget;
 }
 
-double Player::ShowBudget(void)
+long long Player::ShowBudget(void)
 {
 	return iBudget;
 }
 
-void Player::FixBet(double bet)
+void Player::FixBet(long long bet)
 {
 	iBet = bet;
 }
@@ -31,7 +31,7 @@ void Player::PlaceBet(int hand)
 	}
 }
 
-void Player::RaiseBet(double bet, int hand)
+void Player::RaiseBet(long long bet, int hand)
 {
 	if (vHand.size() > hand)
 	{

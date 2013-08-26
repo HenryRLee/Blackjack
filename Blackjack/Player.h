@@ -7,7 +7,7 @@ class Player :
 	public Gambler
 {
 protected:
-	double iBudget;
+	long long iBudget;
 
 	Strategy * strategy;
 
@@ -17,15 +17,15 @@ protected:
 	void GetPays(double multiplier, int hand=0);
 
 public:
-	double iBet;
+	long long iBet;
 	string ShowName(void);
 
-	void SetBudget(double);
-	double ShowBudget(void);
+	void SetBudget(long long);
+	long long ShowBudget(void);
 
-	void FixBet(double);
+	void FixBet(long long);
 	void PlaceBet(int hand=0);
-	void RaiseBet(double, int hand=0);
+	void RaiseBet(long long, int hand=0);
 	void DoubleBet(int hand=0);
 
 	void JoinTable(Table *);
