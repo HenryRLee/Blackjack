@@ -9,6 +9,27 @@
 #include "BasicStrategy.h"
 #include "SimpleCalculator.h"
 
+inline int RunMultipleGames(int times, Table * table, Player * player,
+		Statistics * stat=NULL)
+{
+	double peak = player->ShowBudget();
+	double dip = player->ShowBudget();
+
+	for (int i=0; i<times; i++)
+	{
+		double current;
+		
+		table->StartOneGame();
+
+		current = player->ShowBudget();
+
+		peak = (peak > current) ? peak : current;
+		dip = (dip < current) ? dip : current;
+	}
+
+	cout << "Peak: " << peak << " Dip: " << dip << endl;
+}
+
 int main(int argc, char *argv[])
 {
 	Player * Hank = new Player("Hank");
@@ -24,7 +45,7 @@ int main(int argc, char *argv[])
 	Hank->UseStrategy(BStrategy);
 //	Hank->UseStrategy(UserInput);
 	Hank->FixBet(100);
-	Hank->SetBudget(500*1000);
+	Hank->SetBudget(0);
 	BJDealer->JoinTable(Venetian);
 	MacauGame->UseStatistics(NoLogger);
 //	MacauGame->UseStatistics(Logger);
@@ -32,9 +53,11 @@ int main(int argc, char *argv[])
 
 	Venetian->CleanTable();
 	Venetian->StartOneGame();
-	Venetian->StartMultipleGames(100);
 
 	cout << fixed;
+	cout.precision(0);
+	RunMultipleGames(1000, Venetian, Hank);
+
 	cout << "Player budget: " << Hank->ShowBudget() << endl;
 
 	return 0;
