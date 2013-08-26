@@ -9,13 +9,13 @@
 #include "BasicStrategy.h"
 #include "SimpleCalculator.h"
 
-inline int RunMultipleGames(int times, Table * table, Player * player,
+inline int RunMultipleGames(long long times, Table * table, Player * player,
 		Statistics * stat=NULL)
 {
 	long long peak = player->ShowBudget();
 	long long dip = player->ShowBudget();
 
-	for (int i=0; i<times; i++)
+	for (long long i=0; i<times; i++)
 	{
 		long long current;
 		
@@ -58,7 +58,7 @@ int main(int argc, char *argv[])
 	cout.precision(0);
 
 //	Venetian->StartMultipleGames(100*1000);
-	RunMultipleGames(10*1000, Venetian, Hank);
+	RunMultipleGames(100*1000, Venetian, Hank);
 
 	cout << "Player budget: " << Hank->ShowBudget() << endl;
 

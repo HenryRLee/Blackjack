@@ -25,7 +25,7 @@ public:
 
 	void UseGameType(Game *);
 	void StartOneGame(void);
-	void StartMultipleGames(int num=1000);
+	void StartMultipleGames(long long num=1000);
 
 	Table(void);
 	~Table(void);
