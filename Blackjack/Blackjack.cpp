@@ -27,7 +27,9 @@ inline int RunMultipleGames(long long times, Table * table, Player * player,
 		dip = (dip < current) ? dip : current;
 	}
 
-	cout << "Peak: " << peak << " Dip: " << dip << endl;
+	cout << "Peak: " << peak << "\tDip: " << dip;
+	cout << "\tCurrent: " << player->ShowBudget();
+	cout << endl;
 }
 
 int main(int argc, char *argv[])
@@ -57,10 +59,15 @@ int main(int argc, char *argv[])
 	cout << fixed;
 	cout.precision(0);
 
-//	Venetian->StartMultipleGames(100*1000);
-	RunMultipleGames(100*1000, Venetian, Hank);
+//	Venetian->StartMultipleGames(10);
+	for (int i=0; i<1000; i++)
+	{
+		srand(time(NULL));
+		cout << "Round: " << i+1 << "\t";
+		RunMultipleGames(1000, Venetian, Hank);
+	}
 
-	cout << "Player budget: " << Hank->ShowBudget() << endl;
+	cout << "Final budget " << Hank->ShowBudget() << endl;
 
 	return 0;
 }

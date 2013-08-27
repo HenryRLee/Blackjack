@@ -186,6 +186,10 @@ void Game::OneHandRoutine(Dealer * dealer, vector < class Player * > vPlayer,
 	Card cardPop;
 
 	this->table = table;
+
+	if (table == NULL)
+		return;
+
 	table->CleanTable();
 
 	for (int i=0; i<vPlayer.size(); i++)
