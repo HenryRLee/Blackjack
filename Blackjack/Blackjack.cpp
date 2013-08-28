@@ -53,6 +53,17 @@ int main(int argc, char *argv[])
 //	MacauGame->UseStatistics(Logger);
 	Venetian->UseGameType(MacauGame);
 
+	Player * Passenger[10];
+
+	for (int i=0; i<4; i++)
+	{
+		Passenger[i] = new Player("Passenger");
+		Passenger[i]->JoinTable(Venetian);
+		Passenger[i]->UseStrategy(BStrategy);
+		Passenger[i]->FixBet(100);
+		Passenger[i]->SetBudget(0);
+	}
+
 	Venetian->CleanTable();
 //	Venetian->StartOneGame();
 
@@ -60,6 +71,7 @@ int main(int argc, char *argv[])
 	cout.precision(0);
 
 //	Venetian->StartMultipleGames(10);
+
 	for (int i=0; i<1000; i++)
 	{
 		srand(time(NULL));
