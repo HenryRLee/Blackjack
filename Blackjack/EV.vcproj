@@ -175,6 +175,11 @@
 				>
 			</File>
 			<File
+				RelativePath=".\AdvancedCalculator.cpp"
+				>
+			</File>
+
+			<File
 				RelativePath=".\Card.cpp"
 				>
 			</File>
@@ -206,6 +211,10 @@
 			>
 			<File
 				RelativePath=".\AdvancedFastCalculator.h"
+				>
+			</File>
+			<File
+				RelativePath=".\AdvancedCalculator.h"
 				>
 			</File>
 			<File

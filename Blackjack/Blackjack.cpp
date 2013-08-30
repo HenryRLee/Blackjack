@@ -30,6 +30,8 @@ inline int RunMultipleGames(long long times, Table * table, Player * player,
 	cout << "Peak: " << peak << "\tDip: " << dip;
 	cout << "\tCurrent: " << player->ShowBudget();
 	cout << endl;
+
+	return 0;
 }
 
 int main(int argc, char *argv[])
@@ -53,8 +55,8 @@ int main(int argc, char *argv[])
 //	MacauGame->UseStatistics(Logger);
 	Venetian->UseGameType(MacauGame);
 
+	/* Add multiple players */
 	Player * Passenger[10];
-
 	for (int i=0; i<4; i++)
 	{
 		Passenger[i] = new Player("Passenger");
