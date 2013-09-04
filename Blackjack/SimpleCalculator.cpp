@@ -107,8 +107,16 @@ ProbSet SimpleCalculator::ProbOfHandsPlayerTurn(HandScore handPlayer,
 	}
 
 	if (handPlayer.iScore == 21)
-		action = STAND;
+	{
+		if (action == HIT)
+		{
+			pbHit.dWin = 0;
+			pbHit.dLose = 1;
+			pbHit.dPush = 0;
 
+			return pbHit;
+		}
+	}
 	/* Hit */
 	if ((action == HIT) || (action == NONE))
 	{
