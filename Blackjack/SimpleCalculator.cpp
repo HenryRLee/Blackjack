@@ -27,6 +27,29 @@ bool SimpleCalculator::DealerHits(HandScore hand)
 		return true;
 	else
 		return false;
+
+	if (hand.iScore < 17)
+	{
+		return true;
+	}
+	else if (hand.iScore > 17)
+	{
+		return false;
+	}
+	else if (hand.iScore == 17)
+	{
+		if (!hand.bSoft)
+		{
+			return false;
+		}
+		else
+		{
+			if (bHitOnSoft17)
+				return true;
+			else
+				return false;
+		}
+	}
 }
 
 HandScore SimpleCalculator::GetOneCard(HandScore hand, int iCardValue)
@@ -235,7 +258,7 @@ ProbSet SimpleCalculator::ProbOfHandsPlayerSplit(HandScore handPlayer,
 		{
 			if (iTimesSplitted < iMaxTimesSplitted)
 			{
-				if (ResplitAces || (i!=11))
+				if (bResplitAces || (i!=11))
 				{
 					pbSplit = ProbOfHandsPlayerSplit(handPlayer, handDealer,
 							iTimesSplitted);
@@ -405,8 +428,6 @@ void SimpleCalculator::ShowProbSetByNextCard(int iPlayerScore, bool bPlayerSoft,
 
 SimpleCalculator::SimpleCalculator(void)
 {
-	iMaxTimesSplitted = 3;
-	ResplitAces = false;
 }
 
 SimpleCalculator::~SimpleCalculator(void)

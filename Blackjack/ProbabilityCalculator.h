@@ -5,6 +5,11 @@
 class ProbabilityCalculator
 {
 protected:
+	bool bResplitAces;
+	int iMaxTimesSplitted;
+	bool bHitOnSoft17;
+	bool bSurrenderVsDealerAce;
+	bool bDLOB;
 
 public:
 	virtual void ShowProbSetByAction(int iPlayerScore, bool bPlayerSoft, 

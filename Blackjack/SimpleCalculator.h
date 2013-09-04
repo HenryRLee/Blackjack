@@ -12,10 +12,6 @@ struct HandScore
 class SimpleCalculator :
 	public ProbabilityCalculator
 {
-private:
-	bool ResplitAces;
-	int iMaxTimesSplitted;
-
 protected:
 	enum PlayerAction
 	{
