@@ -18,6 +18,7 @@ void EvMain(string arg)
 {
 	ProbabilityCalculator * cal = new AdvancedCalculator;
 //	ProbabilityCalculator * cal = new AdvancedFastCalculator;
+	UsedCard current = usedcard;
 	string sPScore;
 	string sDScore;
 	string sPSoft;
@@ -32,6 +33,9 @@ void EvMain(string arg)
 		sPScore = arg.substr(0, delim);
 		rest = arg.substr(delim+1);
 		sDScore = rest.substr(0, delim);
+
+		if (atoi(sDScore.c_str()) <= 11)
+			current.GetOneCard(atoi(sDScore.c_str()));
 	}
 	else
 	{
@@ -48,22 +52,43 @@ void EvMain(string arg)
 
 		if (delim != string::npos)
 		{
+			bool bPSoft = false;
+			bool bDSoft = false;
+
 			sPSoft = rest.substr(0, delim);
+			if (atoi(sPSoft.c_str()) == 1)
+			{
+				bPSoft = true;
+				current.GetOneCard(11);
+			}
+			else
+			{
+				bPSoft = false;
+			}
 			rest = rest.substr(delim+1);
 
 			sDSoft = rest.substr(0, delim);
+			if (atoi(sDSoft.c_str()) == 1)
+			{
+				bDSoft = true;
+				current.GetOneCard(11);
+			}
+			else
+			{
+				bDSoft = false;
+			}
 
 			if (bShowDetail)
 			{
 				cal->ShowProbSetByNextCard(atoi(sPScore.c_str()), 
-						atoi(sPSoft.c_str()), atoi(sDScore.c_str()), 
-						atoi(sDSoft.c_str()), iAction, &usedcard);
+						bPSoft, atoi(sDScore.c_str()), 
+						bDSoft, iAction, &current);
 			}
 			else
 			{
 				cal->ShowProbSetByAction(atoi(sPScore.c_str()), 
-						atoi(sPSoft.c_str()), atoi(sDScore.c_str()), 
-						atoi(sDSoft.c_str()), iAction, &usedcard);
+						bPSoft, atoi(sDScore.c_str()), 
+						bDSoft, iAction, &current);
 			}
 		}
 		else
@@ -77,12 +102,12 @@ void EvMain(string arg)
 		if (bShowDetail)
 		{
 			cal->ShowProbSetByNextCard(atoi(sPScore.c_str()), false, 
-					atoi(sDScore.c_str()), false, iAction, &usedcard);
+					atoi(sDScore.c_str()), false, iAction, &current);
 		}
 		else
 		{
 			cal->ShowProbSetByAction(atoi(sPScore.c_str()), false, 
-					atoi(sDScore.c_str()), false, iAction, &usedcard);
+					atoi(sDScore.c_str()), false, iAction, &current);
 		}
 	}
 
