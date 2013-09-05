@@ -14,6 +14,8 @@ protected:
 
 	ProbSet ProbOfHandsDealerTurn(HandScore player, HandScore dealer,
 			vector <int> vRemaining);
+	ProbSet ProbOfHandsDealerFirstTurn(HandScore player, HandScore dealer,
+			vector <int> vRemaining, bool bLoseBJ=true);
 
 	ProbSet ProbOfHandsPlayerTurn(HandScore player, HandScore dealer, 
 			vector <int> vRemaining, int action=NONE);

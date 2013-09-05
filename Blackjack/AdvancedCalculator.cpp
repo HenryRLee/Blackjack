@@ -76,6 +76,45 @@ vector <int> AdvancedCalculator::CardFlowing(int value, vector <int> vRemaining)
 	return vCurrent;
 }
 
+ProbSet AdvancedCalculator::ProbOfHandsDealerFirstTurn(HandScore handPlayer, 
+		HandScore handDealer, vector <int> vRemaining, bool bLoseBJ)
+{
+	ProbSet pbCurrent;
+
+	for (int i=2; i<=11; i++)
+	{
+		ProbSet pbNew;
+		HandScore handCurrent;
+		vector <int> vCurrent(vRemaining);
+
+		vCurrent = CardFlowing(i, vCurrent);
+		if (((handDealer.iScore == 10) && (i == 11)) ||
+				((handDealer.iScore == 11) && (handDealer.bSoft) && (i == 10)))
+		{
+			/* Dealer has a Blackjack */
+			if (bLoseBJ)
+			{
+				pbNew.dLose = 1;
+			}
+			else
+			{
+				pbNew.dPush = 1;
+			}
+
+			pbCurrent = ProbAfterGettingCard(pbCurrent, pbNew, i, vRemaining);
+		}
+		else
+		{
+			handCurrent = GetOneCard(handDealer, i);
+			pbNew = ProbOfHandsDealerTurn(handPlayer, handCurrent, vCurrent);
+
+			pbCurrent = ProbAfterGettingCard(pbCurrent, pbNew, i, vRemaining);
+		}
+	}
+
+	return pbCurrent;
+}
+
 ProbSet AdvancedCalculator::ProbOfHandsDealerTurn(HandScore handPlayer, 
 		HandScore handDealer, vector <int> vRemaining)
 {
@@ -161,7 +200,8 @@ ProbSet AdvancedCalculator::ProbOfHandsPlayerTurn(HandScore handPlayer,
 	/* Stand */
 	if ((action == STAND) || (action == NONE))
 	{
-		pbStand = ProbOfHandsDealerTurn(handPlayer, handDealer, vRemaining);
+		pbStand = ProbOfHandsDealerFirstTurn(handPlayer, handDealer,
+				vRemaining, true);
 	}
 	/* Stand */
 	if (action == NONE)

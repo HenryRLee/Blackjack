@@ -80,6 +80,43 @@ HandScore SimpleCalculator::GetOneCard(HandScore hand, int iCardValue)
 	return hand;
 }
 
+ProbSet SimpleCalculator::ProbOfHandsDealerFirstTurn(HandScore handPlayer, 
+		HandScore handDealer, bool bLoseBJ)
+{
+	ProbSet pbCurrent;
+
+	for (int i=2; i<=11; i++)
+	{
+		ProbSet pbNew;
+		HandScore handCurrent;
+
+		if (((handDealer.iScore == 10) && (i == 11)) ||
+				((handDealer.iScore == 11) && (handDealer.bSoft) && (i == 10)))
+		{
+			/* Dealer has a Blackjack */
+			if (bLoseBJ)
+			{
+				pbNew.dLose = 1;
+			}
+			else
+			{
+				pbNew.dPush = 1;
+			}
+
+			pbCurrent = ProbAfterGettingCard(pbCurrent, pbNew, i);
+		}
+		else
+		{
+			handCurrent = GetOneCard(handDealer, i);
+			pbNew = ProbOfHandsDealerTurn(handPlayer, handCurrent);
+
+			pbCurrent = ProbAfterGettingCard(pbCurrent, pbNew, i);
+		}
+	}
+
+	return pbCurrent;
+}
+
 ProbSet SimpleCalculator::ProbOfHandsDealerTurn(HandScore handPlayer, 
 		HandScore handDealer)
 {
@@ -160,7 +197,7 @@ ProbSet SimpleCalculator::ProbOfHandsPlayerTurn(HandScore handPlayer,
 	/* Stand */
 	if ((action == STAND) || (action == NONE))
 	{
-		pbStand = ProbOfHandsDealerTurn(handPlayer, handDealer);
+		pbStand = ProbOfHandsDealerFirstTurn(handPlayer, handDealer, true);
 	}
 	/* Stand */
 	if (action == NONE)

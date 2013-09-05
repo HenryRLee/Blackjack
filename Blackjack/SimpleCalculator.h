@@ -31,6 +31,8 @@ protected:
 	HandScore GetOneCard(HandScore hand, int iCardValue);
 
 	ProbSet ProbOfHandsDealerTurn(HandScore player, HandScore dealer);
+	ProbSet ProbOfHandsDealerFirstTurn(HandScore player, HandScore dealer,
+			bool bLoseBJ=true);
 
 	ProbSet ProbOfHandsPlayerTurn(HandScore player, HandScore dealer, 
 			int action=NONE);

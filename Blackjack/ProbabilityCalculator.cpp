@@ -7,6 +7,7 @@ ProbabilityCalculator::ProbabilityCalculator(void)
 	bHitOnSoft17 = false;
 	bSurrenderVsDealerAce = false;
 	bDOBO = true;
+	bSOBO = true;
 }
 
 ProbabilityCalculator::~ProbabilityCalculator(void)

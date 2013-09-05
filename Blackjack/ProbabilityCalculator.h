@@ -10,6 +10,7 @@ protected:
 	bool bHitOnSoft17;
 	bool bSurrenderVsDealerAce;
 	bool bDOBO;
+	bool bSOBO;
 
 public:
 	virtual void ShowProbSetByAction(int iPlayerScore, bool bPlayerSoft, 

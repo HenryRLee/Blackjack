@@ -57,7 +57,7 @@ int main(int argc, char *argv[])
 
 	/* Add multiple players */
 	Player * Passenger[10];
-	for (int i=0; i<4; i++)
+	for (int i=0; i<0; i++)
 	{
 		Passenger[i] = new Player("Passenger");
 		Passenger[i]->JoinTable(Venetian);
