@@ -126,6 +126,9 @@ void Game::PlayerAction(Player * player, bitset<5> allowSet, int iHand)
 			if (!bDoubleAfterSplit)
 				allowSet.set(DOUBLE, 0);
 
+			if (!bLateSurrender)
+				allowSet.set(SURRENDER, 0);
+
 			if (!bSplitAfterSplit)
 				allowSet.set(SPLIT, 0);
 			else if (iSplittedHand >= iTimesSplittedAllow)
