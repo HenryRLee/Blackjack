@@ -100,9 +100,16 @@ void Game::PlayerAction(Player * player, bitset<5> allowSet, int iHand)
 		DealOneCard(player, iHand);
 
 		if (handCurrent->GetScore() > MaxScore)
+		{
 			handCurrent->iStatus = BUSTED;
+		}
 		else
-			PlayerAction(player, allowSet, iHand);
+		{
+			if (bHitAfterDouble)
+				PlayerAction(player, allowSet, iHand);
+			else
+				handCurrent->iStatus = DOUBLEDWAITING;
+		}
 
 		break;
 
@@ -167,6 +174,14 @@ void Game::DealerAction(Dealer * dealer)
 	{
 	case HIT:
 		DealOneCard(dealer);
+
+		if ((dealer->vHand[0].vCard[0].GetValue() +
+					dealer->vHand[0].vCard[1].GetValue()) == MaxScore)
+		{
+			/* Blackjack */
+			dealer->vHand[0].iStatus = BJ;
+			break;
+		}
 
 		if (dealer->vHand[0].GetScore() > MaxScore)
 			dealer->vHand[0].iStatus = BUSTED;
@@ -284,6 +299,44 @@ void Game::OneHandRoutine(Dealer * dealer, vector < class Player * > vPlayer,
 					vPlayer[i]->GetPays(2);
 
 					statistics->Update("  DEALER BUSTS");
+				}
+				else if (dealer->vHand[0].iStatus == BJ)
+				{
+					/* 
+					 * If Dealer has a Blackjack, player loses even if he has a
+					 * 21. However, some rules may allow player lose original
+					 * bet only when doubling and splitting.
+					 */
+					if (vPlayer[i]->vHand[j].iStatus == DOUBLEDWAITING)
+					{
+						/* Double loses original bet */
+						if (bDOBO)
+						{
+							if (!bSOBO || (j==0))
+							{
+								vPlayer[i]->GetPays(0.5);
+								vPlayer[i]->vHand[j].iStatus = LOST;
+								statistics->Update("  OBO IN DOUBLE");
+							}
+							else
+							{
+								/* Splitted hand. Will be handled later. */
+							}
+						}
+					}
+
+					if ((bSOBO) && (j>0))
+					{
+						/* Splitted hand. Pay back all */
+						vPlayer[i]->GetPays(1);
+						vPlayer[i]->vHand[j].iStatus = PUSH;
+						statistics->Update("  OBO IN SPLIT");
+					}
+					else
+					{
+						vPlayer[i]->vHand[j].iStatus = LOST;
+						statistics->Update("  DEALER HAS A BLACKJACK");
+					}
 				}
 				else if (vPlayer[i]->vHand[j].GetScore() > dealer->vHand[0].GetScore())
 				{

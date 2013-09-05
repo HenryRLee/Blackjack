@@ -32,9 +32,9 @@ protected:
 	bool bLateSurrender;
 	bool bSurrenderVsDealerAce;
 	/* Lose only orignal bet in double when dealer has a Blackjack */
-	bool bDLOB;
+	bool bDOBO;
 	/* Lose only orignal bet in split when dealer has a Blackjack */
-	bool bSLOB;
+	bool bSOBO;
 	int iTimesSplittedAllow;
 	double dBlackJackPays;
 

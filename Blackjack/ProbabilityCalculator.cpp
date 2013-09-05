@@ -6,7 +6,7 @@ ProbabilityCalculator::ProbabilityCalculator(void)
 	bResplitAces = false;
 	bHitOnSoft17 = false;
 	bSurrenderVsDealerAce = false;
-	bDLOB = true;
+	bDOBO = true;
 }
 
 ProbabilityCalculator::~ProbabilityCalculator(void)

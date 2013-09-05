@@ -9,7 +9,7 @@ protected:
 	int iMaxTimesSplitted;
 	bool bHitOnSoft17;
 	bool bSurrenderVsDealerAce;
-	bool bDLOB;
+	bool bDOBO;
 
 public:
 	virtual void ShowProbSetByAction(int iPlayerScore, bool bPlayerSoft, 

@@ -9,7 +9,7 @@ namespace GameTerm
 
 	enum Status
 	{
-		WON, LOST, PUSH, BJ, WAITING, BUSTED, SURRENDERED
+		WON, LOST, PUSH, BJ, WAITING, BUSTED, SURRENDERED, DOUBLEDWAITING
 	};
 
 	enum

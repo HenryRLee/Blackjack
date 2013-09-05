@@ -20,8 +20,8 @@ MacauSimulation::MacauSimulation(void)
 	bSurrenderVsDealerAce = false;
 	iTimesSplittedAllow = 3;
 	dBlackJackPays = 2.5;
-	bDLOB = true;
-	bSLOB = false;
+	bDOBO = true;
+	bSOBO = false;
 }
 
 MacauSimulation::~MacauSimulation(void)
