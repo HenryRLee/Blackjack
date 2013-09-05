@@ -94,11 +94,11 @@ ProbSet AdvancedCalculator::ProbOfHandsDealerFirstTurn(HandScore handPlayer,
 			/* Dealer has a Blackjack */
 			if (bLoseBJ)
 			{
-				pbNew.dLose = 1;
+				pbNew.dEV = -1;
 			}
 			else
 			{
-				pbNew.dPush = 1;
+				pbNew.dEV = 0;
 			}
 
 			pbCurrent = ProbAfterGettingCard(pbCurrent, pbNew, i, vRemaining);
@@ -138,13 +138,13 @@ ProbSet AdvancedCalculator::ProbOfHandsDealerTurn(HandScore handPlayer,
 	else
 	{
 		if (handDealer.iScore > 21)
-			pbCurrent.dWin = 1;
+			pbCurrent.dEV = 1;
 		else if (handDealer.iScore < handPlayer.iScore)
-			pbCurrent.dWin = 1;
+			pbCurrent.dEV = 1;
 		else if (handDealer.iScore == handPlayer.iScore)
-			pbCurrent.dPush = 1;
+			pbCurrent.dEV = 0;
 		else if (handDealer.iScore > handPlayer.iScore)
-			pbCurrent.dLose = 1;
+			pbCurrent.dEV = -1;
 	}
 
 	return pbCurrent;
@@ -159,9 +159,7 @@ ProbSet AdvancedCalculator::ProbOfHandsPlayerTurn(HandScore handPlayer,
 	/* Bust */
 	if (handPlayer.iScore > 21)
 	{
-		pbStand.dWin = 0;
-		pbStand.dLose = 1;
-		pbStand.dPush = 0;
+		pbStand.dEV = -1;
 
 		return pbStand;
 	}
@@ -170,9 +168,7 @@ ProbSet AdvancedCalculator::ProbOfHandsPlayerTurn(HandScore handPlayer,
 	{
 		if (action == HIT)
 		{
-			pbHit.dWin = 0;
-			pbHit.dLose = 1;
-			pbHit.dPush = 0;
+			pbHit.dEV = -1;
 
 			return pbHit;
 		}
@@ -206,7 +202,7 @@ ProbSet AdvancedCalculator::ProbOfHandsPlayerTurn(HandScore handPlayer,
 	/* Stand */
 	if (action == NONE)
 	{
-		if (CalEdge(pbHit) > CalEdge(pbStand))
+		if (pbHit.dEV > pbStand.dEV)
 			return pbHit;
 		else
 			return pbStand;
@@ -229,7 +225,6 @@ ProbSet AdvancedCalculator::ProbOfHandsPlayerHit(HandScore handPlayer,
 	vector <int> vStart(vInitialCount);
 
 	pbHit = ProbOfHandsPlayerTurn(handPlayer, handDealer, vStart, HIT);
-	pbHit.dEV = CalEdge(pbHit);
 
 	return pbHit;
 }
@@ -241,7 +236,6 @@ ProbSet AdvancedCalculator::ProbOfHandsPlayerStand(HandScore handPlayer,
 	vector <int> vStart(vInitialCount);
 
 	pbStand = ProbOfHandsPlayerTurn(handPlayer, handDealer, vStart, STAND);
-	pbStand.dEV = CalEdge(pbStand);
 
 	return pbStand;
 }
@@ -253,7 +247,6 @@ ProbSet AdvancedCalculator::ProbOfHandsPlayerHitOrStand(HandScore handPlayer,
 	vector <int> vStart(vInitialCount);
 
 	pbCurrent = ProbOfHandsPlayerTurn(handPlayer, handDealer, vStart);
-	pbCurrent.dEV = CalEdge(pbCurrent);
 
 	return pbCurrent;
 }
@@ -276,7 +269,7 @@ ProbSet AdvancedCalculator::ProbOfHandsPlayerDouble(HandScore handPlayer,
 		pbDouble = ProbAfterGettingCard(pbDouble, pbNew, i, vInitialCount);
 	}
 
-	pbDouble.dEV = CalEdge(pbDouble)*(double)2;
+	pbDouble.dEV *= 2;
 
 	return pbDouble;
 }
@@ -284,14 +277,8 @@ ProbSet AdvancedCalculator::ProbOfHandsPlayerDouble(HandScore handPlayer,
 ProbSet AdvancedCalculator::ProbAfterGettingCard(ProbSet pbCurrent, 
 		ProbSet pbNextCard, int iCardValue, vector <int> vRemaining)
 {
-	pbCurrent.dWin += ProbOfGettingCard(iCardValue, vRemaining)
-		* pbNextCard.dWin;
-
-	pbCurrent.dLose += ProbOfGettingCard(iCardValue, vRemaining)
-		* pbNextCard.dLose;
-
-	pbCurrent.dPush += ProbOfGettingCard(iCardValue, vRemaining)
-		* pbNextCard.dPush;
+	pbCurrent.dEV += ProbOfGettingCard(iCardValue, vRemaining)
+		* pbNextCard.dEV;
 
 	return pbCurrent;
 }

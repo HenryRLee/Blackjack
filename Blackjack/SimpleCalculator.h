@@ -25,7 +25,7 @@ protected:
 
 	virtual double ProbOfGettingCard(int value);
 
-	double CalEdge(ProbSet);
+//	double CalEdge(ProbSet);
 
 	bool DealerHits(HandScore handDealer);
 	HandScore GetOneCard(HandScore hand, int iCardValue);
@@ -64,16 +64,20 @@ public:
 class ProbSet
 {
 public:
+	/*
 	double dWin;
 	double dLose;
 	double dPush;
+	*/
 	double dEV;
 
 	ProbSet(void)
 	{
+		/*
 		dWin = 0;
 		dLose = 0;
 		dPush = 0;
+		*/
 		dEV = 0;
 	}
 
