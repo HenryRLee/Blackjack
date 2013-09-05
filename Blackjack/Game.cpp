@@ -175,14 +175,6 @@ void Game::DealerAction(Dealer * dealer)
 	case HIT:
 		DealOneCard(dealer);
 
-		if ((dealer->vHand[0].vCard[0].GetValue() +
-					dealer->vHand[0].vCard[1].GetValue()) == MaxScore)
-		{
-			/* Blackjack */
-			dealer->vHand[0].iStatus = BJ;
-			break;
-		}
-
 		if (dealer->vHand[0].GetScore() > MaxScore)
 			dealer->vHand[0].iStatus = BUSTED;
 		else
@@ -262,7 +254,17 @@ void Game::OneHandRoutine(Dealer * dealer, vector < class Player * > vPlayer,
 	}
 
 	DealOneCard(dealer);
-	DealerAction(dealer);
+
+	if ((dealer->vHand[0].vCard[0].GetValue() +
+				dealer->vHand[0].vCard[1].GetValue()) == MaxScore)
+	{
+		/* Blackjack */
+		dealer->vHand[0].iStatus = BJ;
+	}
+	else
+	{
+		DealerAction(dealer);
+	}
 
 	statistics->Update(" ");
 	statistics->Update(dealer, "Final hands");
@@ -289,14 +291,14 @@ void Game::OneHandRoutine(Dealer * dealer, vector < class Player * > vPlayer,
 				}
 				else if (vPlayer[i]->vHand[j].iStatus == SURRENDERED)
 				{
-					vPlayer[i]->GetPays(0.5);
+					vPlayer[i]->GetPays(0.5, j);
 
 					statistics->Update("  PLAYER SURRENDERS");
 				}
 				else if (dealer->vHand[0].iStatus == BUSTED)
 				{
 					vPlayer[i]->vHand[j].iStatus = WON;
-					vPlayer[i]->GetPays(2);
+					vPlayer[i]->GetPays(2, j);
 
 					statistics->Update("  DEALER BUSTS");
 				}
@@ -314,7 +316,7 @@ void Game::OneHandRoutine(Dealer * dealer, vector < class Player * > vPlayer,
 						{
 							if (!bSOBO || (j==0))
 							{
-								vPlayer[i]->GetPays(0.5);
+								vPlayer[i]->GetPays(0.5, j);
 								vPlayer[i]->vHand[j].iStatus = LOST;
 								statistics->Update("  OBO IN DOUBLE");
 							}
@@ -328,7 +330,7 @@ void Game::OneHandRoutine(Dealer * dealer, vector < class Player * > vPlayer,
 					if ((bSOBO) && (j>0))
 					{
 						/* Splitted hand. Pay back all */
-						vPlayer[i]->GetPays(1);
+						vPlayer[i]->GetPays(1, j);
 						vPlayer[i]->vHand[j].iStatus = PUSH;
 						statistics->Update("  OBO IN SPLIT");
 					}
@@ -341,14 +343,14 @@ void Game::OneHandRoutine(Dealer * dealer, vector < class Player * > vPlayer,
 				else if (vPlayer[i]->vHand[j].GetScore() > dealer->vHand[0].GetScore())
 				{
 					vPlayer[i]->vHand[j].iStatus = WON;
-					vPlayer[i]->GetPays(2);
+					vPlayer[i]->GetPays(2, j);
 
 					statistics->Update("  PLAYER WINS");
 				}
 				else if (vPlayer[i]->vHand[j].GetScore() == dealer->vHand[0].GetScore())
 				{
 					vPlayer[i]->vHand[j].iStatus = PUSH;
-					vPlayer[i]->GetPays(1);
+					vPlayer[i]->GetPays(1, j);
 
 					statistics->Update("  PUSH");
 				}

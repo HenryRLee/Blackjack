@@ -21,7 +21,7 @@ MacauSimulation::MacauSimulation(void)
 	iTimesSplittedAllow = 3;
 	dBlackJackPays = 2.5;
 	bDOBO = true;
-	bSOBO = false;
+	bSOBO = true;
 }
 
 MacauSimulation::~MacauSimulation(void)
