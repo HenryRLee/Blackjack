@@ -23,16 +23,16 @@ protected:
 		DOUBLE=1, SPLIT=2,
 	};
 
-	virtual double ProbOfGettingCard(int value);
+	bool bDoubled;
+	int iAdditionalHand;
 
-//	double CalEdge(ProbSet);
+	virtual double ProbOfGettingCard(int value);
 
 	bool DealerHits(HandScore handDealer);
 	HandScore GetOneCard(HandScore hand, int iCardValue);
 
 	ProbSet ProbOfHandsDealerTurn(HandScore player, HandScore dealer);
-	ProbSet ProbOfHandsDealerFirstTurn(HandScore player, HandScore dealer,
-			bool bLoseBJ=true);
+	ProbSet ProbOfHandsDealerFirstTurn(HandScore player, HandScore dealer);
 
 	ProbSet ProbOfHandsPlayerTurn(HandScore player, HandScore dealer, 
 			int action=NONE);
