@@ -8,6 +8,7 @@ ProbabilityCalculator::ProbabilityCalculator(void)
 	bSurrenderVsDealerAce = false;
 	bDOBO = true;
 	bSOBO = true;
+	iDeckNumber = 6;
 }
 
 ProbabilityCalculator::~ProbabilityCalculator(void)

@@ -9,12 +9,12 @@ void AdvancedCalculator::InitiateCardCounts(UsedCard * usedcard)
 
 	for (int i=2; i<=11; i++)
 	{
-		vInitialCount[i] = 24;
+		vInitialCount[i] = 4 * iDeckNumber;
 	}
 
 	/* iCount[0] marks the total counts */
-	vInitialCount[0] = 312;
-	vInitialCount[10] = 96;
+	vInitialCount[0] = 52 * iDeckNumber;
+	vInitialCount[10] = 16 * iDeckNumber;
 
 	if (usedcard != NULL)
 	{

@@ -11,6 +11,7 @@ protected:
 	bool bSurrenderVsDealerAce;
 	bool bDOBO;
 	bool bSOBO;
+	int iDeckNumber;
 
 public:
 	virtual void ShowProbSetByAction(int iPlayerScore, bool bPlayerSoft, 
