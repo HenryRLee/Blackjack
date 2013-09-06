@@ -81,6 +81,9 @@ ProbSet AdvancedCalculator::ProbOfHandsDealerFirstTurn(HandScore handPlayer,
 {
 	ProbSet pbCurrent;
 
+	if (handDealer.iScore > 11)
+		return ProbOfHandsDealerTurn(handPlayer, handDealer, vRemaining);
+
 	for (int i=2; i<=11; i++)
 	{
 		ProbSet pbNew;
