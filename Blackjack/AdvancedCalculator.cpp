@@ -65,8 +65,11 @@ vector <int> AdvancedCalculator::CardFlowing(int value, vector <int> vRemaining)
 
 	if (value < vCurrent.size())
 	{
-		vCurrent[value]--;
-		vCurrent[0]--;
+		if (vCurrent[value] >= 0)
+		{
+			vCurrent[value]--;
+			vCurrent[0]--;
+		}
 	}
 	else
 	{
