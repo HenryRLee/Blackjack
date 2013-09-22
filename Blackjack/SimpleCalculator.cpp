@@ -310,17 +310,14 @@ ProbSet SimpleCalculator::ProbOfHandsPlayerSplit(HandScore handPlayer,
 				if ((pbHit.dEV>=pbSplit.dEV) && (pbHit.dEV>=pbDouble.dEV))
 				{
 					pbCurrent = ProbAfterGettingCard(pbCurrent, pbHit, i);
-					pbCurrent.dEV += ProbOfGettingCard(i) * pbHit.dEV;
 				}
 				else if ((pbSplit.dEV>=pbHit.dEV) && (pbSplit.dEV>=pbDouble.dEV))
 				{
 					pbCurrent = ProbAfterGettingCard(pbCurrent, pbSplit, i);
-					pbCurrent.dEV += ProbOfGettingCard(i) * pbSplit.dEV;
 				}
 				else if ((pbDouble.dEV>=pbHit.dEV) && (pbDouble.dEV>=pbSplit.dEV))
 				{
 					pbCurrent = ProbAfterGettingCard(pbCurrent, pbDouble, i);
-					pbCurrent.dEV += ProbOfGettingCard(i) * pbDouble.dEV;
 				}
 				else
 				{
