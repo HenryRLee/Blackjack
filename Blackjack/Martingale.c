@@ -1,20 +1,31 @@
+/*
+ * Martingale
+ *
+ * Player double his bet after every loss so that the first win would recover
+ * all previous losses plus win a profit equal to the original stake.
+ *
+ * Consider p as the probability of winning. If casino has no maximum bet limit,
+ * the expectation of player will be p. If casino has a maximum limit, the
+ * expectation will be (1 - (1-p)^n * 2^n).
+ */
+
 #include <stdio.h>
 #include <time.h>
 #include <stdlib.h>
 
 int main(int argc, char *argv[])
 {
-	int times = 100*1000;
-	long long budget = 1000;
+	long long times = 1000*1000;
+	long long budget = times;
 	long long bet = 1;
 	int maxbet = 50;
-	int i;
+	long long i;
 
 	srand(time(NULL));
 
 	for (i=0; i<times; i++)
 	{
-		if ((rand() % 1000) < 505)
+		if ((rand() % 10000) < 6666)
 		{
 			/* Win */
 			budget += bet;
@@ -25,7 +36,7 @@ int main(int argc, char *argv[])
 			/* Lose */
 			if (bet > budget)
 			{
-				printf("Bankrupt! Round %d, bet %lld\n", i, bet);
+				printf("Bankrupt! Round %lld, bet %lld\n", i, bet);
 				break;
 			}
 
@@ -34,7 +45,7 @@ int main(int argc, char *argv[])
 
 			if (bet > maxbet)
 			{
-				printf("Overflow max bet\n");
+//				printf("Overflow max bet\n");
 				bet = 1;
 			}
 		}

@@ -1,7 +1,7 @@
 #include <iostream>
 #include <string>
 #include "AdvancedCalculator.h"
-#include "SimpleCalculator.h"
+#include "SimpleFastCalculator.h"
 #include "AdvancedFastCalculator.h"
 
 using namespace std;
@@ -18,7 +18,7 @@ enum ActionAllowed
 void EvMain(string arg)
 {
 	ProbabilityCalculator * cal = new AdvancedCalculator;
-//	ProbabilityCalculator * cal = new SimpleCalculator;
+//	ProbabilityCalculator * cal = new SimpleFastCalculator;
 //	ProbabilityCalculator * cal = new AdvancedFastCalculator;
 	UsedCard current = usedcard;
 	string sPScore;
