@@ -12,6 +12,8 @@ class Table
 private:
 	Game * gametype;
 
+	vector <Card> vUsedCards;
+
 	void AddDealer(Dealer *);
 	void AddPlayer(Player *);
 	void DelDealer(Dealer *);
@@ -19,9 +21,12 @@ private:
 
 public:
 	Dealer * dealer;
-	vector < class Player * > vPlayer;
+	vector <class Player *> vPlayer;
 
 	void CleanTable(void);
+
+	void GetOneCard(Card card);
+	vector <Card> ShowUsedCards(void);
 
 	void UseGameType(Game *);
 	void StartOneGame(void);

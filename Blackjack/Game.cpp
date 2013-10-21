@@ -6,7 +6,7 @@
 #include "Statistics.h"
 
 void inline Game::DealInitialCards(Dealer * dealer, 
-		vector < class Player * > vPlayer)
+		vector <class Player *> vPlayer)
 {
 	Card pop;
 
@@ -23,12 +23,13 @@ void inline Game::DealInitialCards(Dealer * dealer,
 	}
 }
 
-void inline Game::DealOneCard(Gambler * gambler, int hand)
+void inline Game::DealOneCard(Gambler * gambler, Table * table, int hand)
 {
 	Card pop;
 	
 	pop = shuffler->PopOneCard();
 	gambler->GetOneCard(pop, hand);
+	table->GetOneCard(pop);
 }
 
 void Game::PlayerAction(Player * player, bitset<5> allowSet, int iHand)
@@ -68,7 +69,7 @@ void Game::PlayerAction(Player * player, bitset<5> allowSet, int iHand)
 
 		allowSet.set(SPLIT, 0);
 
-		DealOneCard(player, iHand);
+		DealOneCard(player, table, iHand);
 
 		if (handCurrent->GetScore() > MaxScore)
 			handCurrent->iStatus = BUSTED;
@@ -97,7 +98,7 @@ void Game::PlayerAction(Player * player, bitset<5> allowSet, int iHand)
 		allowSet.set(SPLIT, 0);
 
 		player->DoubleBet(iHand);
-		DealOneCard(player, iHand);
+		DealOneCard(player, table, iHand);
 
 		if (handCurrent->GetScore() > MaxScore)
 		{
@@ -147,11 +148,11 @@ void Game::PlayerAction(Player * player, bitset<5> allowSet, int iHand)
 		if (!bLateSurrender)
 			allowSet.set(SURRENDER, 0);
 
-		DealOneCard(player, iHand);
+		DealOneCard(player, table, iHand);
 		PlayerAction(player, allowSet, iHand);
 
 		player->PlaceBet(iSplittedHand);
-		DealOneCard(player, iSplittedHand);
+		DealOneCard(player, table, iSplittedHand);
 		PlayerAction(player, allowSet, iSplittedHand);
 
 		break;
@@ -173,7 +174,7 @@ void Game::DealerAction(Dealer * dealer)
 	switch (action)
 	{
 	case HIT:
-		DealOneCard(dealer);
+		DealOneCard(dealer, table);
 
 		if (dealer->vHand[0].GetScore() > MaxScore)
 			dealer->vHand[0].iStatus = BUSTED;
@@ -190,7 +191,7 @@ void Game::DealerAction(Dealer * dealer)
 	}
 }
 
-void Game::OneHandRoutine(Dealer * dealer, vector < class Player * > vPlayer,
+void Game::OneHandRoutine(Dealer * dealer, vector <class Player *> vPlayer,
 		Table * table)
 {
 	Card cardPop;
@@ -253,7 +254,7 @@ void Game::OneHandRoutine(Dealer * dealer, vector < class Player * > vPlayer,
 		PlayerAction(vPlayer[i], allowSet);
 	}
 
-	DealOneCard(dealer);
+	DealOneCard(dealer, table);
 
 	if ((dealer->vHand[0].vCard[0].GetValue() +
 				dealer->vHand[0].vCard[1].GetValue()) == MaxScore)

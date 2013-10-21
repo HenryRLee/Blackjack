@@ -37,6 +37,17 @@ void Table::CleanTable(void)
 	}
 
 	dealer->CleanHands();
+	vUsedCards.clear();
+}
+
+void Table::GetOneCard(Card card)
+{
+	vUsedCards.push_back(card);
+}
+
+vector <Card> Table::ShowUsedCards(void)
+{
+	return vUsedCards;
 }
 
 void Table::UseGameType(Game * game)

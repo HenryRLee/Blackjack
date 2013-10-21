@@ -5,7 +5,7 @@ MacauSimulation::MacauSimulation(void)
 {
 	shuffler = new ContinuousShufflingMachine;
 
-	bHitOnSoft17 = false;
+	bHitOnSoft17 = true;
 	bDouble = true;
 	bSurrender = true;
 	bSplit = true;
