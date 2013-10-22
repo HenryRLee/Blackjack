@@ -45,9 +45,9 @@ void Table::GetOneCard(Card card)
 	vUsedCard.GetOneCard(card);
 }
 
-vector <Card> Table::ShowUsedCards(void)
+UsedCard Table::ShowUsedCards(void)
 {
-	return vUsedCard.ShowCards();
+	return vUsedCard;
 }
 
 void Table::UseGameType(Game * game)

@@ -7,7 +7,7 @@
 #include "LongTermStats.h"
 #include "NoStrategy.h"
 #include "BasicStrategy.h"
-#include "SimpleCalculator.h"
+#include "EnhancedStrategy.h"
 
 inline int RunMultipleGames(long long times, Table * table, Player * player,
 		Statistics * stat=NULL)
@@ -44,9 +44,11 @@ int main(int argc, char *argv[])
 	Statistics * Logger = new StreamLog;
 	Strategy * UserInput = new NoStrategy;
 	Strategy * BStrategy = new BasicStrategy;
+	Strategy * EStrategy = new EnhancedStrategy;
 
 	Hank->JoinTable(Venetian);
-	Hank->UseStrategy(BStrategy);
+	Hank->UseStrategy(EStrategy);
+//	Hank->UseStrategy(BStrategy);
 //	Hank->UseStrategy(UserInput);
 	Hank->FixBet(100);
 	Hank->SetBudget(0);
@@ -57,7 +59,7 @@ int main(int argc, char *argv[])
 
 	/* Add multiple players */
 	Player * Passenger[10];
-	for (int i=0; i<0; i++)
+	for (int i=0; i<4; i++)
 	{
 		Passenger[i] = new Player("Passenger");
 		Passenger[i]->JoinTable(Venetian);

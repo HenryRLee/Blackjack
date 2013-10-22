@@ -367,6 +367,7 @@ void Game::OneHandRoutine(Dealer * dealer, vector <class Player *> vPlayer,
 					
 	statistics->Update(" ");
 	statistics->Update(table, "Game complete");
+	statistics->Update(" ");
 
 	this->table = NULL;
 }

@@ -27,7 +27,7 @@ public:
 	void CleanTable(void);
 
 	void GetOneCard(Card card);
-	vector <Card> ShowUsedCards(void);
+	UsedCard ShowUsedCards(void);
 
 	void UseGameType(Game *);
 	void StartOneGame(void);
