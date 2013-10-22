@@ -346,6 +346,35 @@ ProbSet SimpleCalculator::ProbOfHandsPlayerSplit(HandScore handPlayer,
 	return pbCurrent;
 }
 
+ProbSet SimpleCalculator::ProbOfHandsPlayerAction(HandScore player,
+		HandScore dealer, int action)
+{
+	ProbSet pbSet;
+
+	switch (action)
+	{
+	case HIT:
+		pbSet = ProbOfHandsPlayerHit(player, dealer);
+		break;
+	case STAND:
+		pbSet = ProbOfHandsPlayerStand(player, dealer);
+		break;
+	case SPLIT:
+		pbSet = ProbOfHandsPlayerSplit(player, dealer, 0);
+		break;
+	case DOUBLE:
+		pbSet = ProbOfHandsPlayerDouble(player, dealer);
+		break;
+	case SURRENDER:
+		pbSet.dEV = -0.5;
+		break;
+	default:
+		break;
+	}
+
+	return pbSet;
+}
+
 ProbSet SimpleCalculator::ProbAfterGettingCard(ProbSet pbCurrent, 
 		ProbSet pbNextCard, int iCardValue)
 {
@@ -382,7 +411,7 @@ void SimpleCalculator::ShowProbSetByAction(int iPlayerScore, bool bPlayerSoft,
 	cout << "EV " << pbStand.dEV << endl;
 	cout << endl;
 
-	if ((action & DOUBLE) == DOUBLE)
+	if ((action & ALLOWDOUBLE) == ALLOWDOUBLE)
 	{
 		pbDouble = ProbOfHandsPlayerDouble(handPlayer, handDealer);
 
@@ -391,7 +420,7 @@ void SimpleCalculator::ShowProbSetByAction(int iPlayerScore, bool bPlayerSoft,
 		cout << endl;
 	}
 
-	if ((action & SPLIT) == SPLIT)
+	if ((action & ALLOWSPLIT) == ALLOWSPLIT)
 	{
 		if ((iPlayerScore >= 4) && (iPlayerScore%2 == 0) && 
 				(!bPlayerSoft || (iPlayerScore == 12)))

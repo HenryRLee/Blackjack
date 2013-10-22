@@ -37,6 +37,10 @@ public:
 			int iDealerScore, bool bDealerSoft, int action=0,
 			UsedCard * usedcard=NULL);
 
+	void ShowDeltaOfEachTakenCard(int iPlayerScore, bool bPlayerSoft,
+			int iDealerScore, bool bDealerSoft, int iFirstAction=HIT,
+			int iSecondAction=STAND, UsedCard * usedcard=NULL);
+
 	AdvancedCalculator(void);
 	~AdvancedCalculator(void);
 };

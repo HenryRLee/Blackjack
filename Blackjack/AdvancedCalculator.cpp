@@ -317,6 +317,60 @@ void AdvancedCalculator::ShowProbSetByNextCard(int iPlayerScore,
 			iDealerScore, bDealerSoft, action, usedcard);
 }
 
+void AdvancedCalculator::ShowDeltaOfEachTakenCard(int iPlayerScore,
+		bool bPlayerSoft, int iDealerScore, bool bDealerSoft,
+		int iFirstAction, int iSecondAction, UsedCard * usedcard)
+{
+	HandScore handPlayer;
+	HandScore handDealer;
+	double delta[12];
+	double deltadelta[12];
+	ProbSet pbFirst;
+	ProbSet pbSecond;
+
+	handPlayer.iScore = iPlayerScore;
+	handPlayer.bSoft = bPlayerSoft;
+	handDealer.iScore = iDealerScore;
+	handDealer.bSoft = bDealerSoft;
+
+	UsedCard vUsedCard = *usedcard;
+	InitiateCardCounts(&vUsedCard);
+
+	pbFirst = ProbOfHandsPlayerAction(handPlayer, handDealer,
+			iFirstAction);
+	pbSecond = ProbOfHandsPlayerAction(handPlayer, handDealer,
+			iSecondAction);
+
+	/* Original delta */
+	delta[0] = pbFirst.dEV - pbSecond.dEV;
+
+	for (int i=2; i<=11; i++)
+	{
+		UsedCard vRemaining = vUsedCard;
+		vRemaining.GetOneCard(i);
+		InitiateCardCounts(&vRemaining);
+
+		pbFirst = ProbOfHandsPlayerAction(handPlayer, handDealer,
+				iFirstAction);
+		pbSecond = ProbOfHandsPlayerAction(handPlayer, handDealer,
+				iSecondAction);
+
+		delta[i] = pbFirst.dEV - pbSecond.dEV;
+		deltadelta[i] = delta[i] - delta[0];
+	}
+
+	cout << fixed;
+
+	cout << "Original Delta " << delta[0] << endl;
+	
+	for (int i=2; i<=11; i++)
+	{
+		cout << "Value " << i << " \tDelta " << delta[i];
+		cout << "\tDelta of Delta " << deltadelta[i] << endl;
+	}
+}
+
+
 AdvancedCalculator::AdvancedCalculator(void)
 {
 }

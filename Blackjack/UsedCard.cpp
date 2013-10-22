@@ -24,6 +24,7 @@ vector <Card> UsedCard::ShowCards(void)
 
 UsedCard::UsedCard(void)
 {
+	vCard.clear();
 }
 
 UsedCard::~UsedCard(void)

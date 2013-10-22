@@ -7,6 +7,7 @@
 using namespace std;
 
 bool bShowDetail;
+bool bShowDelta;
 UsedCard usedcard;
 int iAction;
 
@@ -80,7 +81,11 @@ void EvMain(string arg)
 				bDSoft = false;
 			}
 
-			if (bShowDetail)
+			if (bShowDelta)
+			{
+				cout << "Delta of this case is not supported" << endl;
+			}
+			else if (bShowDetail)
 			{
 				cal->ShowProbSetByNextCard(atoi(sPScore.c_str()), 
 						bPSoft, atoi(sDScore.c_str()), 
@@ -101,7 +106,23 @@ void EvMain(string arg)
 	}
 	else
 	{
-		if (bShowDetail)
+		if (bShowDelta)
+		{
+			int iFirst;
+			int iSecond;
+			if ((sPScore.compare("16")==0) && (sDScore.compare("10")==0))
+				cal->ShowDeltaOfEachTakenCard(atoi(sPScore.c_str()), 
+						false, atoi(sDScore.c_str()), false, 1, 2, &current);
+			else if ((sPScore.compare("14")==0) && (sDScore.compare("10")==0))
+				cal->ShowDeltaOfEachTakenCard(atoi(sPScore.c_str()), 
+						false, atoi(sDScore.c_str()), false, 1, 5, &current);
+			else if ((sPScore.compare("16")==0) && (sDScore.compare("9")==0))
+				cal->ShowDeltaOfEachTakenCard(atoi(sPScore.c_str()), 
+						false, atoi(sDScore.c_str()), false, 1, 5, &current);
+			else
+				cout << "Delta of this case is not supported" << endl;
+		}
+		else if (bShowDetail)
 		{
 			cal->ShowProbSetByNextCard(atoi(sPScore.c_str()), false, 
 					atoi(sDScore.c_str()), false, iAction, &current);
@@ -188,6 +209,20 @@ void InteractiveMode(void)
 		{
 			bShowDetail = true;
 			cout << "Detail on" << endl;
+		}
+		InteractiveMode();
+	}
+	else if (cmdhead.compare("delta") == 0)
+	{
+		if (cmdarg.compare("off") == 0)
+		{
+			bShowDelta = false;
+			cout << "Delta off" << endl;
+		}
+		else
+		{
+			bShowDelta = true;
+			cout << "Delta on" << endl;
 		}
 		InteractiveMode();
 	}

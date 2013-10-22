@@ -81,7 +81,7 @@ void Player::JoinTable(Table * table)
 
 int Player::MakeDecision(bitset<5> allowSet, int hand)
 {
-	if (vHand.size() > hand)
+	if ((vHand.size() > hand) && table)
 	{
 		int action;
 

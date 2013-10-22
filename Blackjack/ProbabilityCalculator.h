@@ -13,6 +13,11 @@ protected:
 	bool bSOBO;
 	int iDeckNumber;
 
+	enum PlayerAction
+	{
+		NONE, HIT, STAND, DOUBLE, SPLIT, SURRENDER,
+	};
+
 public:
 	virtual void ShowProbSetByAction(int iPlayerScore, bool bPlayerSoft, 
 			int iDealerScore, bool bDealerSoft, int action=0,
@@ -21,6 +26,10 @@ public:
 	virtual void ShowProbSetByNextCard(int iPlayerScore, bool bPlayerSoft, 
 			int iDealerScore, bool bDealerSoft, int action=0,
 			UsedCard * usedcard=NULL) = 0;
+
+	virtual void ShowDeltaOfEachTakenCard(int iPlayerScore, bool bPlayerSoft,
+			int iDealerScore, bool bDealerSoft, int iFirstAction=HIT,
+			int iSecondAction=STAND, UsedCard * usedcard=NULL);
 
 	ProbabilityCalculator(void);
 	~ProbabilityCalculator(void);

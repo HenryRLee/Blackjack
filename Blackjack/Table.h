@@ -1,6 +1,7 @@
 #pragma once
 #include "Blackjack.h"
 #include "Card.h"
+#include "UsedCard.h"
 
 class ShuffleMachine;
 class Dealer;
@@ -12,7 +13,7 @@ class Table
 private:
 	Game * gametype;
 
-	vector <Card> vUsedCards;
+	UsedCard vUsedCard;
 
 	void AddDealer(Dealer *);
 	void AddPlayer(Player *);

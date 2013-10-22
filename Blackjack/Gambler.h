@@ -23,6 +23,7 @@ public:
 	string ShowName(void);
 
 	virtual void JoinTable(Table *) = 0;
+	void LeaveTable(void);
 
 	Gambler(void);
 	Gambler(string);

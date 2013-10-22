@@ -1,5 +1,11 @@
 #include "ProbabilityCalculator.h"
 
+void ProbabilityCalculator::ShowDeltaOfEachTakenCard(int iPlayerScore,
+		bool bPlayerSoft, int iDealerScore, bool bDealerSoft,
+		int iFirstAction, int iSecondAction, UsedCard * usedcard)
+{
+}
+
 ProbabilityCalculator::ProbabilityCalculator(void)
 {
 	iMaxTimesSplitted = 3;

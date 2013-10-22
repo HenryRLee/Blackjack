@@ -13,14 +13,9 @@ class SimpleCalculator :
 	public ProbabilityCalculator
 {
 protected:
-	enum PlayerAction
-	{
-		NONE, HIT, STAND,
-	};
-
 	enum ActionAllowed
 	{
-		DOUBLE=1, SPLIT=2,
+		ALLOWDOUBLE=1, ALLOWSPLIT=2,
 	};
 
 	bool bDoubled;
@@ -44,6 +39,9 @@ protected:
 	virtual ProbSet ProbOfHandsPlayerDouble(HandScore player, HandScore dealer);
 	virtual ProbSet ProbOfHandsPlayerSplit(HandScore player, HandScore dealer,
 			int iTimesSplitted);
+
+	virtual ProbSet ProbOfHandsPlayerAction(HandScore player, HandScore dealer,
+			int action);
 
 	ProbSet ProbAfterGettingCard(ProbSet current, ProbSet next, int iCardValue);
 

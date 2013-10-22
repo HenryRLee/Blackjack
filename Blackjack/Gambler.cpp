@@ -30,6 +30,11 @@ void Gambler::CleanHands(void)
 	}
 }
 
+void Gambler::LeaveTable(void)
+{
+	this->table = NULL;
+}
+
 vector <Hand> Gambler::ShowHand(int iHand)
 {
 	return vHand;
