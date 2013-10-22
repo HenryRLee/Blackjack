@@ -38,7 +38,8 @@ protected:
 	int iTimesSplittedAllow;
 	double dBlackJackPays;
 
-	void inline DealInitialCards(Dealer *, vector <class Player *>);
+	void inline DealInitialCards(Dealer *, vector <class Player *>,
+			Table * table);
 	void inline DealOneCard(Gambler *, Table * table, int hand=0);
 	void PlayerAction(Player *, bitset<5> allowSet, int hand=0);
 	void DealerAction(Dealer *);

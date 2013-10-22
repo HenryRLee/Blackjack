@@ -6,20 +6,23 @@
 #include "Statistics.h"
 
 void inline Game::DealInitialCards(Dealer * dealer, 
-		vector <class Player *> vPlayer)
+		vector <class Player *> vPlayer, Table * table)
 {
 	Card pop;
 
 	pop = shuffler->PopOneCard();
 	dealer->GetOneCard(pop);
+	table->GetOneCard(pop);
 
 	for (int i=0; i<vPlayer.size(); i++)
 	{
 		pop = shuffler->PopOneCard();
 		vPlayer[i]->GetOneCard(pop);
+		table->GetOneCard(pop);
 
 		pop = shuffler->PopOneCard();
 		vPlayer[i]->GetOneCard(pop);
+		table->GetOneCard(pop);
 	}
 }
 
@@ -208,7 +211,7 @@ void Game::OneHandRoutine(Dealer * dealer, vector <class Player *> vPlayer,
 
 	shuffler->ShuffleCards();
 
-	DealInitialCards(dealer, vPlayer);
+	DealInitialCards(dealer, vPlayer, table);
 
 	statistics->Update(table, "Dealt initial cards");
 	statistics->Update(" ");
