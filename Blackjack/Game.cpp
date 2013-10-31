@@ -225,7 +225,7 @@ void Game::OneHandRoutine(Dealer * dealer, vector <class Player *> vPlayer,
 			/* Blackjack */
 			vPlayer[i]->vHand[0].iStatus = BJ;
 	
-			break;
+			continue;
 		}
 
 		allowSet.set(HIT);
