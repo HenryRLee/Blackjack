@@ -1,11 +1,16 @@
 #include "ContinuousShufflingMachine.h"
+#include <random>
+
+std::random_device generator;
 
 Card ContinuousShufflingMachine::PopOneCard(void)
 {
 	Card cardPop;
 	int idx;
 
-	idx = rand() % vCard.size();
+	std::uniform_int_distribution<int> distribution(0, vCard.size()-1);
+//	idx = rand() % vCard.size();
+	idx = distribution(generator);
 	cardPop = vCard[idx];
 
 	vUsedCard.push_back(vCard[idx]);
@@ -27,8 +32,6 @@ void ContinuousShufflingMachine::ShuffleCards(void)
 ContinuousShufflingMachine::ContinuousShufflingMachine(void)
 {
 	SetDeckNumber(6);
-
-	srand(time(NULL));
 
 	vCard.clear();
 	vUsedCard.clear();

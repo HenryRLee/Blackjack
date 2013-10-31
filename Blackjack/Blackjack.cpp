@@ -46,9 +46,8 @@ int main(int argc, char *argv[])
 	Strategy * BStrategy = new BasicStrategy;
 	Strategy * EStrategy = new EnhancedStrategy;
 
-	Hank->JoinTable(Venetian);
-	Hank->UseStrategy(EStrategy);
-//	Hank->UseStrategy(BStrategy);
+//	Hank->UseStrategy(EStrategy);
+	Hank->UseStrategy(BStrategy);
 //	Hank->UseStrategy(UserInput);
 	Hank->FixBet(100);
 	Hank->SetBudget(0);
@@ -59,7 +58,7 @@ int main(int argc, char *argv[])
 
 	/* Add multiple players */
 	Player * Passenger[10];
-	for (int i=0; i<4; i++)
+	for (int i=0; i<0; i++)
 	{
 		Passenger[i] = new Player("Passenger");
 		Passenger[i]->JoinTable(Venetian);
@@ -68,6 +67,7 @@ int main(int argc, char *argv[])
 		Passenger[i]->SetBudget(0);
 	}
 
+	Hank->JoinTable(Venetian);
 	Venetian->CleanTable();
 //	Venetian->StartOneGame();
 

@@ -15,7 +15,7 @@ Martingale: Martingale.c
 	gcc Martingale.c -o Martingale
 
 %.o: %.cpp
-	g++ ${CFLAGS} $< -c -o $@
+	g++ ${CFLAGS} -std=c++11 $< -c -o $@
 
 clean:
 	rm -f *.o Blackjack EV Martingale
