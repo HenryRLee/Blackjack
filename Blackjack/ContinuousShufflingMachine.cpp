@@ -45,6 +45,22 @@ ContinuousShufflingMachine::ContinuousShufflingMachine(void)
 	}
 }
 
+ContinuousShufflingMachine::ContinuousShufflingMachine(int iDeckNumber)
+{
+	SetDeckNumber(iDeckNumber);
+
+	vCard.clear();
+	vUsedCard.clear();
+
+	for (int i=0; i<iDeckNumber; i++)
+	{
+		for (int j=0; j<CardNumInDeck; j++)
+		{
+			vCard.push_back(*deck.card[j]);
+		}
+	}
+}
+
 ContinuousShufflingMachine::~ContinuousShufflingMachine(void)
 {
 }

@@ -1,9 +1,11 @@
 #include "MacauSimulation.h"
 #include "ContinuousShufflingMachine.h"
+#include "ManipulatedCardSequence.h"
 
 MacauSimulation::MacauSimulation(void)
 {
 	shuffler = new ContinuousShufflingMachine;
+//	shuffler = new ManipulatedCardSequence;
 
 	bHitOnSoft17 = false;
 	bDouble = true;
