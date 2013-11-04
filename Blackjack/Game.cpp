@@ -41,7 +41,10 @@ void Game::PlayerAction(Player * player, bitset<5> allowSet, int iHand)
 	Hand * handCurrent = &(player->vHand[iHand]);
 
 	if (player->vHand.size() <= iHand)
+	{
+		cout << "Error occured" << endl;
 		return;
+	}
 
 	if (handCurrent->vCard.size() >= 2)
 	{
@@ -50,6 +53,10 @@ void Game::PlayerAction(Player * player, bitset<5> allowSet, int iHand)
 		{
 			allowSet.set(SPLIT, 0);
 		}
+	}
+	else
+	{
+		cout << "Error occured" << endl;
 	}
 
 	statistics->Update(*handCurrent);
@@ -64,8 +71,7 @@ void Game::PlayerAction(Player * player, bitset<5> allowSet, int iHand)
 	switch (action)
 	{
 	case HIT:
-		if (!bLateSurrender)
-			allowSet.set(SURRENDER, 0);
+		allowSet.set(SURRENDER, 0);
 
 		if (!bDoubleAfterHit)
 			allowSet.set(DOUBLE, 0);
@@ -95,8 +101,7 @@ void Game::PlayerAction(Player * player, bitset<5> allowSet, int iHand)
 			allowSet.set(DOUBLE, 0);
 		}
 
-		if (!bLateSurrender)
-			allowSet.set(SURRENDER, 0);
+		allowSet.set(SURRENDER, 0);
 
 		allowSet.set(SPLIT, 0);
 
@@ -137,9 +142,6 @@ void Game::PlayerAction(Player * player, bitset<5> allowSet, int iHand)
 			if (!bDoubleAfterSplit)
 				allowSet.set(DOUBLE, 0);
 
-			if (!bLateSurrender)
-				allowSet.set(SURRENDER, 0);
-
 			if (!bSplitAfterSplit)
 				allowSet.set(SPLIT, 0);
 			else if (iSplittedHand >= iTimesSplittedAllow)
@@ -148,8 +150,7 @@ void Game::PlayerAction(Player * player, bitset<5> allowSet, int iHand)
 				allowSet.set(SPLIT, 0);
 		}
 
-		if (!bLateSurrender)
-			allowSet.set(SURRENDER, 0);
+		allowSet.set(SURRENDER, 0);
 
 		DealOneCard(player, table, iHand);
 		PlayerAction(player, allowSet, iHand);
@@ -161,6 +162,7 @@ void Game::PlayerAction(Player * player, bitset<5> allowSet, int iHand)
 		break;
 
 	default:
+		cout << "Error occured" << endl;
 		break;
 	}
 }
@@ -170,7 +172,10 @@ void Game::DealerAction(Dealer * dealer)
 	int action;
 
 	if (dealer->vHand.size() <= 0)
+	{
+		cout << "Error occured" << endl;
 		return;
+	}
 
 	action = dealer->MakeDecision(bHitOnSoft17);
 
@@ -190,6 +195,7 @@ void Game::DealerAction(Dealer * dealer)
 		break;
 
 	default:
+		cout << "Error occured" << endl;
 		break;
 	}
 }
