@@ -108,6 +108,11 @@ ProbSet SimpleCalculator::ProbOfHandsDealerFirstTurn(HandScore handPlayer,
 
 			pbCurrent = ProbAfterGettingCard(pbCurrent, pbNew, i);
 		}
+		else if (handPlayer.iScore > 21)
+		{
+			pbNew.dEV = -1;
+			pbCurrent = ProbAfterGettingCard(pbCurrent, pbNew, i);
+		}
 		else
 		{
 			handCurrent = GetOneCard(handDealer, i);
@@ -162,18 +167,17 @@ ProbSet SimpleCalculator::ProbOfHandsPlayerTurn(HandScore handPlayer,
 	/* Bust */
 	if (handPlayer.iScore > 21)
 	{
-		pbStand.dEV = -1;
-
-		return pbStand;
+		return ProbOfHandsDealerFirstTurn(handPlayer, handDealer);
 	}
 
-	if (handPlayer.iScore == 21)
+	if ((handPlayer.iScore == 21) && (!handPlayer.bSoft))
 	{
+		/* Whatever, it busts */
 		if (action == HIT)
 		{
-			pbHit.dEV = -1;
+			handPlayer.iScore = 22;
 
-			return pbHit;
+			return ProbOfHandsDealerFirstTurn(handPlayer, handDealer);
 		}
 	}
 	/* Hit */

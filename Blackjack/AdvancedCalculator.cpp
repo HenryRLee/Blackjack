@@ -84,8 +84,19 @@ ProbSet AdvancedCalculator::ProbOfHandsDealerFirstTurn(HandScore handPlayer,
 {
 	ProbSet pbCurrent;
 
+	/* If Dealer Score is upto 11, skip Blackjack checking. */
 	if (handDealer.iScore > 11)
-		return ProbOfHandsDealerTurn(handPlayer, handDealer, vRemaining);
+	{
+		if (handPlayer.iScore > 21)
+		{
+			pbCurrent.dEV = -1;
+			return pbCurrent;
+		}
+		else
+		{
+			return ProbOfHandsDealerTurn(handPlayer, handDealer, vRemaining);
+		}
+	}
 
 	for (int i=2; i<=11; i++)
 	{
@@ -117,6 +128,12 @@ ProbSet AdvancedCalculator::ProbOfHandsDealerFirstTurn(HandScore handPlayer,
 
 			pbCurrent = ProbAfterGettingCard(pbCurrent, pbNew, i, vRemaining);
 		}
+		else if (handPlayer.iScore > 21)
+		{
+			pbNew.dEV = -1;
+			pbCurrent = ProbAfterGettingCard(pbCurrent, pbNew, i, vRemaining);
+		}
+
 		else
 		{
 			handCurrent = GetOneCard(handDealer, i);
@@ -173,18 +190,18 @@ ProbSet AdvancedCalculator::ProbOfHandsPlayerTurn(HandScore handPlayer,
 	/* Bust */
 	if (handPlayer.iScore > 21)
 	{
-		pbStand.dEV = -1;
-
-		return pbStand;
+		return ProbOfHandsDealerFirstTurn(handPlayer, handDealer, vRemaining);
 	}
 
-	if (handPlayer.iScore == 21)
+	if ((handPlayer.iScore == 21) && (!handPlayer.bSoft))
 	{
+		/* Whatever, it busts */
 		if (action == HIT)
 		{
-			pbHit.dEV = -1;
+			handPlayer.iScore = 22;
 
-			return pbHit;
+			return ProbOfHandsDealerFirstTurn(handPlayer, handDealer,
+					vRemaining);
 		}
 	}
 
