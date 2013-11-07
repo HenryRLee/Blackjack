@@ -293,24 +293,11 @@ void Game::OneHandRoutine(Dealer * dealer, vector <class Player *> vPlayer,
 
 					statistics->Update("  PLAYER HAS A BLACKJACK");
 				}
-				else if (vPlayer[i]->vHand[j].iStatus == BUSTED)
-				{
-					vPlayer[i]->vHand[j].iStatus = LOST;
-
-					statistics->Update("  PLAYER BUSTS");
-				}
 				else if (vPlayer[i]->vHand[j].iStatus == SURRENDERED)
 				{
 					vPlayer[i]->GetPays(0.5, j);
 
 					statistics->Update("  PLAYER SURRENDERS");
-				}
-				else if (dealer->vHand[0].iStatus == BUSTED)
-				{
-					vPlayer[i]->vHand[j].iStatus = WON;
-					vPlayer[i]->GetPays(2, j);
-
-					statistics->Update("  DEALER BUSTS");
 				}
 				else if (dealer->vHand[0].iStatus == BJ)
 				{
@@ -349,6 +336,19 @@ void Game::OneHandRoutine(Dealer * dealer, vector <class Player *> vPlayer,
 						vPlayer[i]->vHand[j].iStatus = LOST;
 						statistics->Update("  DEALER HAS A BLACKJACK");
 					}
+				}
+				else if (vPlayer[i]->vHand[j].iStatus == BUSTED)
+				{
+					vPlayer[i]->vHand[j].iStatus = LOST;
+
+					statistics->Update("  PLAYER BUSTS");
+				}
+				else if (dealer->vHand[0].iStatus == BUSTED)
+				{
+					vPlayer[i]->vHand[j].iStatus = WON;
+					vPlayer[i]->GetPays(2, j);
+
+					statistics->Update("  DEALER BUSTS");
 				}
 				else if (vPlayer[i]->vHand[j].GetScore() > dealer->vHand[0].GetScore())
 				{
