@@ -224,22 +224,17 @@ void Game::OneHandRoutine(Dealer * dealer, vector <class Player *> vPlayer,
 
 	if (bDealerTakesHole && bDealerPeaksHole)
 	{
-		bool bBlackjack;
+		bool bBlackjack = false;
 
 		if (bDealerPeaksHoleOnAce && (dealer->vHand[0].GetScore() == 11))
 		{
 			if (dealer->PeakHoldCard())
 				bBlackjack = true;
-			else
-				bBlackjack = false;
-
 		}
 		if (bDealerPeaksHoleOnTen && (dealer->vHand[0].GetScore() == 10))
 		{
 			if (dealer->PeakHoldCard())
 				bBlackjack = true;
-			else
-				bBlackjack = false;
 		}
 
 		if (bBlackjack)
