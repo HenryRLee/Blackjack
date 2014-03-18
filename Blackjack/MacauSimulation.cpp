@@ -4,8 +4,8 @@
 
 MacauSimulation::MacauSimulation(void)
 {
-//	shuffler = new ContinuousShufflingMachine(6);
-	shuffler = new ManipulatedCardSequence;
+	shuffler = new ContinuousShufflingMachine(6);
+//	shuffler = new ManipulatedCardSequence;
 
 	bHitOnSoft17 = false;
 	bDouble = true;
