@@ -14,6 +14,13 @@ void inline Game::DealInitialCards(Dealer * dealer,
 	dealer->GetOneCard(pop);
 	table->GetOneCard(pop);
 
+	if (bDealerTakesHole)
+	{
+		pop = shuffler->PopOneCard();
+		dealer->GetHoleCard(pop);
+		table->GetOneCard(pop);
+	}
+
 	for (int i=0; i<vPlayer.size(); i++)
 	{
 		pop = shuffler->PopOneCard();
@@ -222,6 +229,62 @@ void Game::OneHandRoutine(Dealer * dealer, vector <class Player *> vPlayer,
 	statistics->Update(table, "Dealt initial cards");
 	statistics->Update(" ");
 
+	if (bDealerTakesHole && bDealerPeaksHole)
+	{
+		bool bBlackjack;
+
+		if (bDealerPeaksHoleOnAce && (dealer->vHand[0].GetScore() == 11))
+		{
+			if (dealer->PeakHoldCard())
+				bBlackjack = true;
+			else
+				bBlackjack = false;
+
+		}
+		if (bDealerPeaksHoleOnTen && (dealer->vHand[0].GetScore() == 10))
+		{
+			if (dealer->PeakHoldCard())
+				bBlackjack = true;
+			else
+				bBlackjack = false;
+		}
+		
+		if (bBlackjack)
+		{
+			/* Dealer has a Blackjack */
+			dealer->ShowHoleCard();
+			dealer->vHand[0].iStatus = BJ;
+
+			statistics->Update(" ");
+			statistics->Update(dealer, "Final hands");
+			statistics->Update(" ");
+
+			for (int i=0; i<vPlayer.size(); i++)
+			{
+				statistics->Update(vPlayer[i], "Final hands");
+
+				if (vPlayer[i]->vHand[0].GetScore() == MaxScore)
+				{
+					vPlayer[i]->vHand[0].iStatus = BJ;
+					statistics->Update("  BOTH BLACKJACK");
+					vPlayer[i]->vHand[0].iStatus = PUSH;
+					vPlayer[i]->GetPays(1, 0);
+				}
+				else
+				{
+					statistics->Update("  DEALER HAS A BLACKJACK");
+					vPlayer[i]->vHand[0].iStatus = LOST;
+				}
+			}
+
+			statistics->Update(" ");
+			statistics->Update(table, "Game complete");
+			statistics->Update(" ");
+
+			return;
+		}
+	}
+
 	for (int i=0; i<vPlayer.size(); i++)
 	{
 		bitset <5> allowSet;
@@ -230,7 +293,7 @@ void Game::OneHandRoutine(Dealer * dealer, vector <class Player *> vPlayer,
 		{
 			/* Blackjack */
 			vPlayer[i]->vHand[0].iStatus = BJ;
-	
+
 			continue;
 		}
 
@@ -263,7 +326,10 @@ void Game::OneHandRoutine(Dealer * dealer, vector <class Player *> vPlayer,
 		PlayerAction(vPlayer[i], allowSet);
 	}
 
-	DealOneCard(dealer, table);
+	if (bDealerTakesHole)
+		dealer->ShowHoleCard();
+	else
+		DealOneCard(dealer, table);
 
 	if ((dealer->vHand[0].vCard[0].GetValue() +
 				dealer->vHand[0].vCard[1].GetValue()) == MaxScore)

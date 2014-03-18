@@ -49,6 +49,30 @@ int Dealer::MakeDecision(bool bHitOnSoft17, int iHand)
 	}
 }
 
+void Dealer::GetHoleCard(Card hole)
+{
+	this->cardHole = hole;
+}
+
+/* Return true if it's Blackjack */
+bool Dealer::PeakHoldCard(void)
+{
+	if (vHand.size() >= 1)
+	{
+		if ((cardHole.GetValue() + vHand[0].GetScore()) == MaxScore)
+			return true;
+		else
+			return false;
+	}
+}
+
+Card Dealer::ShowHoleCard(void)
+{
+	GetOneCard(cardHole);
+
+	return cardHole;
+}
+
 Dealer::Dealer(void)
 {
 }
