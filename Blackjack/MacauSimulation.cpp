@@ -4,20 +4,26 @@
 
 MacauSimulation::MacauSimulation(void)
 {
-	shuffler = new ContinuousShufflingMachine;
-//	shuffler = new ManipulatedCardSequence;
+//	shuffler = new ContinuousShufflingMachine(6);
+	shuffler = new ManipulatedCardSequence;
 
 	bHitOnSoft17 = false;
 	bDouble = true;
 	bSurrender = true;
 	bSplit = true;
+	bDealerTakesHole = false;
+	bDealerPeaksHole = false;
+	bDealerPeaksHoleOnAce = false;
+	bDealerPeaksHoleOnTen = false;
 	bHitAfterSplit = true;
-	bHitAfterDouble = false;
-	bDoubleAfterHit = false;
-	bDoubleAfterDouble = false;
 	bDoubleAfterSplit = true;
+	bDoubleOnAnyTwo = true;
+	bDoubleOnNine = true;
+	bDoubleOnTen = true;
+	bDoubleOnEleven = true;
 	bSplitAfterSplit = true;
 	bResplitAces = false;
+	bStandAfterSplittedAces = false;
 	bLateSurrender = false;
 	bSurrenderVsDealerAce = false;
 	iTimesSplittedAllow = 3;

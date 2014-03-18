@@ -79,10 +79,7 @@ void Game::PlayerAction(Player * player, bitset<5> allowSet, int iHand)
 	{
 	case HIT:
 		allowSet.set(SURRENDER, 0);
-
-		if (!bDoubleAfterHit)
-			allowSet.set(DOUBLE, 0);
-
+		allowSet.set(DOUBLE, 0);
 		allowSet.set(SPLIT, 0);
 
 		DealOneCard(player, table, iHand);
@@ -98,18 +95,10 @@ void Game::PlayerAction(Player * player, bitset<5> allowSet, int iHand)
 		break;
 
 	case DOUBLE:
-		if (!bHitAfterDouble)
-		{
-			allowSet.set(HIT, 0);
-			allowSet.set(DOUBLE, 0);
-		}
-		else if (!bDoubleAfterDouble)
-		{
-			allowSet.set(DOUBLE, 0);
-		}
-
+		allowSet.set(HIT, 0);
+		allowSet.set(DOUBLE, 0);
+		allowSet.set(DOUBLE, 0);
 		allowSet.set(SURRENDER, 0);
-
 		allowSet.set(SPLIT, 0);
 
 		player->DoubleBet(iHand);
@@ -121,10 +110,7 @@ void Game::PlayerAction(Player * player, bitset<5> allowSet, int iHand)
 		}
 		else
 		{
-			if (bHitAfterDouble)
-				PlayerAction(player, allowSet, iHand);
-			else
-				handCurrent->iStatus = DOUBLEDWAITING;
+			handCurrent->iStatus = DOUBLEDWAITING;
 		}
 
 		break;
@@ -146,6 +132,13 @@ void Game::PlayerAction(Player * player, bitset<5> allowSet, int iHand)
 		}
 		else
 		{
+			if (bStandAfterSplittedAces)
+			{
+				allowSet.set(HIT, 0);
+				allowSet.set(DOUBLE, 0);
+				allowSet.set(SPLIT, 0);
+			}
+
 			if (!bDoubleAfterSplit)
 				allowSet.set(DOUBLE, 0);
 
@@ -248,7 +241,7 @@ void Game::OneHandRoutine(Dealer * dealer, vector <class Player *> vPlayer,
 			else
 				bBlackjack = false;
 		}
-		
+
 		if (bBlackjack)
 		{
 			/* Dealer has a Blackjack */
@@ -301,7 +294,21 @@ void Game::OneHandRoutine(Dealer * dealer, vector <class Player *> vPlayer,
 		allowSet.set(STAND);
 
 		if (bDouble)
-			allowSet.set(DOUBLE);
+		{
+			if (bDoubleOnAnyTwo)
+			{
+				allowSet.set(DOUBLE);
+			}
+			else
+			{
+				if (bDoubleOnNine && (vPlayer[i]->vHand[0].GetScore() == 9))
+					allowSet.set(DOUBLE);
+				if (bDoubleOnTen && (vPlayer[i]->vHand[0].GetScore() == 10))
+					allowSet.set(DOUBLE);
+				if (bDoubleOnEleven && (vPlayer[i]->vHand[0].GetScore() == 11))
+					allowSet.set(DOUBLE);
+			}
+		}
 
 		if (bSurrender)
 		{

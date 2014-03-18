@@ -27,9 +27,6 @@ protected:
 	bool bDealerPeaksHoleOnAce;
 	bool bDealerPeaksHoleOnTen;
 	bool bHitAfterSplit;
-	bool bHitAfterDouble;
-	bool bDoubleAfterHit;
-	bool bDoubleAfterDouble;
 	bool bDoubleAfterSplit;
 	bool bDoubleOnAnyTwo;
 	bool bDoubleOnNine;
@@ -37,7 +34,7 @@ protected:
 	bool bDoubleOnEleven;
 	bool bSplitAfterSplit;
 	bool bResplitAces;
-	bool bHitAfterSplittedAces;
+	bool bStandAfterSplittedAces;
 	bool bLateSurrender;
 	bool bSurrenderVsDealerAce;
 	/* Lose only orignal bet in double when dealer has a Blackjack */
