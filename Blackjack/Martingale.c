@@ -16,8 +16,9 @@
 int main(int argc, char *argv[])
 {
 	long long times = 1000*1000;
-	long long budget = times;
-	long long bet = 1;
+	long long minbet = 1;
+	long long bet = minbet;
+	long long budget = times * 100;
 	int maxbet = 50;
 	long long i;
 
@@ -25,11 +26,11 @@ int main(int argc, char *argv[])
 
 	for (i=0; i<times; i++)
 	{
-		if ((rand() % 10000) < 6666)
+		if ((rand() % 10000) < 5016)
 		{
 			/* Win */
 			budget += bet;
-			bet = 1;
+			bet = minbet;
 		}
 		else
 		{
@@ -46,7 +47,7 @@ int main(int argc, char *argv[])
 			if (bet > maxbet)
 			{
 //				printf("Overflow max bet\n");
-				bet = 1;
+				bet = minbet;
 			}
 		}
 	}
