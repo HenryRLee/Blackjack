@@ -1,24 +1,57 @@
 #pragma once
-#include "SimpleFastCalculator.h"
+#include "AdvancedCalculator.h"
+
+class HashItem;
 
 class AdvancedFastCalculator :
-	public SimpleFastCalculator
+	public AdvancedCalculator
 {
 protected:
-	double pbCard[12];
-	void InitiateProbOfCard(UsedCard *);
-
-	double ProbOfGettingCard(int value);
-
 public:
-	void ShowProbSetByAction(int iPlayerScore, bool bPlayerSoft, 
-			int iDealerScore, bool bDealerSoft, int action=0,
-			UsedCard * usedcard=NULL);
-
-	void ShowProbSetByNextCard(int iPlayerScore, bool bPlayerSoft, 
-			int iDealerScore, bool bDealerSoft, int action=0,
-			UsedCard * usedcard=NULL);
-
 	AdvancedFastCalculator(void);
 	~AdvancedFastCalculator(void);
+};
+
+class HashItem
+{
+protected:
+	vector <int> vUsedCards;
+	bool bPlayerTurn;
+	int iPlayerScore;
+	bool bPlayerSoft;
+	int iDealerScore;
+	bool bDealerSoft;
+
+	bool bAdditional;
+	bool bDoubled;
+
+	double dEV;
+
+public:
+	void SetItems(vector <int> usedcard, bool playerturn, int playerscore,
+			bool playersoft, int dealerscore, bool dealersoft,
+			bool additional = false, bool doubled = false)
+	{
+		vUsedCards = usedcard;
+		bPlayerTurn = playerturn;
+		iPlayerScore = playerscore;
+		bPlayerSoft = playersoft;
+		iDealerScore = dealerscore;
+		bDealerSoft = dealersoft;
+		bAdditional = additional;
+		bDoubled = doubled;
+	}
+
+	void SetEV(double ev)
+	{
+		dEV = ev;
+	}
+
+	bool operator == (const HashItem item) const;
+
+	unsigned int HashValue(void);
+
+	HashItem(void)
+	{
+	}
 };
