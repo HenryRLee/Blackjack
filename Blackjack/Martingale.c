@@ -4,7 +4,7 @@
  * Player double his bet after every loss so that the first win would recover
  * all previous losses plus win a profit equal to the original stake.
  *
- * Consider p as the probability of winning. If casino has no maximum bet limit,
+ * Let p be the probability of winning. If casino has no maximum bet limit,
  * the expectation of player will be p. If casino has a maximum limit, the
  * expectation will be (1 - (1-p)^n * 2^n).
  */

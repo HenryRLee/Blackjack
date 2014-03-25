@@ -57,20 +57,7 @@ bool HashItem::operator == (const HashItem item) const
 }
 unsigned int HashItem::HashValue(void)
 {
-	int prime[12] = {
-		1,		/* 0 */
-		1,		/* 1 */
-		2,		/* 2 */
-		3,		/* 3 */
-		5,		/* 4 */
-		7,		/* 5 */
-		9,		/* 6 */
-		11,		/* 7 */
-		13,		/* 8 */
-		17,		/* 9 */
-		19,		/* 10 */
-		23,		/* 11 */
-	};
+	int box[12] = {0};
 	int score;
 	unsigned int hash = 1;
 
@@ -145,7 +132,13 @@ unsigned int HashItem::HashValue(void)
 
 	for (int i=0; i<vUsedCards.size(); i++)
 	{
-		hash *= prime[vUsedCards[i]];
+		box[vUsedCards[i]]++;
+	}
+
+	for (int i=0; i<12; i++)
+	{
+		/* Assume at most 10 cards per value. If not so, it conflicts. */
+		hash = hash * 10 + box[i];
 	}
 
 	return hash;
