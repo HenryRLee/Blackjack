@@ -27,6 +27,7 @@ int ContinuousShufflingMachine::TakeSpecificCard(int value)
 		{
 			vUsedCard.push_back(vCard[i]);
 			vCard.erase(vCard.begin() + i);
+			break;
 		}
 	}
 }
