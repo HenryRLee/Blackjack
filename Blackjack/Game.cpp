@@ -357,9 +357,17 @@ void Game::OneHandRoutine(Dealer * dealer, vector <class Player *> vPlayer,
 			{
 				if (vPlayer[i]->vHand[j].iStatus == BJ)
 				{
-					vPlayer[i]->GetPays(dBlackJackPays);
+					if (dealer->vHand[0].iStatus == BJ)
+					{
+						vPlayer[i]->GetPays(1);
+						statistics->Update("  BOTH BLACKJACKS PUSH");
+					}
+					else
+					{
+						vPlayer[i]->GetPays(dBlackJackPays);
+						statistics->Update("  PLAYER HAS A BLACKJACK");
+					}
 
-					statistics->Update("  PLAYER HAS A BLACKJACK");
 				}
 				else if (vPlayer[i]->vHand[j].iStatus == SURRENDERED)
 				{

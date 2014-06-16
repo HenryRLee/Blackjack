@@ -22,14 +22,14 @@ MacauSimulation::MacauSimulation(void)
 	bDoubleOnTen = true;
 	bDoubleOnEleven = true;
 	bSplitAfterSplit = true;
-	bResplitAces = false;
+	bResplitAces = true;
 	bStandAfterSplittedAces = false;
 	bLateSurrender = false;
 	bSurrenderVsDealerAce = false;
 	iTimesSplittedAllow = 3;
 	dBlackJackPays = 2.5;
 	bDOBO = true;
-	bSOBO = true;
+	bSOBO = false;
 }
 
 MacauSimulation::~MacauSimulation(void)
