@@ -13,7 +13,7 @@ public:
 	Card PopOneCard(void);
 
 	void ShuffleCards(void);
-	int TakeSpecificCard(int value);
+	int TakeSpecificCard(int value, int num = 1);
 
 	ContinuousShufflingMachine(void);
 	ContinuousShufflingMachine(int iDeckNumber);

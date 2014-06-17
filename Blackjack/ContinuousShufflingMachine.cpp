@@ -19,15 +19,15 @@ Card ContinuousShufflingMachine::PopOneCard(void)
 	return cardPop;
 }
 
-int ContinuousShufflingMachine::TakeSpecificCard(int value)
+int ContinuousShufflingMachine::TakeSpecificCard(int value, int num)
 {
-	for (int i=0; i<vCard.size(); i++)
+	for (int i=0, j=0; (i<vCard.size())&&(j<num); i++)
 	{
 		if (vCard[i].GetValue() == value)
 		{
 			vUsedCard.push_back(vCard[i]);
 			vCard.erase(vCard.begin() + i);
-			break;
+			j++;
 		}
 	}
 }

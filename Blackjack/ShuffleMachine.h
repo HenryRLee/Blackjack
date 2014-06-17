@@ -13,7 +13,7 @@ public:
 
 	virtual Card PopOneCard(void) = 0;
 	virtual void ShuffleCards(void) = 0;
-	virtual int TakeSpecificCard(int value) = 0;
+	virtual int TakeSpecificCard(int value, int num = 1) = 0;
 
 	ShuffleMachine(void);
 	virtual ~ShuffleMachine(void);
