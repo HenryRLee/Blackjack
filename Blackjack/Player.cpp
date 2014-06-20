@@ -1,6 +1,7 @@
 #include "Player.h"
 #include "Table.h"
 #include "Strategy.h"
+#include "BettingSystem.h"
 
 string Player::ShowName(void)
 {
@@ -17,13 +18,18 @@ long long Player::ShowBudget(void)
 	return iBudget;
 }
 
-void Player::FixBet(long long bet)
+void Player::PreferBet(long long bet)
 {
-	iBet = bet;
+	iPreferredBet = bet;
 }
 
 void Player::PlaceBet(int hand)
 {
+	if (bettingsystem)
+		iBet = bettingsystem->CalculateBet(iPreferredBet, iBudget, table);
+	else
+		iBet = iPreferredBet;
+
 	if (vHand.size() > hand)
 	{
 		vHand[hand].iBet = iBet;
@@ -97,6 +103,11 @@ int Player::MakeDecision(bitset<5> allowSet, int hand)
 void Player::UseStrategy(Strategy * strategy)
 {
 	this->strategy = strategy;
+}
+
+void Player::UseBettingSystem(BettingSystem * bettingsystem)
+{
+	this->bettingsystem = bettingsystem;
 }
 
 Player::Player(void)

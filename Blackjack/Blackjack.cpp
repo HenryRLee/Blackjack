@@ -8,6 +8,7 @@
 #include "NoStrategy.h"
 #include "BasicStrategy.h"
 #include "EnhancedStrategy.h"
+#include "FixedBet.h"
 
 inline int RunMultipleGames(long long times, Table * table, Player * player,
 		Statistics * stat=NULL)
@@ -45,11 +46,13 @@ int main(int argc, char *argv[])
 	Strategy * UserInput = new NoStrategy;
 	Strategy * BStrategy = new BasicStrategy;
 	Strategy * EStrategy = new EnhancedStrategy;
+	BettingSystem * Fixedbet = new FixedBet;
 
 //	Hank->UseStrategy(EStrategy);
 	Hank->UseStrategy(BStrategy);
 //	Hank->UseStrategy(UserInput);
-	Hank->FixBet(100);
+	Hank->UseBettingSystem(Fixedbet);
+	Hank->PreferBet(100);
 	Hank->SetBudget(0);
 	BJDealer->JoinTable(Venetian);
 	MacauGame->UseStatistics(NoLogger);
@@ -63,7 +66,7 @@ int main(int argc, char *argv[])
 		Passenger[i] = new Player("Passenger");
 		Passenger[i]->JoinTable(Venetian);
 		Passenger[i]->UseStrategy(BStrategy);
-		Passenger[i]->FixBet(100);
+		Passenger[i]->PreferBet(100);
 		Passenger[i]->SetBudget(0);
 	}
 
