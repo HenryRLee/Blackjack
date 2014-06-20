@@ -4,7 +4,7 @@
 class ContinuousShufflingMachine :
 	public ShuffleMachine
 {
-private:
+protected:
 	vector <Card> vCard;
 	vector <Card> vUsedCard;
 	Deck deck;

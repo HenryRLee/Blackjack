@@ -1,11 +1,15 @@
 #include "MacauSimulation.h"
 #include "ContinuousShufflingMachine.h"
 #include "ManipulatedCardSequence.h"
+#include "PenetrationShuffler.h"
 
 MacauSimulation::MacauSimulation(void)
 {
-	shuffler = new ContinuousShufflingMachine(6);
+	shuffler = new PenetrationShuffler(6);
+//	shuffler = new ContinuousShufflingMachine(6);
 //	shuffler = new ManipulatedCardSequence;
+
+	shuffler->SetPenetration(0.16666);
 
 	bHitOnSoft17 = false;
 	bDouble = true;

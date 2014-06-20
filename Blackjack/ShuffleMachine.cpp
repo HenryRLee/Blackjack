@@ -7,6 +7,11 @@ int ShuffleMachine::SetDeckNumber(int num)
 	return num;
 }
 
+int ShuffleMachine::SetPenetration(float penetration)
+{
+	fPenetration = penetration;
+}
+
 ShuffleMachine::ShuffleMachine(void)
 {
 }
