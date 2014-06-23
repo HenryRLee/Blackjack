@@ -12,6 +12,7 @@ public:
 	Card PopOneCard(void);
 
 	void ShuffleCards(void);
+	int TakeSpecificCard(int value, int num = 1);
 
 	ManipulatedCardSequence(void);
 	~ManipulatedCardSequence(void);

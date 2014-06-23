@@ -23,6 +23,10 @@ void ManipulatedCardSequence::ShuffleCards(void)
 	vUsedCard.clear();
 }
 
+int ManipulatedCardSequence::TakeSpecificCard(int value, int num)
+{
+}
+
 ManipulatedCardSequence::ManipulatedCardSequence(void)
 {
 	int iSequence[] = {11, 11, 11, 10, 10, 10};
