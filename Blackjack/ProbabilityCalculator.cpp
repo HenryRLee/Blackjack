@@ -9,11 +9,11 @@ void ProbabilityCalculator::ShowDeltaOfEachTakenCard(int iPlayerScore,
 ProbabilityCalculator::ProbabilityCalculator(void)
 {
 	iMaxTimesSplitted = 3;
-	bResplitAces = false;
+	bResplitAces = true;
 	bHitOnSoft17 = false;
 	bSurrenderVsDealerAce = false;
 	bDOBO = true;
-	bSOBO = true;
+	bSOBO = false;
 	iDeckNumber = 6;
 }
 

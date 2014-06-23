@@ -9,6 +9,7 @@
 #include "BasicStrategy.h"
 #include "EnhancedStrategy.h"
 #include "FixedBet.h"
+#include "FlowCounting.h"
 
 inline int RunMultipleGames(long long times, Table * table, Player * player,
 		Statistics * stat=NULL)
@@ -47,11 +48,13 @@ int main(int argc, char *argv[])
 	Strategy * BStrategy = new BasicStrategy;
 	Strategy * EStrategy = new EnhancedStrategy;
 	BettingSystem * Fixedbet = new FixedBet;
+	BettingSystem * Flowcounting = new FlowCounting;
 
 //	Hank->UseStrategy(EStrategy);
 	Hank->UseStrategy(BStrategy);
 //	Hank->UseStrategy(UserInput);
 	Hank->UseBettingSystem(Fixedbet);
+	Hank->UseBettingSystem(Flowcounting);
 	Hank->PreferBet(100);
 	Hank->SetBudget(0);
 	BJDealer->JoinTable(Venetian);

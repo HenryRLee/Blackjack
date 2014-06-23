@@ -5,7 +5,7 @@ Blackjack: Blackjack.o Card.o Dealer.o Deck.o Gambler.o Game.o \
 		ContinuousShufflingMachine.o Hand.o Statistics.o StreamLog.o \
 		Strategy.o BasicStrategy.o  NoStrategy.o LongTermStats.o \
 		EnhancedStrategy.o UsedCard.o ManipulatedCardSequence.o \
-		BettingSystem.o FixedBet.o PenetrationShuffler.o
+		BettingSystem.o FixedBet.o PenetrationShuffler.o FlowCounting.o
 	g++ ${CFLAGS} $^ -o $@
 
 EV: EV.o ProbabilityCalculator.o SimpleCalculator.o AdvancedFastCalculator.o \
