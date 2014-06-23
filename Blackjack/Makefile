@@ -15,7 +15,7 @@ EV: EV.o ProbabilityCalculator.o SimpleCalculator.o AdvancedFastCalculator.o \
 Martingale: Martingale.c
 	gcc Martingale.c -o Martingale
 
-%.o: %.cpp %.h
+%.o: %.cpp
 	g++ ${CFLAGS} -std=c++11 $< -c -o $@
 
 clean:
