@@ -6,7 +6,7 @@ long long FlowCounting::CalculateBet(long long iPreferredBet, long long iBudget,
 {
 	if (table)
 	{
-		long long iFinalBet = iPreferredBet;
+		long long iFinalBet;
 		int iCardValue[12] =
 		{
 			0,
@@ -26,8 +26,6 @@ long long FlowCounting::CalculateBet(long long iPreferredBet, long long iBudget,
 		UsedCard vUsedCard = table->ShowUsedCards();
 		vector <Card> vCard = vUsedCard.ShowCards();
 
-		cout << "Shoe size " << vCard.size() << endl;
-
 		for (int i=0; i<vCard.size(); i++)
 		{
 			int score = vCard[i].GetValue();
@@ -35,9 +33,9 @@ long long FlowCounting::CalculateBet(long long iPreferredBet, long long iBudget,
 				iFlowValue += iCardValue[score];
 		}
 
-		cout << "Flow value " << iFlowValue << endl;;
+		iFinalBet = 100 * (iFlowValue / 100) + 1000 * (1 + iPreferredBet/1000);
 
-		return iPreferredBet;
+		return iFinalBet;
 	}
 	else
 	{
