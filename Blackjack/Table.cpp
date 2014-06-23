@@ -37,12 +37,16 @@ void Table::CleanTable(void)
 	}
 
 	dealer->CleanHands();
-	vUsedCard.Clear();
 }
 
 void Table::GetOneCard(Card card)
 {
 	vUsedCard.GetOneCard(card);
+}
+
+void Table::CleanCards(void)
+{
+	vUsedCard.Clear();
 }
 
 UsedCard Table::ShowUsedCards(void)

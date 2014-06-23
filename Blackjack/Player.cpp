@@ -30,6 +30,9 @@ void Player::PlaceBet(int hand)
 	else
 		iBet = iPreferredBet;
 
+	if (iBet < 0)
+		iBet = 0;
+
 	if (vHand.size() > hand)
 	{
 		vHand[hand].iBet = iBet;

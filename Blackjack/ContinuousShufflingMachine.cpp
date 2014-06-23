@@ -19,6 +19,14 @@ Card ContinuousShufflingMachine::PopOneCard(void)
 	return cardPop;
 }
 
+Card ContinuousShufflingMachine::PopOneCard(Table * table)
+{
+	Card cardPop = PopOneCard();
+	table->GetOneCard(cardPop);
+
+	return cardPop;
+}
+
 int ContinuousShufflingMachine::TakeSpecificCard(int value, int num)
 {
 	for (int i=0, j=0; (i<vCard.size())&&(j<num); i++)
@@ -40,6 +48,12 @@ void ContinuousShufflingMachine::ShuffleCards(void)
 	}
 
 	vUsedCard.clear();
+}
+
+void ContinuousShufflingMachine::ShuffleCards(Table * table)
+{
+	ShuffleCards();
+	table->CleanCards();
 }
 
 ContinuousShufflingMachine::ContinuousShufflingMachine(void)

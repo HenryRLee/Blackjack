@@ -24,15 +24,20 @@ long long FlowCounting::CalculateBet(long long iPreferredBet, long long iBudget,
 		};
 		int iFlowValue = 0;
 		UsedCard vUsedCard = table->ShowUsedCards();
+		vector <Card> vCard = vUsedCard.ShowCards();
 
-		for (int i=0; i<vUsedCard.size(); i++)
+		cout << "Shoe size " << vCard.size() << endl;
+
+		for (int i=0; i<vCard.size(); i++)
 		{
-			int score = cardvUsedCard[i].GetValue();
+			int score = vCard[i].GetValue();
 			if (score <= 11)
 				iFlowValue += iCardValue[score];
 		}
 
-		cout << iFlowValue << endl;;
+		cout << "Flow value " << iFlowValue << endl;;
+
+		return iPreferredBet;
 	}
 	else
 	{

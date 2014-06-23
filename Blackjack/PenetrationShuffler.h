@@ -8,6 +8,7 @@ private:
 
 public:
 	void ShuffleCards(void);
+	void ShuffleCards(Table *);
 
 	PenetrationShuffler(void);
 	PenetrationShuffler(int iDeckNumber);

@@ -11,8 +11,10 @@ protected:
 
 public:
 	Card PopOneCard(void);
+	Card PopOneCard(Table *);
 
 	void ShuffleCards(void);
+	void ShuffleCards(Table *);
 	int TakeSpecificCard(int value, int num = 1);
 
 	ContinuousShufflingMachine(void);

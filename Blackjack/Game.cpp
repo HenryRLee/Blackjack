@@ -10,26 +10,22 @@ void inline Game::DealInitialCards(Dealer * dealer,
 {
 	Card pop;
 
-	pop = shuffler->PopOneCard();
+	pop = shuffler->PopOneCard(table);
 	dealer->GetOneCard(pop);
-	table->GetOneCard(pop);
 
 	if (bDealerTakesHole)
 	{
-		pop = shuffler->PopOneCard();
+		pop = shuffler->PopOneCard(table);
 		dealer->GetHoleCard(pop);
-		table->GetOneCard(pop);
 	}
 
 	for (int i=0; i<vPlayer.size(); i++)
 	{
-		pop = shuffler->PopOneCard();
+		pop = shuffler->PopOneCard(table);
 		vPlayer[i]->GetOneCard(pop);
-		table->GetOneCard(pop);
 
-		pop = shuffler->PopOneCard();
+		pop = shuffler->PopOneCard(table);
 		vPlayer[i]->GetOneCard(pop);
-		table->GetOneCard(pop);
 	}
 }
 
@@ -37,9 +33,8 @@ void inline Game::DealOneCard(Gambler * gambler, Table * table, int hand)
 {
 	Card pop;
 	
-	pop = shuffler->PopOneCard();
+	pop = shuffler->PopOneCard(table);
 	gambler->GetOneCard(pop, hand);
-	table->GetOneCard(pop);
 }
 
 void Game::PlayerAction(Player * player, bitset<5> allowSet, int iHand)
@@ -215,7 +210,7 @@ void Game::OneHandRoutine(Dealer * dealer, vector <class Player *> vPlayer,
 	for (int i=0; i<vPlayer.size(); i++)
 		vPlayer[i]->PlaceBet();
 
-	shuffler->ShuffleCards();
+	shuffler->ShuffleCards(table);
 
 	DealInitialCards(dealer, vPlayer, table);
 

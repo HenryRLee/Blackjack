@@ -27,6 +27,7 @@ public:
 	void CleanTable(void);
 
 	void GetOneCard(Card card);
+	void CleanCards(void);
 	UsedCard ShowUsedCards(void);
 
 	void UseGameType(Game *);
