@@ -57,7 +57,7 @@ int main(int argc, char *argv[])
 //	Hank->UseStrategy(UserInput);
 	Hank->UseBettingSystem(Fixedbet);
 	Hank->UseBettingSystem(Flowcounting);
-	Hank->PreferBet(100);
+	Hank->PreferBet(1000);
 	Hank->SetBudget(0);
 	BJDealer->JoinTable(Venetian);
 	MacauGame->UseStatistics(NoLogger);

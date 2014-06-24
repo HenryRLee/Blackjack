@@ -33,10 +33,10 @@ long long FlowCounting::CalculateBet(long long iPreferredBet, long long iBudget,
 				iFlowValue += iCardValue[score];
 		}
 
-		if (iFlowValue < -50)
+		if (iFlowValue < 200)
 			iFinalBet = 0;
 		else
-			iFinalBet = 100 * (iFlowValue / 100) + 1000 * (1 + iPreferredBet/1000);
+			iFinalBet = iPreferredBet * (iFlowValue / 100) + 0 * (1 + iPreferredBet/1000);
 
 		return iFinalBet;
 	}
