@@ -1,19 +1,19 @@
-#include "MacauSimulation.h"
+#include "SydneySimulation.h"
 #include "ContinuousShufflingMachine.h"
 #include "ManipulatedCardSequence.h"
 #include "PenetrationShuffler.h"
 
-MacauSimulation::MacauSimulation(void)
+SydneySimulation::SydneySimulation(void)
 {
-	shuffler = new PenetrationShuffler(6);
+	shuffler = new PenetrationShuffler(8);
 //	shuffler = new ContinuousShufflingMachine(6);
 //	shuffler = new ManipulatedCardSequence;
 
-	shuffler->SetPenetration(0.1666666);
+	shuffler->SetPenetration(0.375);
 
 	bHitOnSoft17 = false;
 	bDouble = true;
-	bSurrender = true;
+	bSurrender = false;
 	bSplit = true;
 	bDealerTakesHole = false;
 	bDealerPeaksHole = false;
@@ -21,21 +21,21 @@ MacauSimulation::MacauSimulation(void)
 	bDealerPeaksHoleOnTen = false;
 	bHitAfterSplit = true;
 	bDoubleAfterSplit = true;
-	bDoubleOnAnyTwo = true;
+	bDoubleOnAnyTwo = false;
 	bDoubleOnNine = true;
 	bDoubleOnTen = true;
 	bDoubleOnEleven = true;
-	bSplitAfterSplit = true;
-	bResplitAces = true;
-	bStandAfterSplittedAces = false;
+	bSplitAfterSplit = false;
+	bResplitAces = false;
+	bStandAfterSplittedAces = true;
 	bLateSurrender = false;
 	bSurrenderVsDealerAce = false;
-	iTimesSplittedAllow = 3;
+	iTimesSplittedAllow = 1;
 	dBlackJackPays = 2.5;
 	bDOBO = true;
-	bSOBO = false;
+	bSOBO = true;
 }
 
-MacauSimulation::~MacauSimulation(void)
+SydneySimulation::~SydneySimulation(void)
 {
 }

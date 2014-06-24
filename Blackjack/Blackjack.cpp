@@ -10,6 +10,7 @@
 #include "EnhancedStrategy.h"
 #include "FixedBet.h"
 #include "FlowCounting.h"
+#include "SydneySimulation.h"
 
 inline int RunMultipleGames(long long times, Table * table, Player * player,
 		Statistics * stat=NULL)
@@ -42,6 +43,7 @@ int main(int argc, char *argv[])
 	Dealer * BJDealer = new Dealer("BJDealer");
 	Table * Venetian = new Table;
 	Game * MacauGame = new MacauSimulation;
+	Game * SydneyGame = new SydneySimulation;
 	Statistics * NoLogger = new LongTermStats;
 	Statistics * Logger = new StreamLog;
 	Strategy * UserInput = new NoStrategy;
@@ -59,8 +61,10 @@ int main(int argc, char *argv[])
 	Hank->SetBudget(0);
 	BJDealer->JoinTable(Venetian);
 	MacauGame->UseStatistics(NoLogger);
+	SydneyGame->UseStatistics(NoLogger);
 //	MacauGame->UseStatistics(Logger);
 	Venetian->UseGameType(MacauGame);
+//	Venetian->UseGameType(SydneyGame);
 
 	/* Add multiple players */
 	Player * Passenger[10];

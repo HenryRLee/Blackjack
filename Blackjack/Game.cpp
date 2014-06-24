@@ -249,7 +249,7 @@ void Game::OneHandRoutine(Dealer * dealer, vector <class Player *> vPlayer,
 				if (vPlayer[i]->vHand[0].GetScore() == MaxScore)
 				{
 					vPlayer[i]->vHand[0].iStatus = BJ;
-					statistics->Update("  BOTH BLACKJACK");
+					statistics->Update("  BOTH BLACKJACKS");
 					vPlayer[i]->vHand[0].iStatus = PUSH;
 					vPlayer[i]->GetPays(1, 0);
 				}
@@ -355,7 +355,7 @@ void Game::OneHandRoutine(Dealer * dealer, vector <class Player *> vPlayer,
 					if (dealer->vHand[0].iStatus == BJ)
 					{
 						vPlayer[i]->GetPays(1);
-						statistics->Update("  BOTH BLACKJACKS PUSH");
+						statistics->Update("  BOTH BLACKJACKS");
 					}
 					else
 					{
