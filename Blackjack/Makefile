@@ -1,4 +1,4 @@
-all: Blackjack EV
+all: Blackjack
 
 Blackjack: Blackjack.o Card.o Dealer.o Deck.o Gambler.o Game.o \
 		MacauSimulation.o Player.o ShuffleMachine.o Table.o \
@@ -9,15 +9,8 @@ Blackjack: Blackjack.o Card.o Dealer.o Deck.o Gambler.o Game.o \
 		SydneySimulation.o
 	g++ ${CFLAGS} $^ -o $@
 
-EV: EV.o ProbabilityCalculator.o SimpleCalculator.o AdvancedFastCalculator.o \
-		SimpleFastCalculator.o AdvancedCalculator.o Card.o UsedCard.o
-	g++ ${CFLAGS} $^ -o $@
-
-Martingale: Martingale.c
-	gcc Martingale.c -o Martingale
-
 %.o: %.cpp
 	g++ ${CFLAGS} -std=c++11 $< -c -o $@
 
 clean:
-	rm -f *.o Blackjack EV Martingale
+	rm -f *.o Blackjack
