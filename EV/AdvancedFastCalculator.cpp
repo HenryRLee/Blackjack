@@ -122,11 +122,11 @@ unsigned int HashItem::HashValue(void)
 		hash = hash * 21 + score;
 	}
 	
-	hash << 1;
+	hash *= 2;
 	if (bAdditional)
 		hash += 1;
 
-	hash << 1;
+	hash *= 2;
 	if (bDoubled)
 		hash += 1;
 

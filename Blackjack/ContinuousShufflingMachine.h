@@ -15,7 +15,7 @@ public:
 
 	void ShuffleCards(void);
 	void ShuffleCards(Table *);
-	int TakeSpecificCard(int value, int num = 1);
+	void TakeSpecificCard(int value, int num = 1);
 
 	ContinuousShufflingMachine(void);
 	ContinuousShufflingMachine(int iDeckNumber);

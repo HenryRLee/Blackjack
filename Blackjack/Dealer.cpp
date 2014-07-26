@@ -43,10 +43,8 @@ int Dealer::MakeDecision(bool bHitOnSoft17, int iHand)
 			}
 		}
 	}
-	else
-	{
-		return -1;
-	}
+
+	return -1;
 }
 
 void Dealer::GetHoleCard(Card hole)
@@ -64,6 +62,8 @@ bool Dealer::PeakHoldCard(void)
 		else
 			return false;
 	}
+
+	return false;
 }
 
 Card Dealer::ShowHoleCard(void)

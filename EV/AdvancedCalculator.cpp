@@ -247,6 +247,7 @@ ProbSet AdvancedCalculator::ProbOfHandsPlayerTurn(HandScore handPlayer,
 		return pbStand;
 	}
 	
+	return pbStand;
 }
 
 ProbSet AdvancedCalculator::ProbOfHandsPlayerHit(HandScore handPlayer, 

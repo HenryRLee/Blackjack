@@ -23,7 +23,7 @@ void ManipulatedCardSequence::ShuffleCards(void)
 	vUsedCard.clear();
 }
 
-int ManipulatedCardSequence::TakeSpecificCard(int value, int num)
+void ManipulatedCardSequence::TakeSpecificCard(int value, int num)
 {
 }
 

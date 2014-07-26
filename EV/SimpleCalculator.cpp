@@ -219,6 +219,8 @@ ProbSet SimpleCalculator::ProbOfHandsPlayerTurn(HandScore handPlayer,
 		return pbStand;
 	}
 	
+	return pbStand;
+	}
 }
 
 ProbSet SimpleCalculator::ProbOfHandsPlayerHit(HandScore handPlayer, 
