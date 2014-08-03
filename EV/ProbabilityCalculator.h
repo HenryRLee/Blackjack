@@ -10,9 +10,14 @@ protected:
 	bool bResplitAces;
 	int iMaxTimesSplitted;
 	bool bHitOnSoft17;
-	bool bSurrenderVsDealerAce;
 	bool bDOBO;
 	bool bSOBO;
+	bool bDoubleOnAnyTwo;
+	bool bDoubleOnSoft;
+	bool bDoubleOnNine;
+	bool bDoubleOnTen;
+	bool bDoubleOnEleven;
+	bool bStandAfterSplittedAces;
 	int iDeckNumber;
 
 	enum PlayerAction

@@ -220,7 +220,6 @@ ProbSet SimpleCalculator::ProbOfHandsPlayerTurn(HandScore handPlayer,
 	}
 	
 	return pbStand;
-	}
 }
 
 ProbSet SimpleCalculator::ProbOfHandsPlayerHit(HandScore handPlayer, 
@@ -282,7 +281,7 @@ ProbSet SimpleCalculator::ProbOfHandsPlayerSplit(HandScore handPlayer,
 {
 	ProbSet pbCurrent;
 	ProbSet pbSplit;
-	ProbSet pbHit;
+	ProbSet pbHS;
 	ProbSet pbDouble;
 
 	iTimesSplitted++;
@@ -295,8 +294,37 @@ ProbSet SimpleCalculator::ProbOfHandsPlayerSplit(HandScore handPlayer,
 			bool bSplitted = false;
 
 			handCurrent = GetOneCard(handPlayer, i);
-			pbHit = ProbOfHandsPlayerHitOrStand(handCurrent, handDealer);
-			pbDouble = ProbOfHandsPlayerDouble(handCurrent, handDealer);
+
+			if (!(bStandAfterSplittedAces && (handPlayer.iScore == 11)))
+			{
+				/* General rules for hit or stand */
+				pbHS = ProbOfHandsPlayerHitOrStand(handCurrent, handDealer);
+			}
+			else
+			{
+				/* Special rule that no hitting after splitting Aces */
+				pbHS = ProbOfHandsPlayerStand(handCurrent, handDealer);
+			}
+
+			if (bDoubleOnAnyTwo)
+			{
+				/* Double allowed on any two cards */
+				pbDouble = ProbOfHandsPlayerDouble(handCurrent, handDealer);
+			}
+			else
+			{
+				/* Special doubling rules */
+				if (!bDoubleOnSoft && handCurrent.bSoft)
+					pbDouble.dEV = -100;
+				else if (bDoubleOnNine && (handCurrent.iScore == 9))
+					pbDouble = ProbOfHandsPlayerDouble(handCurrent, handDealer);
+				else if (bDoubleOnTen && (handCurrent.iScore == 10))
+					pbDouble = ProbOfHandsPlayerDouble(handCurrent, handDealer);
+				else if (bDoubleOnEleven && (handCurrent.iScore == 11))
+					pbDouble = ProbOfHandsPlayerDouble(handCurrent, handDealer);
+				else
+					pbDouble.dEV = -100;
+			}
 
 			if (i == handPlayer.iScore)
 			{
@@ -313,15 +341,15 @@ ProbSet SimpleCalculator::ProbOfHandsPlayerSplit(HandScore handPlayer,
 
 			if (bSplitted)
 			{
-				if ((pbHit.dEV>=pbSplit.dEV) && (pbHit.dEV>=pbDouble.dEV))
+				if ((pbHS.dEV>=pbSplit.dEV) && (pbHS.dEV>=pbDouble.dEV))
 				{
-					pbCurrent = ProbAfterGettingCard(pbCurrent, pbHit, i);
+					pbCurrent = ProbAfterGettingCard(pbCurrent, pbHS, i);
 				}
-				else if ((pbSplit.dEV>=pbHit.dEV) && (pbSplit.dEV>=pbDouble.dEV))
+				else if ((pbSplit.dEV>=pbHS.dEV) && (pbSplit.dEV>=pbDouble.dEV))
 				{
 					pbCurrent = ProbAfterGettingCard(pbCurrent, pbSplit, i);
 				}
-				else if ((pbDouble.dEV>=pbHit.dEV) && (pbDouble.dEV>=pbSplit.dEV))
+				else if ((pbDouble.dEV>=pbHS.dEV) && (pbDouble.dEV>=pbSplit.dEV))
 				{
 					pbCurrent = ProbAfterGettingCard(pbCurrent, pbDouble, i);
 				}
@@ -332,9 +360,9 @@ ProbSet SimpleCalculator::ProbOfHandsPlayerSplit(HandScore handPlayer,
 			}
 			else
 			{
-				if (pbHit.dEV > pbDouble.dEV)
+				if (pbHS.dEV > pbDouble.dEV)
 				{
-					pbCurrent = ProbAfterGettingCard(pbCurrent, pbHit, i);
+					pbCurrent = ProbAfterGettingCard(pbCurrent, pbHS, i);
 				}
 				else
 				{
