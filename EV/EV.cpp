@@ -282,7 +282,47 @@ void InteractiveMode(void)
 
 int main(int argc, char * argv[])
 {
-	InteractiveMode();
+	if (argc == 1)
+	{
+		InteractiveMode();
+	}
+	else
+	{
+		string args;
+		for (int i=1; i<argc; i++)
+		{
+			if (argv[i][0] == '-')
+			{
+				if (strlen(argv[i]) > 1)
+				{
+					switch (argv[i][1])
+					{
+					case 'd':
+						iAction |= DOUBLE;
+						break;
+					case 's':
+						iAction |= SPLIT;
+						break;
+					default:
+						break;
+					}
+				}
+				else
+				{
+					cout << "./EV [-d] [-s] <Player Score> <Dealer Score> "
+						"[<Player is Soft> <Dealer is Soft>]" << endl;
+				}
+			}
+			else
+			{
+				args.append(argv[i]);
+
+				if (i != argc - 1)
+					args.append(" ");
+			}
+		}
+		EvMain(args);
+	}
 
 	return 0;
 }
