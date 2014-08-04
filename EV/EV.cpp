@@ -27,6 +27,10 @@ void EvMain(string arg)
 	string sPSoft;
 	string sDSoft;
 	string rest;
+	int iPScore;
+	int iDScore;
+	bool bPSoft = false;
+	bool bDSoft = false;
 	size_t delim;
 
 	delim = arg.find(" ");
@@ -36,6 +40,28 @@ void EvMain(string arg)
 		sPScore = arg.substr(0, delim);
 		rest = arg.substr(delim+1);
 		sDScore = rest.substr(0, delim);
+
+		if (sPScore[0] == 's')
+		{
+			bPSoft = true;
+			sPScore.erase(sPScore.begin());
+			iPScore = atoi(sPScore.c_str());
+		}
+		else
+		{
+			iPScore = atoi(sPScore.c_str());
+		}
+
+		if (sDScore[0] == 's')
+		{
+			bDSoft = true;
+			sDScore.erase(sDScore.begin());
+			iDScore = atoi(sDScore.c_str());
+		}
+		else
+		{
+			iDScore = atoi(sDScore.c_str());
+		}
 
 		if (atoi(sDScore.c_str()) <= 11)
 			current.GetOneCard(atoi(sDScore.c_str()));
@@ -55,19 +81,13 @@ void EvMain(string arg)
 
 		if (delim != string::npos)
 		{
-			bool bPSoft = false;
-			bool bDSoft = false;
-
 			sPSoft = rest.substr(0, delim);
 			if (atoi(sPSoft.c_str()) == 1)
 			{
 				bPSoft = true;
 				current.GetOneCard(11);
 			}
-			else
-			{
-				bPSoft = false;
-			}
+
 			rest = rest.substr(delim+1);
 
 			sDSoft = rest.substr(0, delim);
@@ -76,10 +96,6 @@ void EvMain(string arg)
 				bDSoft = true;
 				current.GetOneCard(11);
 			}
-			else
-			{
-				bDSoft = false;
-			}
 
 			if (bShowDelta)
 			{
@@ -87,14 +103,14 @@ void EvMain(string arg)
 			}
 			else if (bShowDetail)
 			{
-				cal->ShowProbSetByNextCard(atoi(sPScore.c_str()), 
-						bPSoft, atoi(sDScore.c_str()), 
+				cal->ShowProbSetByNextCard(iPScore, 
+						bPSoft, iDScore, 
 						bDSoft, iAction, &current);
 			}
 			else
 			{
-				cal->ShowProbSetByAction(atoi(sPScore.c_str()), 
-						bPSoft, atoi(sDScore.c_str()), 
+				cal->ShowProbSetByAction(iPScore, 
+						bPSoft, iDScore, 
 						bDSoft, iAction, &current);
 			}
 		}
@@ -111,26 +127,26 @@ void EvMain(string arg)
 			int iFirst;
 			int iSecond;
 			if ((sPScore.compare("16")==0) && (sDScore.compare("10")==0))
-				cal->ShowDeltaOfEachTakenCard(atoi(sPScore.c_str()), 
-						false, atoi(sDScore.c_str()), false, 1, 2, &current);
+				cal->ShowDeltaOfEachTakenCard(iPScore, 
+						false, iDScore, false, 1, 2, &current);
 			else if ((sPScore.compare("14")==0) && (sDScore.compare("10")==0))
-				cal->ShowDeltaOfEachTakenCard(atoi(sPScore.c_str()), 
-						false, atoi(sDScore.c_str()), false, 1, 5, &current);
+				cal->ShowDeltaOfEachTakenCard(iPScore, 
+						false, iDScore, false, 1, 5, &current);
 			else if ((sPScore.compare("16")==0) && (sDScore.compare("9")==0))
-				cal->ShowDeltaOfEachTakenCard(atoi(sPScore.c_str()), 
-						false, atoi(sDScore.c_str()), false, 1, 5, &current);
+				cal->ShowDeltaOfEachTakenCard(iPScore, 
+						false, iDScore, false, 1, 5, &current);
 			else
 				cout << "Delta of this case is not supported" << endl;
 		}
 		else if (bShowDetail)
 		{
-			cal->ShowProbSetByNextCard(atoi(sPScore.c_str()), false, 
-					atoi(sDScore.c_str()), false, iAction, &current);
+			cal->ShowProbSetByNextCard(iPScore, bPSoft, 
+					iDScore, bDSoft, iAction, &current);
 		}
 		else
 		{
-			cal->ShowProbSetByAction(atoi(sPScore.c_str()), false, 
-					atoi(sDScore.c_str()), false, iAction, &current);
+			cal->ShowProbSetByAction(iPScore, bPSoft, 
+					iDScore, bDSoft, iAction, &current);
 		}
 	}
 
