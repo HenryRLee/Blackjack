@@ -39,6 +39,7 @@ void EvMain(string arg)
 	{
 		sPScore = arg.substr(0, delim);
 		rest = arg.substr(delim+1);
+		delim = rest.find(" ");
 		sDScore = rest.substr(0, delim);
 
 		if (sPScore[0] == 's')
