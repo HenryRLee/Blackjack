@@ -5,8 +5,8 @@
  * all previous losses plus win a profit equal to the original stake.
  *
  * Let p be the probability of winning. If casino has no maximum bet limit,
- * the expectation of player will be p. If casino has a maximum limit, the
- * expectation will be (1 - (1-p)^n * 2^n).
+ * the expectation of player profolio will be p. If casino has a maximum limit,
+ * the expectation will be (1 - (1-p)^n * 2^n).
  */
 
 #include <stdio.h>

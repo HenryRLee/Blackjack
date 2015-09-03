@@ -195,7 +195,8 @@ void InteractiveMode(void)
 	size_t delim;
 
 	cout << "> ";
-	getline(cin, fullcmd);
+	if (!getline(cin, fullcmd))
+		return;
 
 	delim = fullcmd.find(" ");
 

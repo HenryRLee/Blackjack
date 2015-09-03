@@ -1,0 +1,8 @@
+Blackjack
+---------
+
+This is a simulation of a Blackjack game. The testing code is in Blackjack.cpp.
+
+The testing program doesn't have an interface yet. But you can modify the
+Blackjack.cpp to change the game rule, decision strategy, betting strategy and
+budget. Then compile and run.
