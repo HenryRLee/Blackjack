@@ -1,6 +1,6 @@
 all: EV
 
-EV: EV.o ProbabilityCalculator.o SimpleCalculator.o AdvancedFastCalculator.o \
+EV: Test.o ProbabilityCalculator.o SimpleCalculator.o AdvancedFastCalculator.o \
 		SimpleFastCalculator.o AdvancedCalculator.o Card.o UsedCard.o
 	g++ ${CFLAGS} $^ -o $@
 

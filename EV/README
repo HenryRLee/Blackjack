@@ -2,17 +2,21 @@ EV
 ----------
 Calculates the expectation value of any hand.
 
-EV.cpp is the testing code. You can change different calculators by modifying
+Test.cpp is the testing code. You can change different calculators by modifying
 the EvMain function.
 
-It currently only supports SimpleCalculator, SimpleFastCalculator and
-AdvancedCalculator. The SimpleCalculator assumes the deck is infinitely large,
-and each card has exactly 1/13 probability of being drawed. The
-SimpleFastCalculator adds dynamic programming to speed up the calculation. The
-AdvancedCalculator doesn't assume that each card has equal probability all the
-time. For example drawing an Ace will reduce one Ace from the stack, therefore
-it reduces the probability of drawing another Ace next time, but increases the
-probability of drawing other cards.
+Currently it only supports SimpleCalculator, SimpleFastCalculator and
+AdvancedCalculator.
+
+The SimpleCalculator assumes the deck is infinitely large, and each card has
+exactly 1/13 probability of being drawed.
+
+The SimpleFastCalculator adds dynamic programming to speed up the calculation.
+
+The AdvancedCalculator doesn't assume that each card has equal probability all
+the time. For example drawing an Ace will reduce one Ace from the stack,
+as a result it will reduce the probability of drawing another Ace next time, but
+will increase the probability of drawing other cards.
 
 = Running examples =
 
@@ -34,7 +38,8 @@ probability of drawing other cards.
 	EV -1.070049
 
 The command "run 16 10", computes the situation that player has a hand value at 
-16, and the dealer has a 10.
+16, and the dealer has a 10. We can read that the EV of hit is slightly greater
+than Stand, therefore stand is the optimal decision.
 
 	> run s19 10
 	Hit: 
