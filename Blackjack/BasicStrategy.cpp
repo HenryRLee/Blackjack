@@ -21,7 +21,7 @@
 
 void BasicStrategy::CreateDefaultTables(void)
 {
-	int iDfltHardTable[PMAX][DMAX] = 
+	int iDfltHardTable[PMAX][DMAX] =
 	{
 		/*	2	3	4 	5 	6 	7 	8 	9 	X 	A	*/
 		{	H, 	H, 	H, 	H, 	H, 	H, 	H, 	H, 	H, 	H	},	/* 4 */ 
@@ -44,7 +44,7 @@ void BasicStrategy::CreateDefaultTables(void)
 		{	S,	S,	S,	S,	S,	S,	S,	S,	S,	S	},	/* 21 */
 	};
 
-	int iDfltSoftTable[PSMAX][DMAX] = 
+	int iDfltSoftTable[PSMAX][DMAX] =
 	{
 		/*	2	3	4	5	6	7	8	9	X	A	*/
 		{	H,	H,	H,	H,	H,	H,	H,	H,	H,	H	},	/* 12 */
@@ -59,7 +59,7 @@ void BasicStrategy::CreateDefaultTables(void)
 		{	S,	S,	S,	S,	S,	S,	S,	S,	S,	S	},	/* 21 */
 	};
 
-	int iDfltPairTable[PPMAX][DMAX] = 
+	int iDfltPairTable[PPMAX][DMAX] =
 	{
 		/*	2	3	4	5	6	7	8	9	X	A	*/
 		{	P,	P,	P,	P,	P,	P,	H,	H,	H,	H	},	/* 2,2 */
